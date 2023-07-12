@@ -26,7 +26,12 @@ class _HomePageState extends State<HomePage> {
         onTap: _onTapActionBottomNavigation,
         currentPageIndex: _currentIndex,
       ),
-      body: widgetOptions.elementAt(_currentIndex),
+      body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: widgetOptions.elementAt(_currentIndex),
+          )
+      ),
     );
   }
 }
