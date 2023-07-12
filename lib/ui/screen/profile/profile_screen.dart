@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/ui/screen/profile/widget/post_grid_view.dart';
+import 'package:nuri/ui/screen/profile/widget/profile_edit_bar.dart';
+import 'package:nuri/ui/screen/profile/widget/user_info.dart';
 
 class NuriProfileScreen extends StatefulWidget {
   const NuriProfileScreen({super.key});
@@ -10,6 +14,13 @@ class NuriProfileScreen extends StatefulWidget {
 class _NuriProfileScreenState extends State<NuriProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ListView(
+        children: [
+          UserInfo(),
+          ProfileEditBar(),
+          SizedBox(height: 110.h,),
+          PostGridView()
+        ],
+    );
   }
 }
