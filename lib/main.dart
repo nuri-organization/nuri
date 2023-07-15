@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/config/provider_di.dart';
 import 'package:nuri/home.dart';
 import 'package:nuri/nuri_observer.dart';
 
@@ -17,11 +18,14 @@ class NuriApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(360, 640),
         builder: (context, child){
-          return MaterialApp(
-            theme: ThemeData(
-              fontFamily: "maple"
+          return MultiBlocProvider(
+            providers: getProvider(),
+            child: MaterialApp(
+              theme: ThemeData(
+                fontFamily: "maple"
+              ),
+              home: HomePage(),
             ),
-            home: HomePage(),
           );
         }
     );
