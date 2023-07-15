@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nuri/ui/widget/bottom_nav/bottom_navigation_router.dart';
-import 'package:nuri/ui/widget/bottom_nav/bottom_navigator_bar.dart';
+import 'package:nuri/ui/screen/chat/chat_screen.dart';
+import 'package:nuri/ui/screen/profile/profile_screen.dart';
+import 'package:nuri/ui/screen/shortory/shortory_screen.dart';
+import 'package:nuri/ui/screen/travel/travel_screen.dart';
+import 'package:nuri/ui/widget/bottom_nav/bottomnav_router.dart';
+import 'package:nuri/ui/widget/bottom_nav/navigation_cubit.dart';
+import 'package:nuri/ui/widget/bottom_nav/nuri_bottomnavigation_constants.dart';
+
+import 'ui/widget/bottom_nav/bottomnav_state.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,25 +18,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
 
-  void _onTapActionBottomNavigation(int index){
-    setState(() {
-      _currentIndex = index;
-    });
-  }
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      bottomNavigationBar: NuriBottomNavigatorBar(
-        onTap: _onTapActionBottomNavigation,
-        currentPageIndex: _currentIndex,
+      bottomNavigationBar: BlocBuilder<NavigationCubit, NavigationState>(
+        builder: (context, state){
+          return BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: state.index,
+            items: options,
+            onTap: (index){
+              BlocProvider.of<NavigationCubit>(context).getNavBarItem(index);
+            },
+          );
+        },
       ),
-      body: SafeArea(
+      body:SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: widgetOptions.elementAt(_currentIndex),
+            child: BlocBuilder<NavigationCubit, NavigationState>(
+              builder: (context, state){
+                return bottomNavRouter.elementAt(state.index);
+              },
+            )
           )
       ),
     );
