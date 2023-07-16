@@ -17,8 +17,9 @@ class _NuriProfileScreenState extends State<NuriProfileScreen> {
     return ListView(
         children: [
           UserInfo(),
+          SizedBox(height: 40.h,),
           ProfileEditBar(),
-          SizedBox(height: 110.h,),
+          SizedBox(height: 50.h,),
           PostGridView()
         ],
     );

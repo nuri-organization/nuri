@@ -6,31 +6,35 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _UserProfileImage(
-          imageURL: "https://picsum.photos/250?image=9",
-        ),
-        SizedBox(
-          width: 30.w,
-        ),
-        Column(
+        Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _UserProfileDetailInfo(
-              post: 1,
-              follower: 2222,
-              following: 3,
+            _UserProfileImage(
+              imageURL: "https://picsum.photos/250?image=9",
             ),
-            _UserFavoriteTravel(
-              favoriteTravel: "제주도",
+            SizedBox(
+              width: 30.w,
             ),
-            // _UserSelfIntroduce(
-            //   selfIntroduce: "hello every body this is nuri officer thank you user Nuri",
-            // )
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _UserProfileDetailInfo(
+                  post: 1,
+                  follower: 2222,
+                  following: 3,
+                ),
+                _UserFavoriteTravel(
+                  favoriteTravel: "제주도",
+                ),
+              ],
+            )
           ],
-        )
+        ),
+        SizedBox(height: 10.h,),
+        _UserBasicInfo(userName: "yasuo", selfIntroduce: "heelo",)
       ],
     );
   }
@@ -131,26 +135,6 @@ class _UserProfileDetailInfo extends StatelessWidget {
 }
 
 @immutable
-class _UserSelfIntroduce extends StatelessWidget {
-  _UserSelfIntroduce({super.key, required this.selfIntroduce});
-
-  String? selfIntroduce;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 65.h,
-      width: 200.w,
-      child: Center(
-          child: Text(
-        "$selfIntroduce",
-        style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
-      )),
-    );
-  }
-}
-
-@immutable
 class _UserFavoriteTravel extends StatelessWidget {
   _UserFavoriteTravel({super.key, this.favoriteTravel});
 
@@ -169,4 +153,24 @@ class _UserFavoriteTravel extends StatelessWidget {
   }
 }
 
+class _UserBasicInfo extends StatelessWidget {
+  _UserBasicInfo({super.key, required this.userName, this.selfIntroduce});
 
+  String userName;
+  String? selfIntroduce;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "이름 : ${userName}"
+        ),
+        Text(
+          "자기 소개 ${selfIntroduce}"
+        ),
+      ],
+    );
+  }
+}
