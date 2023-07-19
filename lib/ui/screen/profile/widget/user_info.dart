@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/data/model/profile/profile_model.dart';
 
 class UserInfo extends StatelessWidget {
-  const UserInfo({super.key});
+  UserInfo({super.key, required this.profileModel});
+  ProfileModel profileModel;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class UserInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _UserProfileImage(
-              imageURL: "https://picsum.photos/250?image=9",
+              imageURL: profileModel.userProfile,
             ),
             SizedBox(
               width: 30.w,
@@ -22,19 +24,19 @@ class UserInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _UserProfileDetailInfo(
-                  post: 1,
-                  follower: 2222,
-                  following: 3,
+                  post: profileModel.postAmount,
+                  follower: profileModel.flower,
+                  following: profileModel.flowing,
                 ),
                 _UserFavoriteTravel(
-                  favoriteTravel: "제주도",
+                  favoriteTravel: profileModel.bestTravel,
                 ),
               ],
             )
           ],
         ),
         SizedBox(height: 10.h,),
-        _UserBasicInfo(userName: "yasuo", selfIntroduce: "heelo",)
+        _UserBasicInfo(userName: profileModel.userName, selfIntroduce: profileModel.introduce,)
       ],
     );
   }

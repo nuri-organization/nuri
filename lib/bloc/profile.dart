@@ -1,6 +1,6 @@
 import 'dart:async';
 
-class ProfileInfoBloc{
+class ProfileModelBloc{
   String? _userProfileUrl;
   String _userSelfIntroduce = "";
   String _userFavoriteTravel = "";
@@ -8,12 +8,12 @@ class ProfileInfoBloc{
   int _userFollower = 0;
   int _userFollowing = 0;
 
-  final StreamController<int> _profileInfoSubject = StreamController<int>();
+  final StreamController<int> _ProfileModelSubject = StreamController<int>();
 
-  Stream<int> get profileInfo => _profileInfoSubject.stream;
+  Stream<int> get ProfileModel => _ProfileModelSubject.stream;
 
   add(){
     _userPostMount++;
-    _profileInfoSubject.sink.add(_userPostMount);
+    _ProfileModelSubject.sink.add(_userPostMount);
   }
 }
