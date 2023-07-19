@@ -1,4 +1,5 @@
 import 'package:nuri/data/model/profile/profile_model.dart';
+import 'package:nuri/test/profile_data.dart';
 
 class ProfileState{
   final ProfileModel profileModel;
@@ -7,16 +8,7 @@ class ProfileState{
 
   factory ProfileState.empty(){
     return ProfileState(
-        profileModel: ProfileModel(
-          userName: 'yasuo',
-          userProfile: null,
-          introduce: 'hello',
-          bestTravel: 'jeju',
-          postAmount: 0,
-          flower: 0,
-          flowing: 0,
-          posts: [null]
-        )
+        profileModel: TestProfileData().data1
     );
   }
 }

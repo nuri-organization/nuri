@@ -17,10 +17,12 @@ class PostGridView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             crossAxisCount: 3,
             shrinkWrap: true,
-            children: List.generate(profileModel.posts.length - 1, (index) {
+            children: List.generate(profileModel.posts.length, (index) {
               return Container(
                 color: Colors.grey,
-                child: Text("${profileModel.posts[index]?.postId}"),
+                child: Image.network(
+                    "${profileModel.posts[index]?.firstImage}"
+                )
               );
             }),
           ),

@@ -24,7 +24,7 @@ class UserInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _UserProfileDetailInfo(
-                  post: profileModel.postAmount,
+                  post: profileModel.posts.length,
                   follower: profileModel.flower,
                   following: profileModel.flowing,
                 ),
