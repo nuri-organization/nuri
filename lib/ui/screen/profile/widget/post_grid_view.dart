@@ -18,11 +18,14 @@ class PostGridView extends StatelessWidget {
             crossAxisCount: 3,
             shrinkWrap: true,
             children: List.generate(profileModel.posts.length, (index) {
-              return Container(
-                color: Colors.grey,
-                child: Image.network(
-                    "${profileModel.posts[index]?.firstImage}"
-                )
+              return InkWell(
+                onTap: (){},
+                child: Container(
+                  color: Colors.grey,
+                  child: Image.network(
+                      "${profileModel.posts[index]?.firstImage}"
+                  )
+                ),
               );
             }),
           ),

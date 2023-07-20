@@ -19,11 +19,14 @@ class _ProfileEditButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 25.h,
-      width: 100.w,
-      color: Colors.grey,
-      child: Center(child: Text("프로필 수정", style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),)),
+    return InkWell(
+      onTap: (){},
+      child: Container(
+        height: 25.h,
+        width: 100.w,
+        color: Colors.grey,
+        child: Center(child: Text("프로필 수정", style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),)),
+      ),
     );
   }
 }

@@ -8,5 +8,5 @@ class NavigationState extends Equatable{
   NavigationState(this.index, this.navbarItem);
 
   @override
-  List<Object> get props => [this.navbarItem, this.index];
+  List<Object> get props => [navbarItem, index];
 }
