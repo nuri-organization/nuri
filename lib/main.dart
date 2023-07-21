@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/config/constants.dart';
 import 'package:nuri/config/provider_di.dart';
 import 'package:nuri/home.dart';
 import 'package:nuri/nuri_observer.dart';
@@ -22,9 +23,12 @@ class NuriApp extends StatelessWidget {
             providers: getProvider(),
             child: MaterialApp(
               theme: ThemeData(
-                fontFamily: "maple"
+                fontFamily: "maple",
+                primaryColor: Constants.theme4,
+                splashColor: Constants.theme4,
+                primarySwatch: Colors.orange
               ),
-              home: HomePage(),
+              home: const HomePage(),
             ),
           );
         }

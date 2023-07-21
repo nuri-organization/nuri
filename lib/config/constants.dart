@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class Constants{
 
   Constants._privateConstructor();
@@ -13,4 +15,10 @@ class Constants{
   static String baseServerUrl = isDevelopMode
       ? ""
       : "";
+
+  static const theme1 = Color(0xFFFCE8C9);
+  static const theme2 = Color(0xFFFFE3AD);
+  static const theme3 = Color(0xFFFEE092);
+  static const theme4 = Color(0xFFFFB966);
+
 }
