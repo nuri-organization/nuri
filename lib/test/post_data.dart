@@ -21,7 +21,7 @@ class TestPostData{
           content: "hello seojun"
       ),
       ShortoryModel(
-          url: "https://media.licdn.com/dms/image/D5635AQF1wkD91hA9ig/profile-framedphoto-shrink_100_100/0/1681437828406?e=1690452000&v=beta&t=_gFnvXJfMotP6-b3DhN-XzRfYJ1yC4LxXgpwSKfuAeQ",
+          url: "https://media.licdn.com/dms/image/D5603AQEBKsHKr9dzAA/profile-displayphoto-shrink_100_100/0/1677758165535?e=1695254400&v=beta&t=uQEOJS_Ryn9JnqO8IxupMmpr4Ij9qUETjUiVzrnX1SQ",
           content: "hello byeong hun"
       ),
       ShortoryModel(
@@ -57,7 +57,7 @@ class TestPostData{
               content: "hello seojun"
           ),
           ShortoryModel(
-              url: "https://media.licdn.com/dms/image/D5635AQF1wkD91hA9ig/profile-framedphoto-shrink_100_100/0/1681437828406?e=1690452000&v=beta&t=_gFnvXJfMotP6-b3DhN-XzRfYJ1yC4LxXgpwSKfuAeQ",
+              url: "https://media.licdn.com/dms/image/D5603AQEBKsHKr9dzAA/profile-displayphoto-shrink_100_100/0/1677758165535?e=1695254400&v=beta&t=uQEOJS_Ryn9JnqO8IxupMmpr4Ij9qUETjUiVzrnX1SQ",
               content: "hello byeong hun"
           ),
           ShortoryModel(
