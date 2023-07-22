@@ -6,33 +6,28 @@ import 'package:nuri/ui/screen/shortory/shortory_comment.dart';
 class Post extends StatelessWidget {
   Post({super.key,required this.postModel});
 
-  List<PostModel> postModel;
+  PostModel postModel;
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: postModel.length,
-      itemBuilder: (context, index){
-        return Column(
+    return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _UserInfo(
-              imageURL: postModel[index].userInfo.userProfile,
-              userName: postModel[index].userInfo.userName,
+              imageURL: postModel.userInfo.userProfile,
+              userName: postModel.userInfo.userName,
             ),
             SizedBox(
               height: 5.h,
             ),
             _Image(
-                shortory: postModel[index].shortory
+                shortory: postModel.shortory
             ),
             _StateBar(
-              isLoved: postModel[index].liked,
+              isLoved: postModel.liked,
             ),
             _Contents(
-              contents: postModel[index].content,
+              contents: postModel.content,
             ),
             SizedBox(height: 30.h,),
             Container(
@@ -43,8 +38,6 @@ class Post extends StatelessWidget {
             SizedBox(height: 30.h,)
           ],
         );
-      },
-    );
   }
 }
 
