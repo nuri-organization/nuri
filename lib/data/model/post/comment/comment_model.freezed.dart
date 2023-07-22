@@ -27,7 +27,7 @@ mixin _$CommentModel {
   int get likes => throw _privateConstructorUsedError;
   bool get liked => throw _privateConstructorUsedError;
   int get totalReplies => throw _privateConstructorUsedError;
-  RepliesModel get replies => throw _privateConstructorUsedError;
+  List<RepliesModel> get replies => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,10 +49,9 @@ abstract class $CommentModelCopyWith<$Res> {
       int likes,
       bool liked,
       int totalReplies,
-      RepliesModel replies});
+      List<RepliesModel> replies});
 
   $UserInfoModelCopyWith<$Res> get userInfo;
-  $RepliesModelCopyWith<$Res> get replies;
 }
 
 /// @nodoc
@@ -109,7 +108,7 @@ class _$CommentModelCopyWithImpl<$Res, $Val extends CommentModel>
       replies: null == replies
           ? _value.replies
           : replies // ignore: cast_nullable_to_non_nullable
-              as RepliesModel,
+              as List<RepliesModel>,
     ) as $Val);
   }
 
@@ -118,14 +117,6 @@ class _$CommentModelCopyWithImpl<$Res, $Val extends CommentModel>
   $UserInfoModelCopyWith<$Res> get userInfo {
     return $UserInfoModelCopyWith<$Res>(_value.userInfo, (value) {
       return _then(_value.copyWith(userInfo: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $RepliesModelCopyWith<$Res> get replies {
-    return $RepliesModelCopyWith<$Res>(_value.replies, (value) {
-      return _then(_value.copyWith(replies: value) as $Val);
     });
   }
 }
@@ -146,12 +137,10 @@ abstract class _$$_CommentModelCopyWith<$Res>
       int likes,
       bool liked,
       int totalReplies,
-      RepliesModel replies});
+      List<RepliesModel> replies});
 
   @override
   $UserInfoModelCopyWith<$Res> get userInfo;
-  @override
-  $RepliesModelCopyWith<$Res> get replies;
 }
 
 /// @nodoc
@@ -204,9 +193,9 @@ class __$$_CommentModelCopyWithImpl<$Res>
           : totalReplies // ignore: cast_nullable_to_non_nullable
               as int,
       replies: null == replies
-          ? _value.replies
+          ? _value._replies
           : replies // ignore: cast_nullable_to_non_nullable
-              as RepliesModel,
+              as List<RepliesModel>,
     ));
   }
 }
@@ -223,8 +212,8 @@ class _$_CommentModel with DiagnosticableTreeMixin implements _CommentModel {
       this.likes = 0,
       this.liked = false,
       this.totalReplies = 0,
-      this.replies = const RepliesModel(
-          repliesId: 0, content: "", commentTime: "", likes: 0, liked: false)});
+      final List<RepliesModel> replies = const []})
+      : _replies = replies;
 
   factory _$_CommentModel.fromJson(Map<String, dynamic> json) =>
       _$$_CommentModelFromJson(json);
@@ -250,9 +239,14 @@ class _$_CommentModel with DiagnosticableTreeMixin implements _CommentModel {
   @override
   @JsonKey()
   final int totalReplies;
+  final List<RepliesModel> _replies;
   @override
   @JsonKey()
-  final RepliesModel replies;
+  List<RepliesModel> get replies {
+    if (_replies is EqualUnmodifiableListView) return _replies;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_replies);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -290,13 +284,21 @@ class _$_CommentModel with DiagnosticableTreeMixin implements _CommentModel {
             (identical(other.liked, liked) || other.liked == liked) &&
             (identical(other.totalReplies, totalReplies) ||
                 other.totalReplies == totalReplies) &&
-            (identical(other.replies, replies) || other.replies == replies));
+            const DeepCollectionEquality().equals(other._replies, _replies));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, commentId, content, userInfo,
-      commentTime, likes, liked, totalReplies, replies);
+  int get hashCode => Object.hash(
+      runtimeType,
+      commentId,
+      content,
+      userInfo,
+      commentTime,
+      likes,
+      liked,
+      totalReplies,
+      const DeepCollectionEquality().hash(_replies));
 
   @JsonKey(ignore: true)
   @override
@@ -321,7 +323,7 @@ abstract class _CommentModel implements CommentModel {
       final int likes,
       final bool liked,
       final int totalReplies,
-      final RepliesModel replies}) = _$_CommentModel;
+      final List<RepliesModel> replies}) = _$_CommentModel;
 
   factory _CommentModel.fromJson(Map<String, dynamic> json) =
       _$_CommentModel.fromJson;
@@ -341,7 +343,7 @@ abstract class _CommentModel implements CommentModel {
   @override
   int get totalReplies;
   @override
-  RepliesModel get replies;
+  List<RepliesModel> get replies;
   @override
   @JsonKey(ignore: true)
   _$$_CommentModelCopyWith<_$_CommentModel> get copyWith =>

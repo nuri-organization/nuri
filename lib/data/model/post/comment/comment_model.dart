@@ -17,7 +17,7 @@ class CommentModel with _$CommentModel{
     @Default(0) int likes,
     @Default(false) bool liked,
     @Default(0)int totalReplies,
-    @Default(RepliesModel(repliesId: 0, content: "",commentTime: "",likes: 0,liked: false,)) RepliesModel replies,
+    @Default([]) List<RepliesModel> replies,
   }) = _CommentModel;
 
   factory CommentModel.fromJson(Map<String, Object?>json)

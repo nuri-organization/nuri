@@ -17,14 +17,10 @@ _$_CommentModel _$$_CommentModelFromJson(Map<String, dynamic> json) =>
       likes: json['likes'] as int? ?? 0,
       liked: json['liked'] as bool? ?? false,
       totalReplies: json['totalReplies'] as int? ?? 0,
-      replies: json['replies'] == null
-          ? const RepliesModel(
-              repliesId: 0,
-              content: "",
-              commentTime: "",
-              likes: 0,
-              liked: false)
-          : RepliesModel.fromJson(json['replies'] as Map<String, dynamic>),
+      replies: (json['replies'] as List<dynamic>?)
+              ?.map((e) => RepliesModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_CommentModelToJson(_$_CommentModel instance) =>
