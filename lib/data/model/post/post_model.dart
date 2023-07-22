@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:nuri/data/model/profile/user_info/user_info_model.dart';
 
 part 'post_model.freezed.dart';
 
@@ -31,16 +32,4 @@ class ShortoryModel with _$ShortoryModel{
 
 factory ShortoryModel.fromJson(Map<String, Object?>json)
 => _$ShortoryModelFromJson(json);
-}
-
-@freezed
-class UserInfoModel with _$UserInfoModel{
-  const factory UserInfoModel({
-    @Default(0) int userId,
-    @Default("") String userName,
-    @Default("") String userProfile
-  }) = _UserInfoModel;
-
-  factory UserInfoModel.fromJson(Map<String, Object?>json)
-  => _$UserInfoModelFromJson(json);
 }

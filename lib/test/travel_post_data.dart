@@ -1,4 +1,5 @@
 import 'package:nuri/data/model/post/post_model.dart';
+import 'package:nuri/data/model/profile/user_info/user_info_model.dart';
 import 'package:nuri/data/model/travel/travel_post_model.dart';
 
 class TestTravelPostData{

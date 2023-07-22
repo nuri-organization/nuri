@@ -43,17 +43,3 @@ Map<String, dynamic> _$$_ShortoryModelToJson(_$_ShortoryModel instance) =>
       'url': instance.url,
       'content': instance.content,
     };
-
-_$_UserInfoModel _$$_UserInfoModelFromJson(Map<String, dynamic> json) =>
-    _$_UserInfoModel(
-      userId: json['userId'] as int? ?? 0,
-      userName: json['userName'] as String? ?? "",
-      userProfile: json['userProfile'] as String? ?? "",
-    );
-
-Map<String, dynamic> _$$_UserInfoModelToJson(_$_UserInfoModel instance) =>
-    <String, dynamic>{
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'userProfile': instance.userProfile,
-    };

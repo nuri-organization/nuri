@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/data/model/post/comment/comment_model.dart';
 import 'package:nuri/data/model/post/comment/replies_model.dart';
 import 'package:nuri/data/model/post/post_model.dart';
+import 'package:nuri/data/model/profile/user_info/user_info_model.dart';
 
 class Comment extends StatelessWidget {
   Comment({super.key, required this.commentModel});

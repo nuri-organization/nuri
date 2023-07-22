@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:nuri/data/model/post/post_model.dart';
+import 'package:nuri/data/model/profile/user_info/user_info_model.dart';
 
 part 'replies_model.freezed.dart';
 
