@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/data/model/post/post_model.dart';
+import 'package:nuri/ui/screen/shortory/shortory_comment.dart';
 
 class Post extends StatelessWidget {
   Post({super.key,required this.postModel});
@@ -186,7 +187,9 @@ class _StateBarState extends State<_StateBar> {
                 onPressed: _changeFavoriteState,
                 icon: Icon(Icons.favorite,color: widget.isLoved ? Colors.pinkAccent : Colors.black,)
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.chat)),
+            IconButton(onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ShortoryComment()));
+            }, icon: Icon(Icons.chat)),
           ],
         ),
         IconButton(onPressed: () {}, icon: Icon(Icons.menu))
