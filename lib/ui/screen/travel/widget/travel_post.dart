@@ -2,62 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/data/model/travel/travel_post_model.dart';
 
-class TravelPost extends StatefulWidget {
+class TravelPost extends StatelessWidget {
   TravelPost({super.key, required this.travelPostModel});
 
-  List<TravelPostModel> travelPostModel;
+  TravelPostModel travelPostModel;
 
-  @override
-  State<TravelPost> createState() => _TravelPostState();
-}
-
-class _TravelPostState extends State<TravelPost> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: widget.travelPostModel.length,
-        itemBuilder: (context, index){
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _PostInfo(
-                  imageURL: widget.travelPostModel[index].userInfo.userProfile,
-                  name: widget.travelPostModel[index].userInfo.userName,
-                  title: widget.travelPostModel[index].title,
-                  applied: widget.travelPostModel[index].applied,
-                  maxPeople: widget.travelPostModel[index].maxPeople,
-                  people: widget.travelPostModel[index].currentPeople
-              ),
-              Row(
-                children: [
-                  Text("${widget.travelPostModel[index].startDate} ~ ${widget.travelPostModel[index].endDate}")
-                ],
-              ),
-              Text(widget.travelPostModel[index].content),
-              SizedBox(height: 10.h,),
-              const Text("주요 여행지"),
-              // _ImportantTravel(travelName: widget.travelPostModel[index].mainTravel),
-              SizedBox(height: 20.h,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _Cost(cost: widget.travelPostModel[index].cost),
-                  Row(
-                    children: [
-                      _ApplyButton(),
-                      _SettingButton()
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.h,),
-              Container(height: 0.1, width: double.infinity, color: Colors.black,),
-              SizedBox(height: 20.h,),
-            ],
-          );
-        }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _PostInfo(
+            imageURL: travelPostModel.userInfo.userProfile,
+            name: travelPostModel.userInfo.userName,
+            title: travelPostModel.title,
+            applied: travelPostModel.applied,
+            maxPeople: travelPostModel.maxPeople,
+            people: travelPostModel.currentPeople
+        ),
+        Row(
+          children: [
+            Text("${travelPostModel.startDate} ~ ${travelPostModel.endDate}")
+          ],
+        ),
+        Text(travelPostModel.content),
+        SizedBox(height: 10.h,),
+        const Text("주요 여행지"),
+        // _ImportantTravel(travelName: widget.travelPostModel[index].mainTravel),
+        SizedBox(height: 20.h,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _Cost(cost: travelPostModel.cost),
+            Row(
+              children: [
+                _ApplyButton(),
+                _SettingButton()
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 20.h,),
+        Container(height: 0.1, width: double.infinity, color: Colors.black,),
+        SizedBox(height: 20.h,),
+      ],
     );
   }
 }

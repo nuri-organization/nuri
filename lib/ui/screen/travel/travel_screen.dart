@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nuri/test/travel_post_data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nuri/config/enum.dart';
+import 'package:nuri/cubit/travel/post/travel_post_cubit.dart';
 import 'package:nuri/ui/screen/travel/widget/travel_post.dart';
 
 class NuriTravelScreen extends StatefulWidget {
@@ -10,10 +12,30 @@ class NuriTravelScreen extends StatefulWidget {
 }
 
 class _NuriTravelScreenState extends State<NuriTravelScreen> {
+
+  @override
+  void initState() {
+    context.read<TravelPostCubit>().getTravelPostInfo();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: TravelPost(travelPostModel: TestTravelPostData().data1,),
+    return BlocBuilder<TravelPostCubit, TravelPostState>(
+      builder: (context, state) {
+        if (state.loadingStatus == LoadingStatus.success) {
+          return SingleChildScrollView(
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: state.travelPostModel!.length,
+                  itemBuilder: (context, index) {
+                    return TravelPost(
+                      travelPostModel: state.travelPostModel![index],
+                    );
+                  }));
+        }
+        return Container();
+      },
     );
   }
 }
