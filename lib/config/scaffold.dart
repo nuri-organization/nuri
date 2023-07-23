@@ -6,10 +6,11 @@ import 'package:nuri/ui/widget/bottom_nav/navigation_cubit.dart';
 import 'package:nuri/ui/widget/bottom_nav/nuri_bottomnavigation_constants.dart';
 
 class NuriScaffold extends StatelessWidget {
-  NuriScaffold({super.key, this.isInBottomNavigation = false, this.child, this.title = "누리"});
+  NuriScaffold({super.key, this.isInBottomNavigation = false, this.child, this.title = "누리", this.isInAppbar = true});
   bool isInBottomNavigation;
   Widget? child;
   String? title;
+  bool isInAppbar;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +38,11 @@ class NuriScaffold extends StatelessWidget {
                 )
             )
         ),
+
       );
     }
     return Scaffold(
-      appBar: AppBar(title: Text(title!),),
+      appBar: isInAppbar ? AppBar(title: Text(title!),) : null,
       body:SafeArea(
           child: Padding(
               padding: const EdgeInsets.all(10.0),
