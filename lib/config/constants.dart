@@ -13,8 +13,8 @@ class Constants{
 
   static String appName = "누리";
   static String baseServerUrl = isDevelopMode
-      ? ""
-      : "";
+      ? 'http://ec2-15-164-100-59.ap-northeast-2.compute.amazonaws.com'
+      : 'http://ec2-15-164-100-59.ap-northeast-2.compute.amazonaws.com';
 
   static const theme1 = Color(0xFFFCE8C9);
   static const theme2 = Color(0xFFFFE3AD);
