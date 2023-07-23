@@ -25,7 +25,6 @@ class NuriApp extends StatelessWidget {
               theme: ThemeData(
                 fontFamily: "maple",
                 primaryColor: Constants.theme4,
-                splashColor: Constants.theme4,
                 primarySwatch: Colors.orange
               ),
               home: const HomePage(),
