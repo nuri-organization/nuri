@@ -8,6 +8,7 @@ class TravelPostApi extends Api{
   TravelPostApi._internal();
 
   factory TravelPostApi(){
+
     return _instance;
   }
 
