@@ -1,15 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:nuri/cubit/profile/profile_state.dart';
 import 'package:nuri/config/enum.dart';
-import 'package:nuri/data/model/profile/profile_model.dart';
+import 'package:nuri/repository/profile_repository.dart';
 
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit() : super(ProfileState());
+  ProfileCubit(this.profileRepository) : super(ProfileState());
 
 
-  void getUserProfileData({required ProfileModel profileModel, required LoadingStatus loadingStatus}){
-    emit(ProfileState(profileModel: profileModel,loadingStatus: loadingStatus));
+  final ProfileRepository profileRepository;
+
+  void getUserProfileData() async{
+
+    final result = await profileRepository.getProfileInfo();
+
+    emit(ProfileState(profileModel: result, loadingStatus: LoadingStatus.success));
   }
 
   void initUserProfileData(){

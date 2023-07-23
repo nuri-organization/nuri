@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/cubit/profile/profile_cubit.dart';
 import 'package:nuri/cubit/profile/profile_state.dart';
 import 'package:nuri/config/enum.dart';
-import 'package:nuri/test/profile_data.dart';
 import 'package:nuri/ui/screen/profile/widget/post_grid_view.dart';
 import 'package:nuri/ui/screen/profile/widget/profile_edit_bar.dart';
 import 'package:nuri/ui/screen/profile/widget/user_info.dart';
@@ -21,7 +20,7 @@ class _NuriProfileScreenState extends State<NuriProfileScreen> {
 
   @override
   void initState() {
-    context.read<ProfileCubit>().getUserProfileData(profileModel: TestProfileData().data1, loadingStatus: LoadingStatus.success);
+    context.read<ProfileCubit>().getUserProfileData();
     super.initState();
   }
 
