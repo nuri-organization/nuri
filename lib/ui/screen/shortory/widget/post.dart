@@ -25,6 +25,7 @@ class Post extends StatelessWidget {
             ),
             _StateBar(
               isLoved: postModel.liked,
+              userName: postModel.userInfo.userName,
             ),
             _Contents(
               contents: postModel.content,
@@ -154,9 +155,10 @@ imageAnimation(PageController animation, images, pagePosition) {
 
 
 class _StateBar extends StatefulWidget {
-  _StateBar({super.key, required this.isLoved});
+  _StateBar({super.key, required this.isLoved, required this.userName});
 
   bool isLoved = false;
+  String userName;
 
   @override
   State<_StateBar> createState() => _StateBarState();
@@ -181,7 +183,7 @@ class _StateBarState extends State<_StateBar> {
                 icon: Icon(Icons.favorite,color: widget.isLoved ? Colors.pinkAccent : Colors.black,)
             ),
             IconButton(onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ShortoryComment()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ShortoryComment(userName: widget.userName,)));
             }, icon: Icon(Icons.chat)),
           ],
         ),
