@@ -44,7 +44,7 @@ class _NuriProfileScreenState extends State<NuriProfileScreen> {
             ],
           );
         }
-        else return Container();
+        return Container();
       },
     );
   }

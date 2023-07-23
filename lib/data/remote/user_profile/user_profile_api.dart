@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:nuri/config/api.dart';
 import 'package:nuri/data/model/profile/profile_model.dart';
+import 'package:nuri/test/profile_data.dart';
 
 class UserProfileApi extends Api{
   static final UserProfileApi _instance = UserProfileApi._internal();
@@ -12,9 +13,11 @@ class UserProfileApi extends Api{
 
   Future<ProfileModel> getUserProfileInfo() async{
     try {
-      Response response = await dio.get('$baseUrl/');
+      // Response response = await dio.get('$baseUrl/');
+      //
+      // ProfileModel getData = response.data["data"];
 
-      ProfileModel getData = response.data["data"];
+      ProfileModel getData = TestProfileData().data1;
 
       return getData;
     }
