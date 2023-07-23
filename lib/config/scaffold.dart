@@ -6,9 +6,9 @@ import 'package:nuri/ui/widget/bottom_nav/navigation_cubit.dart';
 import 'package:nuri/ui/widget/bottom_nav/nuri_bottomnavigation_constants.dart';
 
 class NuriScaffold extends StatelessWidget {
-  NuriScaffold({super.key, this.isInBottomNavigation = false, required this.child, this.title = "누리"});
+  NuriScaffold({super.key, this.isInBottomNavigation = false, this.child, this.title = "누리"});
   bool isInBottomNavigation;
-  Widget child;
+  Widget? child;
   String? title;
 
   @override
