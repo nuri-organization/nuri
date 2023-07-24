@@ -5,10 +5,20 @@ import 'package:nuri/config/constants.dart';
 import 'package:nuri/config/provider_di.dart';
 import 'package:nuri/home.dart';
 import 'package:nuri/nuri_observer.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() {
   Bloc.observer = NuriObserver();
+
+  initApp();
+
   runApp(const NuriApp());
+}
+
+Future<void> initApp() async{
+
+  await Hive.initFlutter();
+  await Hive.openBox(Constants.hiveBoxName);
 }
 
 class NuriApp extends StatelessWidget {
