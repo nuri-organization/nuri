@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:nuri/config/constants.dart';
+import 'package:nuri/data/local/local_storage.dart';
 
 class Api{
 
@@ -12,8 +13,10 @@ class Api{
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (request, handler) async{
-          if(needAccessToken){
-            request.headers['Authorization'] = 'Bearer ';
+          if((LocalStorage().getUserIdToken()).isNotEmpty){
+            if(needAccessToken){
+              request.headers['Authorization'] = 'Bearer ${LocalStorage().getUserIdToken()}';
+            }
           }
           return handler.next(request);
         }
