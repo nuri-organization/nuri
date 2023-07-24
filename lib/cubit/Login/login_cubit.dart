@@ -16,6 +16,8 @@ class LoginCubit extends Cubit<LoginState> {
 
   void signUp({required String loginId, required String loginPassword}) async{
     var result = await loginRepository.signUp(loginId: loginId, loginPassword: loginPassword);
+
+    LocalStorage().setUserIdToken(result).then((value) => emit(LoginState(loginStatus: LoginStatus.finish)));
   }
 
   void signIn({required String loginId, required String loginPassword}) async{

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/config/constants.dart';
 import 'package:nuri/config/scaffold.dart';
 import 'package:nuri/cubit/Login/login_cubit.dart';
+import 'package:nuri/ui/screen/profile/profile_input_screen.dart';
 
 class EmailInfoScreen extends StatefulWidget {
   const EmailInfoScreen({super.key});
@@ -168,7 +169,9 @@ class _LoginButton extends StatelessWidget {
             isLogin
                 ? context.read<LoginCubit>().signIn(loginId: loginId, loginPassword: loginPassword)
                 : context.read<LoginCubit>().signUp(loginId: loginId, loginPassword: loginPassword);
-            Navigator.pop(context);
+            isLogin
+                ? Navigator.pop(context)
+                : Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInputScreen()));
           },
           child: Center(child: Text(isLogin ? "로그인 하기" : "회원가입 하기"))),
     );

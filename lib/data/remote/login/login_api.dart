@@ -11,7 +11,7 @@ class LoginApi extends Api{
     return _instance;
   }
 
-  Future<bool> signUp({required String loginId, required String loginPassword}) async{
+  Future signUp({required String loginId, required String loginPassword}) async{
 
     Map requestBody =
     {
@@ -23,8 +23,9 @@ class LoginApi extends Api{
 
       Response response = await dio.post("$baseUrl/account/sign-up",data: requestBody);
 
+      var data = response.data["userId"];
 
-      return true;
+      return data;
     }
     catch(e){
       return Future.error(e);
