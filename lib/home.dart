@@ -15,6 +15,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   @override
+  void initState() {
+    context.read<LoginCubit>().checkAutoLogin();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
