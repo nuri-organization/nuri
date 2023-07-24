@@ -7,10 +7,10 @@ import 'package:nuri/home.dart';
 import 'package:nuri/nuri_observer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async{
   Bloc.observer = NuriObserver();
 
-  initApp();
+  await initApp();
 
   runApp(const NuriApp());
 }
