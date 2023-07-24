@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dio/dio.dart';
 import 'package:nuri/config/api.dart';
 import 'package:nuri/data/model/profile/profile_model.dart';
@@ -13,7 +15,9 @@ class UserProfileApi extends Api{
 
   Future<ProfileModel> getUserProfileInfo() async{
     try {
-      // Response response = await dio.get('$baseUrl/');
+      // Response response = await dio.get("$baseUrl/profile/");
+      //
+      // print(response);
       //
       // ProfileModel getData = response.data["data"];
 
@@ -34,6 +38,28 @@ class UserProfileApi extends Api{
       return true;
     }
     catch(e){
+      return false;
+    }
+  }
+
+  Future<bool> postUserProfile({required String userName, String? bestTravel, String? introduce}) async{
+    try{
+
+      Map requestBody = {
+        "userProfile": null,
+        "userName": userName,
+        "introduce": introduce,
+        "bestTravel": bestTravel
+      };
+
+
+      Response response = await dio.post('$baseUrl/profile/', data: requestBody);
+
+
+      return true;
+    }
+    catch(e){
+      print(e);
       return false;
     }
   }
