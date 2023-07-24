@@ -3,7 +3,7 @@ import 'package:nuri/data/remote/login/login_api.dart';
 
 abstract class LoginRepository{
   Future<bool> signUp({required String loginId, required String loginPassword});
-  Future<bool> signIn({required LoginModel loginModel});
+  Future signIn({required String loginId, required String loginPassword});
 }
 
 class LoginRepositoryImpl extends LoginRepository{
@@ -12,15 +12,15 @@ class LoginRepositoryImpl extends LoginRepository{
   LoginRepositoryImpl(this.api);
 
   @override
-  Future<bool> signIn({required LoginModel loginModel}) async{
-    final bool result = await api.signIn(loginModel: loginModel);
+  Future signIn({required String loginId, required String loginPassword}) async{
+    var result = await api.signIn(loginPassword: loginPassword,loginId: loginId);
 
     return result;
   }
 
   @override
   Future<bool> signUp({required String loginId, required String loginPassword}) async{
-    final bool result = await api.signUp(loginPassword: loginPassword, loginId:  loginId);
+    var result = await api.signUp(loginPassword: loginPassword, loginId:  loginId);
 
     return result;
   }

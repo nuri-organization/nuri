@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/config/constants.dart';
 import 'package:nuri/config/scaffold.dart';
 import 'package:nuri/cubit/Login/login_cubit.dart';
-import 'package:nuri/data/model/login/login_model.dart';
 
 class EmailInfoScreen extends StatefulWidget {
   const EmailInfoScreen({super.key});
@@ -16,21 +15,79 @@ class EmailInfoScreen extends StatefulWidget {
 class _EmailInfoScreenState extends State<EmailInfoScreen> {
   String loginId = "";
   String loginPassword = "";
+  bool isLogin = false;
 
   @override
   Widget build(BuildContext context) {
     return NuriScaffold(
-      title: "로그인",
+      title: isLogin ? "로그인" : "회원 가입",
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
           return Column(
             children: [
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isLogin = false;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: 170.w,
+                          height: 20.h,
+                          child: const Center(
+                            child: Text("계정 생성"),
+                          ),
+                        ),
+                        isLogin
+                            ? const SizedBox()
+                            : Container(
+                                height: 3,
+                                width: 70.w,
+                                color: Constants.theme4,
+                              )
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isLogin = true;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: 170.w,
+                          height: 20.h,
+                          child: const Center(
+                            child: Text("로그인"),
+                          ),
+                        ),
+                        isLogin
+                            ? Container(
+                                height: 3,
+                                width: 70.w,
+                                color: Constants.theme4,
+                              )
+                            : const SizedBox()
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 13.h,
+              ),
               _GetTextField(
                 title: "이메일 아이디를 입력해주세요!",
                 labelHint: "ID",
                 content: (value) {
                   setState(() {
-                  loginId = value;
+                    loginId = value;
                   });
                 },
               ),
@@ -42,7 +99,7 @@ class _EmailInfoScreenState extends State<EmailInfoScreen> {
                 labelHint: "PASSWORD",
                 content: (value) {
                   setState(() {
-                  loginPassword = value;
+                    loginPassword = value;
                   });
                 },
               ),
@@ -52,6 +109,7 @@ class _EmailInfoScreenState extends State<EmailInfoScreen> {
               _LoginButton(
                 loginId: loginId,
                 loginPassword: loginPassword,
+                isLogin: isLogin,
               )
             ],
           );
@@ -62,10 +120,11 @@ class _EmailInfoScreenState extends State<EmailInfoScreen> {
 }
 
 class _GetTextField extends StatelessWidget {
-  _GetTextField({super.key,
-    required this.title,
-    required this.labelHint,
-    required this.content});
+  _GetTextField(
+      {super.key,
+      required this.title,
+      required this.labelHint,
+      required this.content});
 
   String title;
   String labelHint;
@@ -79,20 +138,24 @@ class _GetTextField extends StatelessWidget {
         Text(title),
         SizedBox(
             child: TextField(
-              onChanged: content,
-              decoration: InputDecoration(labelText: labelHint),
-            ))
+          onChanged: content,
+          decoration: InputDecoration(labelText: labelHint),
+        ))
       ],
     );
   }
 }
 
 class _LoginButton extends StatelessWidget {
-  _LoginButton({super.key, required this.loginPassword, required this.loginId});
+  _LoginButton(
+      {super.key,
+      required this.loginPassword,
+      required this.loginId,
+      required this.isLogin});
 
   String loginId;
   String loginPassword;
-
+  bool isLogin;
 
   @override
   Widget build(BuildContext context) {
@@ -102,14 +165,12 @@ class _LoginButton extends StatelessWidget {
       color: Constants.theme4,
       child: InkWell(
           onTap: () {
-            print(loginId);
-            print(loginPassword);
-            context.read<LoginCubit>().signUp(loginId: loginId, loginPassword: loginPassword);
+            isLogin
+                ? context.read<LoginCubit>().signIn(loginId: loginId, loginPassword: loginPassword)
+                : context.read<LoginCubit>().signUp(loginId: loginId, loginPassword: loginPassword);
+            Navigator.pop(context);
           },
-          child: const Center(
-              child: Text("로그인 하기")
-          )
-      ),
+          child: Center(child: Text(isLogin ? "로그인 하기" : "회원가입 하기"))),
     );
   }
 }
