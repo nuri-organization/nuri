@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,7 +23,7 @@ class _ProfileInputScreenState extends State<ProfileInputScreen> {
   ProfileModel? profileModel;
 
   XFile? _image;
-  Int8List? _bytes;
+  String? byte;
 
   String userName = "";
   String? introduce;
@@ -39,14 +40,14 @@ class _ProfileInputScreenState extends State<ProfileInputScreen> {
     }
   }
 
-  void _getBytes(imageUrl) async {
-    final ByteData data =
-    await NetworkAssetBundle(Uri.parse(imageUrl)).load(imageUrl);
-    setState(() {
-      _bytes = data.buffer.asInt8List();
-      print(_bytes);
-    });
+  Future _getBytes(imageUrl) async {
+
+    final Uint8List bytes = await File(imageUrl).readAsBytes();
+    final val = base64Encode(bytes).toString();
+    byte = val;
+    print(byte);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +61,13 @@ class _ProfileInputScreenState extends State<ProfileInputScreen> {
               child: _ProfileImage(
                 onTap: (){
                   setState(() {
-                    getImage(ImageSource.gallery);
-                    _getBytes(_image!.path);
+                    getImage(ImageSource.gallery).then((value){
+                      _getBytes(_image!.path);
+                    });
+                    // _getBytes(_image!.path);
                   });
                 },
+                image: _image,
               )
           ),
           const Text("프로필 이미지"),
@@ -71,7 +75,9 @@ class _ProfileInputScreenState extends State<ProfileInputScreen> {
               title: "이름을 정해주세요",
               labelHint: "이름",
               content: (value){
-                userName = value!;
+                setState(() {
+                  userName = value!;
+                });
                 // profileModel = ProfileModel(userName: value!);
               }
           ),
@@ -80,7 +86,9 @@ class _ProfileInputScreenState extends State<ProfileInputScreen> {
               title: "간단한 자기소개를 입력해주세요",
               labelHint: "자기소개",
               content: (value){
-                introduce = value!;
+                setState(() {
+                  introduce = value!;
+                });
                 // profileModel = ProfileModel(introduce: value);
               }
           ),
@@ -89,12 +97,15 @@ class _ProfileInputScreenState extends State<ProfileInputScreen> {
               title: "지금까지 경험해본 가장 좋았던 장소를 입력해주세요",
               labelHint: "여행지 이름",
               content: (value){
-                bestTravel = value;
+                setState(() {
+                  bestTravel = value;
+                });
                 // profileModel = ProfileModel(bestTravel: value);
               }
           ),
           SizedBox(height: 150.h,),
           _LoginButton(
+            image: byte,
             userName: userName,
             introduce: introduce,
             bestTravel: bestTravel,
@@ -166,9 +177,9 @@ class _GetTextField extends StatelessWidget {
 }
 
 class _LoginButton extends StatelessWidget {
-  _LoginButton({super.key, required this.userName, this.bestTravel, this.introduce});
+  _LoginButton({super.key, required this.userName, this.bestTravel, this.introduce, this.image});
 
-
+  String? image;
   String userName;
   String? introduce;
   String? bestTravel;
@@ -181,8 +192,15 @@ Widget build(BuildContext context) {
     width: 100.w,
     color: Constants.theme4,
     child: InkWell(
-        onTap: () {
-          context.read<ProfileCubit>().setProfileData(userName: userName, introduce: introduce, bestTravel: bestTravel);
+        onTap: () async{
+          await context.read<ProfileCubit>().setProfileData(userName: userName, introduce: introduce, bestTravel: bestTravel, image: image)
+              .then((value) {
+                if(value) {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              }
+            }
+          );
         },
         child: const Center(child: Text("완료"))),
   );
