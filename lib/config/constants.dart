@@ -13,8 +13,8 @@ class Constants{
 
   static String appName = "누리";
   static String baseServerUrl = isDevelopMode
-      ? 'http://ec2-15-164-100-59.ap-northeast-2.compute.amazonaws.com'
-      : 'http://ec2-15-164-100-59.ap-northeast-2.compute.amazonaws.com';
+      ? 'http://ec2-43-201-105-221.ap-northeast-2.compute.amazonaws.com'
+      : 'http://ec2-43-201-105-221.ap-northeast-2.compute.amazonaws.com';
 
   static String hiveBoxName = "nuri";
 
