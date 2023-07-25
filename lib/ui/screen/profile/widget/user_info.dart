@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/config/constants.dart';
 import 'package:nuri/data/model/profile/profile_model.dart';
 
 class UserInfo extends StatelessWidget {
@@ -59,8 +60,7 @@ class _UserProfileImage extends StatelessWidget {
       ),
       child: imageURL != null
           ? ClipOval(
-              child: Image.network(
-              imageURL!,
+              child: Image.network("${Constants.baseServerUrl + imageURL!}",
               fit: BoxFit.fill,
             ))
           : Icon(
