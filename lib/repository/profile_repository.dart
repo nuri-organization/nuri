@@ -3,8 +3,8 @@ import 'package:nuri/data/remote/user_profile/user_profile_api.dart';
 
 abstract class ProfileRepository{
   Future<ProfileModel> getProfileInfo();
-  Future<bool> fetchProfileInfo({required ProfileModel profileModel});
-  Future<bool> postProfileInfo({required String userName, String? bestTravel, String? introduce});
+  Future<bool> fetchProfileInfo({required String userName, String? bestTravel, String? introduce, String? image});
+  Future<bool> postProfileInfo({required String userName, String? bestTravel, String? introduce, String? image});
 }
 
 class ProfileRepositoryImpl extends ProfileRepository{
@@ -13,9 +13,9 @@ class ProfileRepositoryImpl extends ProfileRepository{
   ProfileRepositoryImpl(this.api);
 
   @override
-  Future<bool> fetchProfileInfo({required ProfileModel profileModel}) async{
+  Future<bool> fetchProfileInfo({required String userName, String? bestTravel, String? introduce, String? image}) async{
 
-    final bool result = await api.fetchUserProfile(profileModel: profileModel);
+    final bool result = await api.fetchUserProfile(userName: userName, bestTravel: bestTravel, introduce: introduce, image: image);
 
     return result;
   }
@@ -29,9 +29,9 @@ class ProfileRepositoryImpl extends ProfileRepository{
   }
 
   @override
-  Future<bool> postProfileInfo({required String userName, String? bestTravel, String? introduce}) async{
+  Future<bool> postProfileInfo({required String userName, String? bestTravel, String? introduce, String? image}) async{
 
-    final bool result = await api.postUserProfile(userName: userName, bestTravel:  bestTravel, introduce:  introduce);
+    final bool result = await api.postUserProfile(userName: userName, bestTravel:  bestTravel, introduce:  introduce, image: image);
 
     return result;
 

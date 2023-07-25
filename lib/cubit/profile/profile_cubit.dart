@@ -18,12 +18,19 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileState(profileModel: result, loadingStatus: LoadingStatus.success));
   }
 
-  void setProfileData({required String userName, String? bestTravel, String? introduce}) async{
+  Future<bool> setProfileData({required String userName, String? bestTravel, String? introduce, String? image}) async{
 
-    final result = await profileRepository.postProfileInfo(userName: userName, bestTravel:  bestTravel, introduce:  introduce);
-
+    final result = await profileRepository.postProfileInfo(userName: userName, bestTravel:  bestTravel, introduce:  introduce, image: image);
 
     emit(ProfileState(loadingStatus: LoadingStatus.success));
+
+    return result;
+  }
+
+  void fetchProfileData({required String userName, String? bestTravel, String? introduce, String? image}) async{
+
+    final result = await profileRepository.fetchProfileInfo(userName: userName, introduce: introduce, bestTravel: bestTravel, image: image);
+
   }
 
   void initUserProfileData(){
