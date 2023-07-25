@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nuri/config/enum.dart';
 import 'package:nuri/cubit/travel/post/travel_post_cubit.dart';
+import 'package:nuri/ui/screen/error_screen.dart';
 import 'package:nuri/ui/screen/travel/widget/travel_post.dart';
 
 class NuriTravelScreen extends StatefulWidget {
@@ -33,6 +34,9 @@ class _NuriTravelScreenState extends State<NuriTravelScreen> {
                       travelPostModel: state.travelPostModel![index],
                     );
                   }));
+        }
+        if(state.loadingStatus == LoadingStatus.fail){
+          return const ErrorScreen();
         }
         return Container();
       },

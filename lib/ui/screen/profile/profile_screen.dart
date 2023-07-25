@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/cubit/profile/profile_cubit.dart';
 import 'package:nuri/cubit/profile/profile_state.dart';
 import 'package:nuri/config/enum.dart';
+import 'package:nuri/ui/screen/error_screen.dart';
 import 'package:nuri/ui/screen/profile/widget/post_grid_view.dart';
 import 'package:nuri/ui/screen/profile/widget/profile_edit_bar.dart';
 import 'package:nuri/ui/screen/profile/widget/user_info.dart';
@@ -43,6 +44,12 @@ class _NuriProfileScreenState extends State<NuriProfileScreen> {
               )
             ],
           );
+        }
+        if(state.loadingStatus == LoadingStatus.loading){
+          return const CircularProgressIndicator();
+        }
+        if(state.loadingStatus == LoadingStatus.fail){
+          return const ErrorScreen();
         }
         return Container();
       },
