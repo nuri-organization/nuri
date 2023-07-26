@@ -1,2 +1,2 @@
-enum LoadingStatus {initial, loading, success, fail}
+enum LoadingStatus {initial, loading, success, fail, noData}
 enum LoginStatus {before, loading, finish}
