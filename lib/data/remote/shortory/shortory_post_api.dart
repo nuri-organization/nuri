@@ -11,17 +11,27 @@ class ShortoryPostApi extends Api{
     return _instance;
   }
 
-  Future<List<PostModel>> getPostInfo() async{
+  Future<List> getPostInfo() async{
+
+    Map requestBody =
+        {
+          "postAmount": 5
+        };
 
     try{
-      // Response response = await dio.get("$baseUrl/post/");
-      //
-      // List<PostModel> getPostData = response.data;
-      // print(response);
+      Response response = await dio.get("$baseUrl/post/",data:requestBody );
 
-      List<PostModel> getPostData = TestPostData().data1;
 
-      return getPostData;
+
+      List getData = response.data["post"];
+
+
+      List data = getData.map((e) => PostModel.fromJson(e)).toList();
+
+
+
+
+      return data;
     }
     catch(e){
       return Future.error(e);

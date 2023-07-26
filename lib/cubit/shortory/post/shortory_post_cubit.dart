@@ -11,10 +11,19 @@ class ShortoryPostCubit extends Cubit<ShortoryPostState> {
 
   final ShortoryPostRepository shortoryPostRepository;
 
+
   void getShortoryPostInfo() async{
 
-    var result = await shortoryPostRepository.getShortoryPostInfo();
+    emit(ShortoryPostState(loadingStatus:  LoadingStatus.loading));
 
-    emit(ShortoryPostState(postModel: result,loadingStatus:  LoadingStatus.success));
+    List result = await shortoryPostRepository.getShortoryPostInfo();
+
+    if(result.isNotEmpty){
+      emit(ShortoryPostState(loadingStatus:  LoadingStatus.success));
+    }
+    if(result.isEmpty){
+      emit(ShortoryPostState(loadingStatus:  LoadingStatus.noData));
+    }
+
   }
 }

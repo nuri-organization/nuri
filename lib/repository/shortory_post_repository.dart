@@ -2,7 +2,7 @@ import 'package:nuri/data/model/post/post_model.dart';
 import 'package:nuri/data/remote/shortory/shortory_post_api.dart';
 
 abstract class ShortoryPostRepository{
-  Future<List<PostModel>> getShortoryPostInfo();
+  Future<List> getShortoryPostInfo();
   Future<bool> postShortoryPostInfo({required PostModel postModel});
   Future<bool> fetchShortoryPostInfo({required PostModel postModel});
 }
@@ -20,9 +20,10 @@ class ShortoryPostRepositoryImpl extends ShortoryPostRepository{
   }
 
   @override
-  Future<List<PostModel>> getShortoryPostInfo() async{
+  Future<List> getShortoryPostInfo() async{
 
-    final List<PostModel> result = await api.getPostInfo();
+    final List result = await api.getPostInfo();
+
 
     return result;
   }
