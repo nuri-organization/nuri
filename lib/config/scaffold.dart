@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nuri/ui/screen/shortory/shortory_post_screen.dart';
+import 'package:nuri/ui/widget/action_button.dart';
 import 'package:nuri/ui/widget/bottom_nav/bottomnav_router.dart';
 import 'package:nuri/ui/widget/bottom_nav/bottomnav_state.dart';
 import 'package:nuri/ui/widget/bottom_nav/navigation_cubit.dart';
@@ -38,7 +40,31 @@ class NuriScaffold extends StatelessWidget {
                 )
             )
         ),
+        floatingActionButton: BlocBuilder<NavigationCubit, NavigationState>(
+          builder: (context, state){
+            if(state.index == 0){
+             return ActionButton(children: [
+               ActionButtonSetting(
+                   onPressed: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const ShortoryPostScreen()));
+                   },
+                   icon: const Icon(Icons.add)
+               )
+             ],);
+            }
+            if(state.index == 1){
+              return ActionButton(children: [
+                ActionButtonSetting(
+                    onPressed: (){
 
+                    },
+                    icon: const Icon(Icons.add)
+                )
+              ],);
+            }
+            return Container();
+          },
+        )
       );
     }
     return Scaffold(
