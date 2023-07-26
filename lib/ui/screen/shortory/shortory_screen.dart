@@ -15,8 +15,13 @@ class NuriShortoryScreen extends StatefulWidget {
 class _NuriShortoryScreenState extends State<NuriShortoryScreen> {
   @override
   void initState() {
-    context.read<ShortoryPostCubit>().getShortoryPostInfo();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    context.read<ShortoryPostCubit>().getShortoryPostInfo();
+    super.didChangeDependencies();
   }
 
   @override
@@ -28,12 +33,15 @@ class _NuriShortoryScreenState extends State<NuriShortoryScreen> {
               child: ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: state.postModel!.length,
+              itemCount: state.postModel != null ? state.postModel!.length : 0,
               itemBuilder: (context, index) {
                 return Post(postModel: state.postModel![index]);
               },
             )
           );
+        }
+        if(state.loadingStatus == LoadingStatus.noData){
+          return const Center(child: Text("아직 작성된 게시글이 없어서 최초의 게시글을 작성해보세요!"),);
         }
         if(state.loadingStatus == LoadingStatus.fail){
           return const ErrorScreen();

@@ -60,7 +60,7 @@ class _UserProfileImage extends StatelessWidget {
       ),
       child: imageURL != null
           ? ClipOval(
-              child: Image.network("${Constants.baseServerUrl + imageURL!}",
+              child: Image.network("${imageURL!}",
               fit: BoxFit.fill,
             ))
           : Icon(

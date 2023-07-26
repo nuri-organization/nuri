@@ -139,20 +139,6 @@ AnimatedContainer slider(images, pagePosition) {
   );
 }
 
-imageAnimation(PageController animation, images, pagePosition) {
-  return AnimatedBuilder(
-    animation: animation,
-    builder: (context, widget) {
-      return SizedBox(
-        width: 350.w,
-        height: 250.h,
-        child: widget,
-      );
-    },
-    child: Image.network(images[pagePosition],fit: BoxFit.cover,),
-  );
-}
-
 
 class _StateBar extends StatefulWidget {
   _StateBar({super.key, required this.isLoved, required this.userName});
