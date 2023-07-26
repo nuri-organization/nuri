@@ -11,7 +11,7 @@ class ShortoryPostApi extends Api{
     return _instance;
   }
 
-  Future<List> getPostInfo() async{
+  Future<List<PostModel>> getPostInfo() async{
 
     Map requestBody =
         {
@@ -21,15 +21,11 @@ class ShortoryPostApi extends Api{
     try{
       Response response = await dio.get("$baseUrl/post/",data:requestBody );
 
+      print(response);
 
+      List getData =  response.data["post"];
 
-      List getData = response.data["post"];
-
-
-      List data = getData.map((e) => PostModel.fromJson(e)).toList();
-
-
-
+      List<PostModel> data = getData.map((e) => PostModel.fromJson(e)).toList();
 
       return data;
     }
@@ -38,14 +34,35 @@ class ShortoryPostApi extends Api{
     }
   }
 
-  Future<bool> postPostInfo({required PostModel postModel}) async{
+  Future<bool> postPostInfo({required List<ShortoryModel> shortoryModel, required String title, required String content}) async{
+
+    print(shortoryModel);
+
+    List<Map<String, dynamic>> shortory = [];
+    for (int index = 0; index < shortoryModel.length -1; index++) {
+      shortory.add({
+        "url" : shortoryModel[index].url,
+        "content" : shortoryModel[index].content
+      });
+    }
+    Map requestBody =
+    {
+      "title": title,
+      "content": content,
+      "shotory": shortory
+
+    };
+
     try{
-      Map requestBody = {};
+
+      print(requestBody["shotory"].length);
 
       Response response = await dio.post(
-          "$baseUrl/",
+          "$baseUrl/post/",
           data: requestBody
       );
+
+      print(response);
 
       return true;
     }

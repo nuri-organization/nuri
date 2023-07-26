@@ -13,7 +13,7 @@ class CommentModel with _$CommentModel{
   const factory CommentModel({
     @Default(0) int commentId,
     @Default("") String content,
-    @Default(UserInfoModel(userProfile: "", userName: "", userId: 0)) UserInfoModel userInfo,
+    @Default(UserInfoModel(userProfile: "", userName: "", userId: "")) UserInfoModel userInfo,
     @Default("") String commentTime,
     @Default(0) int likes,
     @Default(false) bool liked,

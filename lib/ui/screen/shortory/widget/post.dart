@@ -10,6 +10,9 @@ class Post extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(postModel);
+    print(postModel.postId);
+    print(postModel.shotory);
     return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -21,7 +24,7 @@ class Post extends StatelessWidget {
               height: 5.h,
             ),
             _Image(
-                shortory: postModel.shortory
+                shortory: postModel.shotory
             ),
             _StateBar(
               isLoved: postModel.liked,
@@ -101,6 +104,7 @@ class _ImageState extends State<_Image> {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         SizedBox(

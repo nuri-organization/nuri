@@ -3,10 +3,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nuri/config/constants.dart';
 import 'package:nuri/config/scaffold.dart';
+import 'package:nuri/cubit/shortory/post/shortory_post_cubit.dart';
+import 'package:nuri/data/model/post/post_model.dart';
 
 class ShortoryPostScreen extends StatefulWidget {
   const ShortoryPostScreen({super.key});
@@ -17,10 +20,13 @@ class ShortoryPostScreen extends StatefulWidget {
 
 class _ShortoryPostScreenState extends State<ShortoryPostScreen> {
   String title = "";
+  String content = "";
   List<XFile>? _images;
+
   List<String> story = List.filled(10, "");
-  // List<String>? story;
-  List<String>? byte;
+  List<String> byte = List.filled(10, "");
+
+  List<ShortoryModel> shortoryModel = [];
 
   final ImagePicker picker = ImagePicker();
 
@@ -29,6 +35,7 @@ class _ShortoryPostScreenState extends State<ShortoryPostScreen> {
     if (pickedFiles != null) {
       setState(() {
         _images = pickedFiles;
+        _setData();
       });
     }
   }
@@ -37,6 +44,7 @@ class _ShortoryPostScreenState extends State<ShortoryPostScreen> {
     setState(() {
       story[index] = content;
     });
+    print(story);
   }
 
   Future getImage(int index) async {
@@ -48,11 +56,30 @@ class _ShortoryPostScreenState extends State<ShortoryPostScreen> {
     }
   }
 
-  Future _getBytes(imageUrl) async {
+  Future _getBytes(imageUrl, int index) async {
     final Uint8List bytes = await File(imageUrl).readAsBytes();
-    final val = base64Encode(bytes).toString();
-    // byte = val;
-    print(byte);
+    final String val = await base64Encode(bytes).toString();
+
+    setState(() {
+      byte[index] = val;
+    });
+  }
+
+  void _setData() {
+
+    for(int i = 0; i <= _images!.length -1; i++){
+      print("gelli");
+       _getBytes(_images![i].path, i);
+       print(i);
+    }
+
+
+  }
+
+  Future _setData2() async{
+    for(int i = 0; i <= _images!.length -1; i++){
+      shortoryModel.add(ShortoryModel(url: byte[i],content: story[i]));
+    }
   }
 
   @override
@@ -79,7 +106,7 @@ class _ShortoryPostScreenState extends State<ShortoryPostScreen> {
                   labelHint: "내용을 작성해주세요",
                   content: (value) {
                     setState(() {
-                      title = value;
+                      content = value;
                     });
                   }),
               SizedBox(height: 10.h,),
@@ -110,7 +137,9 @@ class _ShortoryPostScreenState extends State<ShortoryPostScreen> {
 
               SizedBox(height: 100.h,),
               InkWell(
-                onTap: (){
+                onTap: () async{
+                  await _setData2().then((value) => _setData2().then((value) => context.read<ShortoryPostCubit>().postShortoryPostInfo(shortoryModel: shortoryModel,title: title,content: content)));
+
                 },
                 child: Container(width: 100, height: 30, color: Constants.theme4, child: Center(child: Text("업로드 하기"),),),
               ),

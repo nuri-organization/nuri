@@ -11,7 +11,7 @@ _$_CommentModel _$$_CommentModelFromJson(Map<String, dynamic> json) =>
       commentId: json['commentId'] as int? ?? 0,
       content: json['content'] as String? ?? "",
       userInfo: json['userInfo'] == null
-          ? const UserInfoModel(userProfile: "", userName: "", userId: 0)
+          ? const UserInfoModel(userProfile: "", userName: "", userId: "")
           : UserInfoModel.fromJson(json['userInfo'] as Map<String, dynamic>),
       commentTime: json['commentTime'] as String? ?? "",
       likes: json['likes'] as int? ?? 0,

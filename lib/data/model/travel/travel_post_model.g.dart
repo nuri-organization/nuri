@@ -12,7 +12,7 @@ _$_TravelPostModel _$$_TravelPostModelFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String? ?? "",
       content: json['content'] as String? ?? "",
       userInfo: json['userInfo'] == null
-          ? const UserInfoModel(userProfile: "", userName: "", userId: 0)
+          ? const UserInfoModel(userProfile: "", userName: "", userId: "")
           : UserInfoModel.fromJson(json['userInfo'] as Map<String, dynamic>),
       mainTravel: (json['mainTravel'] as List<dynamic>?)
               ?.map((e) => e as String)

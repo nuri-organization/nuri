@@ -20,7 +20,7 @@ UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserInfoModel {
-  int get userId => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userProfile => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $UserInfoModelCopyWith<$Res> {
           UserInfoModel value, $Res Function(UserInfoModel) then) =
       _$UserInfoModelCopyWithImpl<$Res, UserInfoModel>;
   @useResult
-  $Res call({int userId, String userName, String userProfile});
+  $Res call({String userId, String userName, String userProfile});
 }
 
 /// @nodoc
@@ -60,7 +60,7 @@ class _$UserInfoModelCopyWithImpl<$Res, $Val extends UserInfoModel>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -81,7 +81,7 @@ abstract class _$$_UserInfoModelCopyWith<$Res>
       __$$_UserInfoModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int userId, String userName, String userProfile});
+  $Res call({String userId, String userName, String userProfile});
 }
 
 /// @nodoc
@@ -103,7 +103,7 @@ class __$$_UserInfoModelCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -120,14 +120,14 @@ class __$$_UserInfoModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserInfoModel with DiagnosticableTreeMixin implements _UserInfoModel {
   const _$_UserInfoModel(
-      {this.userId = 0, this.userName = "", this.userProfile = ""});
+      {this.userId = "", this.userName = "", this.userProfile = ""});
 
   factory _$_UserInfoModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserInfoModelFromJson(json);
 
   @override
   @JsonKey()
-  final int userId;
+  final String userId;
   @override
   @JsonKey()
   final String userName;
@@ -182,7 +182,7 @@ class _$_UserInfoModel with DiagnosticableTreeMixin implements _UserInfoModel {
 
 abstract class _UserInfoModel implements UserInfoModel {
   const factory _UserInfoModel(
-      {final int userId,
+      {final String userId,
       final String userName,
       final String userProfile}) = _$_UserInfoModel;
 
@@ -190,7 +190,7 @@ abstract class _UserInfoModel implements UserInfoModel {
       _$_UserInfoModel.fromJson;
 
   @override
-  int get userId;
+  String get userId;
   @override
   String get userName;
   @override

@@ -23,7 +23,7 @@ mixin _$PostModel {
   int get postId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  List<ShortoryModel> get shortory => throw _privateConstructorUsedError;
+  List<ShortoryModel> get shotory => throw _privateConstructorUsedError;
   UserInfoModel get userInfo => throw _privateConstructorUsedError;
   dynamic get likes => throw _privateConstructorUsedError;
   dynamic get liked => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $PostModelCopyWith<$Res> {
       {int postId,
       String title,
       String content,
-      List<ShortoryModel> shortory,
+      List<ShortoryModel> shotory,
       UserInfoModel userInfo,
       dynamic likes,
       dynamic liked});
@@ -67,7 +67,7 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
     Object? postId = null,
     Object? title = null,
     Object? content = null,
-    Object? shortory = null,
+    Object? shotory = null,
     Object? userInfo = null,
     Object? likes = freezed,
     Object? liked = freezed,
@@ -85,9 +85,9 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      shortory: null == shortory
-          ? _value.shortory
-          : shortory // ignore: cast_nullable_to_non_nullable
+      shotory: null == shotory
+          ? _value.shotory
+          : shotory // ignore: cast_nullable_to_non_nullable
               as List<ShortoryModel>,
       userInfo: null == userInfo
           ? _value.userInfo
@@ -124,7 +124,7 @@ abstract class _$$_PostModelCopyWith<$Res> implements $PostModelCopyWith<$Res> {
       {int postId,
       String title,
       String content,
-      List<ShortoryModel> shortory,
+      List<ShortoryModel> shotory,
       UserInfoModel userInfo,
       dynamic likes,
       dynamic liked});
@@ -147,7 +147,7 @@ class __$$_PostModelCopyWithImpl<$Res>
     Object? postId = null,
     Object? title = null,
     Object? content = null,
-    Object? shortory = null,
+    Object? shotory = null,
     Object? userInfo = null,
     Object? likes = freezed,
     Object? liked = freezed,
@@ -165,9 +165,9 @@ class __$$_PostModelCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      shortory: null == shortory
-          ? _value._shortory
-          : shortory // ignore: cast_nullable_to_non_nullable
+      shotory: null == shotory
+          ? _value._shotory
+          : shotory // ignore: cast_nullable_to_non_nullable
               as List<ShortoryModel>,
       userInfo: null == userInfo
           ? _value.userInfo
@@ -186,12 +186,12 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
       {this.postId = 0,
       this.title = "",
       this.content = "",
-      final List<ShortoryModel> shortory = const [],
+      final List<ShortoryModel> shotory = const [],
       this.userInfo =
-          const UserInfoModel(userId: 0, userName: "", userProfile: ""),
+          const UserInfoModel(userId: "", userName: "", userProfile: ""),
       this.likes = 0,
       this.liked = false})
-      : _shortory = shortory;
+      : _shotory = shotory;
 
   factory _$_PostModel.fromJson(Map<String, dynamic> json) =>
       _$$_PostModelFromJson(json);
@@ -205,13 +205,13 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
   @override
   @JsonKey()
   final String content;
-  final List<ShortoryModel> _shortory;
+  final List<ShortoryModel> _shotory;
   @override
   @JsonKey()
-  List<ShortoryModel> get shortory {
-    if (_shortory is EqualUnmodifiableListView) return _shortory;
+  List<ShortoryModel> get shotory {
+    if (_shotory is EqualUnmodifiableListView) return _shotory;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_shortory);
+    return EqualUnmodifiableListView(_shotory);
   }
 
   @override
@@ -226,7 +226,7 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostModel(postId: $postId, title: $title, content: $content, shortory: $shortory, userInfo: $userInfo, likes: $likes, liked: $liked)';
+    return 'PostModel(postId: $postId, title: $title, content: $content, shotory: $shotory, userInfo: $userInfo, likes: $likes, liked: $liked)';
   }
 
   @override
@@ -237,7 +237,7 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
       ..add(DiagnosticsProperty('postId', postId))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('shortory', shortory))
+      ..add(DiagnosticsProperty('shotory', shotory))
       ..add(DiagnosticsProperty('userInfo', userInfo))
       ..add(DiagnosticsProperty('likes', likes))
       ..add(DiagnosticsProperty('liked', liked));
@@ -251,7 +251,7 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
             (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
-            const DeepCollectionEquality().equals(other._shortory, _shortory) &&
+            const DeepCollectionEquality().equals(other._shotory, _shotory) &&
             (identical(other.userInfo, userInfo) ||
                 other.userInfo == userInfo) &&
             const DeepCollectionEquality().equals(other.likes, likes) &&
@@ -265,7 +265,7 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
       postId,
       title,
       content,
-      const DeepCollectionEquality().hash(_shortory),
+      const DeepCollectionEquality().hash(_shotory),
       userInfo,
       const DeepCollectionEquality().hash(likes),
       const DeepCollectionEquality().hash(liked));
@@ -289,7 +289,7 @@ abstract class _PostModel implements PostModel {
       {final int postId,
       final String title,
       final String content,
-      final List<ShortoryModel> shortory,
+      final List<ShortoryModel> shotory,
       final UserInfoModel userInfo,
       final dynamic likes,
       final dynamic liked}) = _$_PostModel;
@@ -304,7 +304,7 @@ abstract class _PostModel implements PostModel {
   @override
   String get content;
   @override
-  List<ShortoryModel> get shortory;
+  List<ShortoryModel> get shotory;
   @override
   UserInfoModel get userInfo;
   @override

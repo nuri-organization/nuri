@@ -12,8 +12,8 @@ class PostModel with _$PostModel{
     @Default(0) int postId,
     @Default("") String title,
     @Default("") String content,
-    @Default([]) List<ShortoryModel> shortory,
-    @Default(UserInfoModel(userId: 0, userName: "", userProfile: "")) UserInfoModel userInfo,
+    @Default([]) List<ShortoryModel> shotory,
+    @Default(UserInfoModel(userId: "", userName: "", userProfile: "")) UserInfoModel userInfo,
     @Default(0) likes,
     @Default(false) liked,
 

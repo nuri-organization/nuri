@@ -207,7 +207,7 @@ class _$_CommentModel with DiagnosticableTreeMixin implements _CommentModel {
       {this.commentId = 0,
       this.content = "",
       this.userInfo =
-          const UserInfoModel(userProfile: "", userName: "", userId: 0),
+          const UserInfoModel(userProfile: "", userName: "", userId: ""),
       this.commentTime = "",
       this.likes = 0,
       this.liked = false,

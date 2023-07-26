@@ -181,7 +181,7 @@ class _$_RepliesModel with DiagnosticableTreeMixin implements _RepliesModel {
       {this.repliesId = 1,
       this.content = "",
       this.userInfo =
-          const UserInfoModel(userId: 0, userName: "", userProfile: ""),
+          const UserInfoModel(userId: "", userName: "", userProfile: ""),
       this.commentTime = "",
       this.likes = 0,
       this.liked = false});

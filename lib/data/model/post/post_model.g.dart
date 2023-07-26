@@ -10,12 +10,12 @@ _$_PostModel _$$_PostModelFromJson(Map<String, dynamic> json) => _$_PostModel(
       postId: json['postId'] as int? ?? 0,
       title: json['title'] as String? ?? "",
       content: json['content'] as String? ?? "",
-      shortory: (json['shortory'] as List<dynamic>?)
+      shotory: (json['shotory'] as List<dynamic>?)
               ?.map((e) => ShortoryModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       userInfo: json['userInfo'] == null
-          ? const UserInfoModel(userId: 0, userName: "", userProfile: "")
+          ? const UserInfoModel(userId: "", userName: "", userProfile: "")
           : UserInfoModel.fromJson(json['userInfo'] as Map<String, dynamic>),
       likes: json['likes'] ?? 0,
       liked: json['liked'] ?? false,
@@ -26,7 +26,7 @@ Map<String, dynamic> _$$_PostModelToJson(_$_PostModel instance) =>
       'postId': instance.postId,
       'title': instance.title,
       'content': instance.content,
-      'shortory': instance.shortory,
+      'shotory': instance.shotory,
       'userInfo': instance.userInfo,
       'likes': instance.likes,
       'liked': instance.liked,

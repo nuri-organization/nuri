@@ -16,7 +16,7 @@ class TravelPostModel with _$TravelPostModel{
         UserInfoModel(
             userProfile: "",
             userName: "",
-            userId: 0
+            userId: ""
         )
     ) UserInfoModel userInfo,
     @Default([]) List<String> mainTravel,

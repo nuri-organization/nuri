@@ -22,7 +22,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     final result = await profileRepository.postProfileInfo(userName: userName, bestTravel:  bestTravel, introduce:  introduce, image: image);
 
-    emit(ProfileState(loadingStatus: LoadingStatus.success));
+    emit(ProfileState( loadingStatus: LoadingStatus.success));
 
     return result;
   }

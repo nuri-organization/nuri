@@ -16,14 +16,21 @@ class ShortoryPostCubit extends Cubit<ShortoryPostState> {
 
     emit(ShortoryPostState(loadingStatus:  LoadingStatus.loading));
 
-    List result = await shortoryPostRepository.getShortoryPostInfo();
+    List<PostModel> result = await shortoryPostRepository.getShortoryPostInfo();
 
     if(result.isNotEmpty){
-      emit(ShortoryPostState(loadingStatus:  LoadingStatus.success));
+      emit( ShortoryPostState(postModel: result, loadingStatus:  LoadingStatus.success));
     }
     if(result.isEmpty){
-      emit(ShortoryPostState(loadingStatus:  LoadingStatus.noData));
+      emit( ShortoryPostState(loadingStatus:  LoadingStatus.noData));
     }
 
   }
+
+  void postShortoryPostInfo({required List<ShortoryModel> shortoryModel, required String title, required String content}) async{
+
+    bool result = await shortoryPostRepository.postShortoryPostInfo(shortoryModel: shortoryModel,title: title,content: content);
+
+  }
+
 }

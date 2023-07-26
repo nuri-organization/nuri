@@ -11,7 +11,7 @@ class TestCommentData{
       userInfo: UserInfoModel(
         userProfile: "https://media.licdn.com/dms/image/C4D03AQGMWViv6xuHnQ/profile-displayphoto-shrink_100_100/0/1653876350950?e=1695254400&v=beta&t=rLm1u-qNKA_cD6yh3K4p5bB3GfR4oPJBgJW4Fs-B4UE",
         userName: "hamilton",
-        userId: 1
+        userId: ""
       ),
       commentTime: "지금",
       likes: 11,
@@ -24,7 +24,7 @@ class TestCommentData{
             userInfo: UserInfoModel(
                 userProfile: "https://media.licdn.com/dms/image/C5603AQFnw3jPDEQ0GA/profile-displayphoto-shrink_100_100/0/1652049920739?e=1695254400&v=beta&t=VgqPMeTqrUhHPr12zp6WJ1lqLtQt4hNaHKir_Erg4tQ",
                 userName: "moon",
-                userId: 1
+                userId: ""
             ),
           liked: false,
           likes: 0
@@ -36,7 +36,7 @@ class TestCommentData{
             userInfo: UserInfoModel(
                 userProfile: "https://media.licdn.com/dms/image/C4D03AQGMWViv6xuHnQ/profile-displayphoto-shrink_100_100/0/1653876350950?e=1695254400&v=beta&t=rLm1u-qNKA_cD6yh3K4p5bB3GfR4oPJBgJW4Fs-B4UE",
                 userName: "hamilton",
-                userId: 1
+                userId: ""
             ),
             liked: false,
             likes: 0
@@ -50,7 +50,7 @@ class TestCommentData{
         userInfo: UserInfoModel(
             userProfile: "https://media.licdn.com/dms/image/C4D03AQGMWViv6xuHnQ/profile-displayphoto-shrink_100_100/0/1653876350950?e=1695254400&v=beta&t=rLm1u-qNKA_cD6yh3K4p5bB3GfR4oPJBgJW4Fs-B4UE",
             userName: "hamilton",
-            userId: 1
+            userId: ""
         ),
         commentTime: "지금",
         likes: 11,
@@ -63,7 +63,7 @@ class TestCommentData{
               userInfo: UserInfoModel(
                   userProfile: "https://media.licdn.com/dms/image/C5603AQFnw3jPDEQ0GA/profile-displayphoto-shrink_100_100/0/1652049920739?e=1695254400&v=beta&t=VgqPMeTqrUhHPr12zp6WJ1lqLtQt4hNaHKir_Erg4tQ",
                   userName: "hamilton",
-                  userId: 1
+                  userId: ""
               ),
               liked: false,
               likes: 0
@@ -75,7 +75,7 @@ class TestCommentData{
               userInfo: UserInfoModel(
                   userProfile: "https://media.licdn.com/dms/image/C4D03AQGMWViv6xuHnQ/profile-displayphoto-shrink_100_100/0/1653876350950?e=1695254400&v=beta&t=rLm1u-qNKA_cD6yh3K4p5bB3GfR4oPJBgJW4Fs-B4UE",
                   userName: "hamilton",
-                  userId: 1
+                  userId: ""
               ),
               liked: false,
               likes: 0
@@ -87,7 +87,7 @@ class TestCommentData{
               userInfo: UserInfoModel(
                   userProfile: "https://media.licdn.com/dms/image/C4D03AQGMWViv6xuHnQ/profile-displayphoto-shrink_100_100/0/1653876350950?e=1695254400&v=beta&t=rLm1u-qNKA_cD6yh3K4p5bB3GfR4oPJBgJW4Fs-B4UE",
                   userName: "hamilton",
-                  userId: 1
+                  userId: ""
               ),
               liked: false,
               likes: 0
@@ -101,7 +101,7 @@ class TestCommentData{
         userInfo: UserInfoModel(
             userProfile: "https://media.licdn.com/dms/image/C4D03AQGMWViv6xuHnQ/profile-displayphoto-shrink_100_100/0/1653876350950?e=1695254400&v=beta&t=rLm1u-qNKA_cD6yh3K4p5bB3GfR4oPJBgJW4Fs-B4UE",
             userName: "hamilton",
-            userId: 1
+            userId: ""
         ),
         commentTime: "지금",
         likes: 11,
@@ -117,7 +117,7 @@ class TestCommentData{
         userInfo: UserInfoModel(
             userProfile: "https://media.licdn.com/dms/image/C4D03AQGMWViv6xuHnQ/profile-displayphoto-shrink_100_100/0/1653876350950?e=1695254400&v=beta&t=rLm1u-qNKA_cD6yh3K4p5bB3GfR4oPJBgJW4Fs-B4UE",
             userName: "hamilton",
-            userId: 1
+            userId: ""
         ),
         commentTime: "지금",
         likes: 11,
@@ -130,7 +130,7 @@ class TestCommentData{
               userInfo: UserInfoModel(
                   userProfile: "https://media.licdn.com/dms/image/C5603AQFnw3jPDEQ0GA/profile-displayphoto-shrink_100_100/0/1652049920739?e=1695254400&v=beta&t=VgqPMeTqrUhHPr12zp6WJ1lqLtQt4hNaHKir_Erg4tQ",
                   userName: "hamilton",
-                  userId: 1
+                  userId: ""
               ),
               liked: false,
               likes: 0
@@ -142,7 +142,7 @@ class TestCommentData{
               userInfo: UserInfoModel(
                   userProfile: "https://media.licdn.com/dms/image/C4D03AQGMWViv6xuHnQ/profile-displayphoto-shrink_100_100/0/1653876350950?e=1695254400&v=beta&t=rLm1u-qNKA_cD6yh3K4p5bB3GfR4oPJBgJW4Fs-B4UE",
                   userName: "hamilton",
-                  userId: 1
+                  userId: ""
               ),
               liked: false,
               likes: 0
