@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/cubit/shortory/post/shortory_post_cubit.dart';
 import 'package:nuri/data/model/post/post_model.dart';
 import 'package:nuri/ui/screen/shortory/shortory_comment.dart';
 
@@ -10,9 +12,6 @@ class Post extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(postModel);
-    print(postModel.postId);
-    print(postModel.shotory);
     return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,6 +28,7 @@ class Post extends StatelessWidget {
             _StateBar(
               isLoved: postModel.liked,
               userName: postModel.userInfo.userName,
+              postId: postModel.postId,
             ),
             _Contents(
               contents: postModel.content,
@@ -145,21 +145,17 @@ AnimatedContainer slider(images, pagePosition) {
 
 
 class _StateBar extends StatefulWidget {
-  _StateBar({super.key, required this.isLoved, required this.userName});
+  _StateBar({super.key, required this.isLoved, required this.userName, required this.postId});
 
   bool isLoved = false;
   String userName;
+  int postId = 0;
 
   @override
   State<_StateBar> createState() => _StateBarState();
 }
 
 class _StateBarState extends State<_StateBar> {
-  _changeFavoriteState() {
-    setState(() {
-      widget.isLoved ? widget.isLoved = false : widget.isLoved = true;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +165,12 @@ class _StateBarState extends State<_StateBar> {
         Row(
           children: [
             IconButton(
-                onPressed: _changeFavoriteState,
+                onPressed: () async{
+                  setState(() {
+                      widget.isLoved ? widget.isLoved = false : widget.isLoved = true;
+                    });
+                   context.read<ShortoryPostCubit>().postLike(postId: widget.postId);
+                },
                 icon: Icon(Icons.favorite,color: widget.isLoved ? Colors.pinkAccent : Colors.black,)
             ),
             IconButton(onPressed: () {

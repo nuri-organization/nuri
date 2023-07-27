@@ -33,6 +33,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   }
 
+
   void initUserProfileData(){
     emit(ProfileState());
   }

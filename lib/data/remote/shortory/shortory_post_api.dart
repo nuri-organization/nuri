@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:nuri/config/api.dart';
 import 'package:nuri/data/model/post/post_model.dart';
-import 'package:nuri/test/post_data.dart';
 
 class ShortoryPostApi extends Api{
   static final ShortoryPostApi _instance = ShortoryPostApi._internal();
@@ -36,7 +35,6 @@ class ShortoryPostApi extends Api{
 
   Future<bool> postPostInfo({required List<ShortoryModel> shortoryModel, required String title, required String content}) async{
 
-    print(shortoryModel);
 
     List<Map<String, dynamic>> shortory = [];
     for (int index = 0; index < shortoryModel.length -1; index++) {
@@ -55,7 +53,6 @@ class ShortoryPostApi extends Api{
 
     try{
 
-      print(requestBody["shotory"].length);
 
       Response response = await dio.post(
           "$baseUrl/post/",
@@ -86,4 +83,35 @@ class ShortoryPostApi extends Api{
       return Future.error(e).then((value) => false);
     }
   }
+
+  Future<bool> postLike({required int postId}) async{
+    try{
+      Response response = await dio.put(
+        "$baseUrl/post/likes/$postId",
+      );
+      print(response);
+
+      return true;
+
+    }
+    catch(e){
+      return Future.error(e).then((value) => false);
+    }
+  }
+
+  Future<bool> postBookmark({required int postId}) async{
+    try{
+      Response response = await dio.put(
+        "$baseUrl/post/bookmarks/$postId",
+      );
+      print(response);
+
+      return true;
+
+    }
+    catch(e){
+      return Future.error(e).then((value) => false);
+    }
+  }
+
 }

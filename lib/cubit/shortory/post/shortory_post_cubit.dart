@@ -33,4 +33,16 @@ class ShortoryPostCubit extends Cubit<ShortoryPostState> {
 
   }
 
+  void fetchShortoryPostInfo({required List<ShortoryModel> shortoryModel, required String title, required String content}) async{
+
+  }
+
+  void postLike({required int postId}) async{
+    bool result = await shortoryPostRepository.postLikes(postId: postId);
+  }
+
+  void postBookmark({required int postId}) async{
+    bool result = await shortoryPostRepository.postBookmark(postId: postId);
+  }
+
 }

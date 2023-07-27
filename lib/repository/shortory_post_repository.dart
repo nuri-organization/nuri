@@ -5,6 +5,8 @@ abstract class ShortoryPostRepository{
   Future<List<PostModel>> getShortoryPostInfo();
   Future<bool> postShortoryPostInfo({required List<ShortoryModel> shortoryModel, required String title, required String content});
   Future<bool> fetchShortoryPostInfo({required PostModel postModel});
+  Future<bool> postLikes({required int postId});
+  Future<bool> postBookmark({required int postId});
 }
 
 class ShortoryPostRepositoryImpl extends ShortoryPostRepository{
@@ -32,6 +34,22 @@ class ShortoryPostRepositoryImpl extends ShortoryPostRepository{
   Future<bool> postShortoryPostInfo({required List<ShortoryModel> shortoryModel, required String title, required String content}) async{
 
     final bool result = await api.postPostInfo(shortoryModel: shortoryModel,title: title,content: content);
+
+    return result;
+  }
+
+  @override
+  Future<bool> postBookmark({required int postId}) async{
+
+    final bool result = await api.postBookmark(postId: postId);
+
+    return result;
+  }
+
+  @override
+  Future<bool> postLikes({required int postId}) async{
+
+    final bool result = await api.postLike(postId: postId);
 
     return result;
   }
