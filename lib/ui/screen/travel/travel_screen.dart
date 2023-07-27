@@ -35,6 +35,9 @@ class _NuriTravelScreenState extends State<NuriTravelScreen> {
                     );
                   }));
         }
+        if(state.loadingStatus == LoadingStatus.noData){
+          return const ErrorScreen();
+        }
         if(state.loadingStatus == LoadingStatus.fail){
           return const ErrorScreen();
         }

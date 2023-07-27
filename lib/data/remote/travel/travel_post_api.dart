@@ -13,28 +13,49 @@ class TravelPostApi extends Api{
   }
 
   Future<List<TravelPostModel>> getTravelPostInfo() async{
+
+    Map requestBody =
+    {
+      "travelAmount": 10
+    };
+
     try{
-      // Response response = await dio.get("$baseUrl/");
-      //
-      // List<TravelPostModel> getData = response.data["data"];
 
-      List<TravelPostModel> getData = TestTravelPostData().data1;
+      Response response = await dio.get("$baseUrl/travel/",data: requestBody);
 
-      return getData;
+      List getData = response.data["travels"];
+
+      List<TravelPostModel> data = getData.map((e) => TravelPostModel.fromJson(e)).toList();
+
+
+      return data;
     }
     catch(e){
       return Future.error(e);
     }
   }
 
-  Future<bool> postTravelPostInfo({required TravelPostModel travelPostModel}) async{
+  Future<bool> postTravelPostInfo({required String title, required String content, required List<String> mainTravel, required int cost, required String startData, required String endDate, required int maxPeople}) async{
     try {
-      Map requestBody = {};
+      Map requestBody =
+      {
+        "title": title,
+        "content": content,
+        "mainTravel": mainTravel,
+        "cost": cost,
+        "startDate": startData,
+        "endDate": endDate,
+        "maxPeople": maxPeople
+      };
+
+      print(requestBody);
 
       Response response = await dio.post(
-        "$baseUrl/",
+        "$baseUrl/travel/",
         data: requestBody
       );
+
+      print(response);
 
       return true;
     }

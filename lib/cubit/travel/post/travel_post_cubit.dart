@@ -14,7 +14,19 @@ class TravelPostCubit extends Cubit<TravelPostState> {
   void getTravelPostInfo() async{
     var result = await travelPostRepository.getTravelPostInfo();
 
-    emit(TravelPostState(travelPostModel: result, loadingStatus: LoadingStatus.success));
+    if(result.isEmpty){
+      emit(TravelPostState(loadingStatus: LoadingStatus.noData));
+    }
+    if(result.isNotEmpty){
+      emit(TravelPostState(travelPostModel: result, loadingStatus: LoadingStatus.success));
+    }
+
+  }
+
+  void postTravelPostInfo({required String title, required String content, required List<String> mainTravel, required int cost, required String startData, required String endDate, required int maxPeople}) async{
+    var result = await travelPostRepository.postTravelPostInfo(title: title,cost:cost,content: content,maxPeople: maxPeople,mainTravel: mainTravel,startData: startData,endDate: endDate);
+
+
   }
 
 }
