@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/cubit/shortory/post/shortory_post_cubit.dart';
+import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/data/model/post/post_model.dart';
 import 'package:nuri/ui/screen/shortory/shortory_comment.dart';
 import 'package:nuri/ui/widget/nuri_dialog.dart';
@@ -27,6 +28,7 @@ class Post extends StatelessWidget {
                 shortory: postModel.shotory
             ),
             _StateBar(
+              userId: postModel.userInfo.userId,
               isLoved: postModel.liked,
               userName: postModel.userInfo.userName,
               postId: postModel.postId,
@@ -146,11 +148,12 @@ AnimatedContainer slider(images, pagePosition) {
 
 
 class _StateBar extends StatefulWidget {
-  _StateBar({super.key, required this.isLoved, required this.userName, required this.postId});
+  _StateBar({super.key, required this.isLoved, required this.userName, required this.postId, required this.userId});
 
   bool isLoved = false;
   String userName;
   int postId = 0;
+  String userId;
 
   @override
   State<_StateBar> createState() => _StateBarState();
@@ -185,6 +188,7 @@ class _StateBarState extends State<_StateBar> {
                   MaterialPageRoute(
                       builder: (context) => ShortoryComment(
                         userName: widget.userName,
+                        postId: widget.postId,
                       )
                   )
               );
@@ -194,6 +198,11 @@ class _StateBarState extends State<_StateBar> {
         IconButton(onPressed: () async{
           await nuriDialog(context,[
             const Text("-----메뉴-----"),
+            LocalStorage().getUserIdToken() == widget.userId ?
+            TextButton(
+                onPressed: (){
+
+                }, child: const Text("수정 하기")) : const SizedBox(),
             TextButton(
                 onPressed: () async{
                   context.read<ShortoryPostCubit>().postBookmark(postId: widget.postId);

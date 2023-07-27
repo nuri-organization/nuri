@@ -7,8 +7,9 @@ import 'package:nuri/test/comment_data.dart';
 import 'package:nuri/ui/screen/shortory/widget/comment.dart';
 
 class ShortoryComment extends StatefulWidget {
-  ShortoryComment({super.key,required this.userName});
+  ShortoryComment({super.key,required this.userName, required this.postId});
   String userName;
+  int postId;
 
   @override
   State<ShortoryComment> createState() => _ShortoryCommentState();
@@ -18,7 +19,7 @@ class _ShortoryCommentState extends State<ShortoryComment> {
 
   @override
   void initState() {
-    context.read<CommentCubit>().getCommentInfo();
+    context.read<CommentCubit>().getCommentInfo(postId: widget.postId);
     super.initState();
   }
 
@@ -40,6 +41,9 @@ class _ShortoryCommentState extends State<ShortoryComment> {
                     );
                   },
                 ));
+          }
+          if(state.loadingStatus == LoadingStatus.noData){
+            return const Center(child: Text("아직 작성된 댓글이 없습니다. 최초의 댓글을 남겨보세요!"),);
           }
           return Container();
         },

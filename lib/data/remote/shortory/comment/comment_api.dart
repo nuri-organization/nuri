@@ -11,15 +11,19 @@ class CommentApi extends Api{
     return _instance;
   }
 
-  Future<List<CommentModel>> getCommentInfo() async{
+  Future<List<CommentModel>> getCommentInfo({required int postId}) async{
+
     try{
-      // Response response = await dio.get("$baseUrl/");
-      //
-      // List<CommentModel> getCommentData = response.data["data"];
 
-      List<CommentModel> getCommentData = TestCommentData().data1;
+      Response response = await dio.get("$baseUrl/post/comments/$postId");
 
-      return getCommentData;
+      List getData = response.data["comments"];
+
+      List<CommentModel> data = getData.map((e) => CommentModel.fromJson(e)).toList();
+
+      // List<CommentModel> getCommentData = TestCommentData().data1;
+
+      return data;
 
     }
     catch(e){

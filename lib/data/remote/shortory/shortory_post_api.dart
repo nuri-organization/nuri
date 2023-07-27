@@ -14,7 +14,7 @@ class ShortoryPostApi extends Api{
 
     Map requestBody =
         {
-          "postAmount": 5
+          "postAmount": 10
         };
 
     try{

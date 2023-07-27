@@ -12,11 +12,17 @@ class CommentCubit extends Cubit<CommentState> {
 
   final CommentRepository commentRepository;
 
-  void getCommentInfo() async{
+  void getCommentInfo({required int postId}) async{
 
-    var result = await commentRepository.getCommentInfo();
+    var result = await commentRepository.getCommentInfo(postId: postId);
 
-    emit(CommentState(commentModel: result,loadingStatus:  LoadingStatus.success));
+    if(result.isEmpty){
+      emit(CommentState(commentModel: result,loadingStatus:  LoadingStatus.noData));
+    }
+    if(result.isNotEmpty){
+      emit(CommentState(commentModel: result,loadingStatus:  LoadingStatus.success));
+    }
+
   }
 
 }
