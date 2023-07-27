@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/cubit/shortory/post/shortory_post_cubit.dart';
 import 'package:nuri/data/model/post/post_model.dart';
 import 'package:nuri/ui/screen/shortory/shortory_comment.dart';
+import 'package:nuri/ui/widget/nuri_dialog.dart';
 
 class Post extends StatelessWidget {
   Post({super.key,required this.postModel});
@@ -171,14 +172,52 @@ class _StateBarState extends State<_StateBar> {
                     });
                    context.read<ShortoryPostCubit>().postLike(postId: widget.postId);
                 },
-                icon: Icon(Icons.favorite,color: widget.isLoved ? Colors.pinkAccent : Colors.black,)
+                icon: Icon(
+                  Icons.favorite,
+                  color: widget.isLoved
+                      ? Colors.pinkAccent
+                      : Colors.black,
+                )
             ),
             IconButton(onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ShortoryComment(userName: widget.userName,)));
-            }, icon: Icon(Icons.chat)),
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ShortoryComment(
+                        userName: widget.userName,
+                      )
+                  )
+              );
+            }, icon: const Icon(Icons.chat)),
           ],
         ),
-        IconButton(onPressed: () {}, icon: Icon(Icons.menu))
+        IconButton(onPressed: () async{
+          await nuriDialog(context,[
+            const Text("-----메뉴-----"),
+            TextButton(
+                onPressed: () async{
+                  context.read<ShortoryPostCubit>().postBookmark(postId: widget.postId);
+                },
+                child: const Text("북마크하기")),
+            TextButton(
+                onPressed: (){
+
+                },
+                child: const Text("프로필 보기")),
+            TextButton(
+                onPressed: (){
+
+                }, child: const Text("채팅 하기")),
+            TextButton(
+                onPressed: (){
+
+                }, child: const Text("신고하기",style: TextStyle(color: Colors.redAccent),)),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  }, child: const Text("닫기"))
+          ]);
+        }, icon: const Icon(Icons.menu))
       ],
     );
   }
