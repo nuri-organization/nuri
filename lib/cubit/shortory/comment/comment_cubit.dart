@@ -25,4 +25,8 @@ class CommentCubit extends Cubit<CommentState> {
 
   }
 
+  void postCommentInfo({required int postId, required String content}) async{
+    var result = await commentRepository.postCommentInfo(postId: postId, content: content);
+  }
+
 }

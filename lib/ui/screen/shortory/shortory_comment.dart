@@ -7,8 +7,8 @@ import 'package:nuri/test/comment_data.dart';
 import 'package:nuri/ui/screen/shortory/widget/comment.dart';
 
 class ShortoryComment extends StatefulWidget {
-  ShortoryComment({super.key,required this.userName, required this.postId});
-  String userName;
+  ShortoryComment({super.key,required this.title, required this.postId});
+  String title;
   int postId;
 
   @override
@@ -26,7 +26,7 @@ class _ShortoryCommentState extends State<ShortoryComment> {
   @override
   Widget build(BuildContext context) {
     return NuriScaffold(
-      title: "${widget.userName} 게시글의 댓글",
+      title: "${widget.title} 게시글의 댓글",
       child: BlocBuilder<CommentCubit, CommentState>(
         builder: (context, state) {
           if (state.loadingStatus == LoadingStatus.success) {
@@ -37,7 +37,7 @@ class _ShortoryCommentState extends State<ShortoryComment> {
                   itemCount: state.commentModel!.length,
                   itemBuilder: (context, index) {
                     return Comment(
-                      commentModel: TestCommentData().data1[index],
+                      commentModel: state.commentModel![index],
                     );
                   },
                 ));

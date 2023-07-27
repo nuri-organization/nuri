@@ -3,7 +3,7 @@ import 'package:nuri/data/remote/shortory/comment/comment_api.dart';
 
 abstract class CommentRepository{
   Future<List<CommentModel>> getCommentInfo({required int postId});
-  Future<bool> postCommentInfo({required CommentModel commentModel});
+  Future<bool> postCommentInfo({required int postId, required String content});
   Future<bool> fetchCommentInfo({required CommentModel commentModel});
   Future<bool> deleteCommentInfo({required CommentModel commentModel});
 }
@@ -29,9 +29,9 @@ class CommentRepositoryImpl extends CommentRepository{
   }
 
   @override
-  Future<bool> postCommentInfo({required CommentModel commentModel}) async{
+  Future<bool> postCommentInfo({required int postId, required String content}) async{
 
-    final bool result = await api.postCommentInfo(commentModel: commentModel);
+    final bool result = await api.postCommentInfo(postId: postId,content: content);
 
     return result;
   }

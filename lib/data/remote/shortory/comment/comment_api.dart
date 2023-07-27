@@ -31,12 +31,14 @@ class CommentApi extends Api{
     }
   }
 
-  Future<bool> postCommentInfo({required CommentModel commentModel}) async{
+  Future<bool> postCommentInfo({required int postId, required String content}) async{
     try{
-      Map requestBody = {};
+      Map requestBody = {
+        "content" : content
+      };
 
       Response response = await dio.post(
-        "$baseUrl/",
+        "$baseUrl/post/comments/$postId",
         data: requestBody
       );
 

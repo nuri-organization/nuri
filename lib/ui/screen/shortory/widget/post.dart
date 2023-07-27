@@ -30,7 +30,7 @@ class Post extends StatelessWidget {
             _StateBar(
               userId: postModel.userInfo.userId,
               isLoved: postModel.liked,
-              userName: postModel.userInfo.userName,
+              title: postModel.title,
               postId: postModel.postId,
             ),
             _Contents(
@@ -148,12 +148,12 @@ AnimatedContainer slider(images, pagePosition) {
 
 
 class _StateBar extends StatefulWidget {
-  _StateBar({super.key, required this.isLoved, required this.userName, required this.postId, required this.userId});
+  _StateBar({super.key, required this.isLoved, required this.title, required this.postId, required this.userId});
 
   bool isLoved = false;
-  String userName;
   int postId = 0;
   String userId;
+  String title;
 
   @override
   State<_StateBar> createState() => _StateBarState();
@@ -187,7 +187,7 @@ class _StateBarState extends State<_StateBar> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => ShortoryComment(
-                        userName: widget.userName,
+                        title: widget.title,
                         postId: widget.postId,
                       )
                   )
