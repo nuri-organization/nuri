@@ -41,7 +41,7 @@ class _NuriShortoryScreenState extends State<NuriShortoryScreen> {
           );
         }
         if(state.loadingStatus == LoadingStatus.noData){
-          return const Center(child: Text("아직 작성된 게시글이 없어서 최초의 게시글을 작성해보세요!"),);
+          return const Center(child: Text("아직 작성된 게시글이 없습니다. 최초의 게시글을 작성해보세요!"),);
         }
         if(state.loadingStatus == LoadingStatus.fail){
           return const ErrorScreen();
