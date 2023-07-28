@@ -6,6 +6,8 @@ import 'package:nuri/config/provider_di.dart';
 import 'package:nuri/home.dart';
 import 'package:nuri/nuri_observer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async{
   Bloc.observer = NuriObserver();
@@ -19,6 +21,9 @@ Future<void> initApp() async{
 
   await Hive.initFlutter();
   await Hive.openBox(Constants.hiveBoxName);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class NuriApp extends StatelessWidget {

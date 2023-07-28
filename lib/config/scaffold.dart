@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/ui/screen/shortory/shortory_post_screen.dart';
 import 'package:nuri/ui/screen/travel/travel_post_screen.dart';
 import 'package:nuri/ui/widget/action_button.dart';
@@ -59,8 +60,16 @@ class NuriScaffold extends StatelessWidget {
                     onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const TravelPostScreen()));
                     },
-                    icon: const Icon(Icons.add)
-                )
+                    icon: const Icon(Icons.add),
+                ),
+                ActionButtonSetting(
+                  onPressed: (){
+                    bool data = LocalStorage().getPartyData();
+
+                    data == true ? LocalStorage().setPartyData(false) : LocalStorage().setPartyData(true);
+                  },
+                  icon: const Icon(Icons.autorenew),
+                ),
               ],);
             }
             return Container();

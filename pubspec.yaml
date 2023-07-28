@@ -45,6 +45,11 @@ dependencies:
   hive_flutter: ^1.1.0
   image_picker: ^1.0.1
   permission_handler: ^10.4.3
+  firebase_messaging: ^14.6.5
+  cloud_firestore: ^4.8.4
+  flutter_local_notifications: ^15.1.0+1
+  intl: ^0.18.1
+  firebase_core: ^2.15.0
 
 dev_dependencies:
   flutter_test:

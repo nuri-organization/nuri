@@ -13,6 +13,7 @@ class LocalStorage{
   }
 
   String _userIdTokenKey = "userIdToken";
+  String isHaveParty = "isHaveParty";
 
   String getUserIdToken(){
     return (box.get(_userIdTokenKey) ?? "").toString();
@@ -20,6 +21,14 @@ class LocalStorage{
 
   Future<void> setUserIdToken(String token) async{
     await box.put(_userIdTokenKey, token);
+  }
+
+  bool getPartyData(){
+    return (box.get(isHaveParty) ?? false);
+  }
+
+  Future<void> setPartyData(bool data) async{
+    await box.put(isHaveParty, data);
   }
 
 }
