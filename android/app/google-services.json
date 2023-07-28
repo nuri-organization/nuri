@@ -30,6 +30,13 @@
             {
               "client_id": "929496212017-2eervciqmdvru4r2sbpogk10vmme01ad.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "929496212017-0ltbjo8f37m4i77ad8thbacq5c1kpm85.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.nuri"
+              }
             }
           ]
         }
