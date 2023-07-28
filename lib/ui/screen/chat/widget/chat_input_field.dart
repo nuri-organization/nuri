@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/config/constants.dart';
 import 'package:nuri/ui/widget/nuri_dialog.dart';
 
 // 채팅 입력창
@@ -23,7 +24,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
   // 댓글 입력창 style
   static final _borderStyle = OutlineInputBorder(
     borderRadius: BorderRadius.circular(16.r),
-    borderSide: BorderSide(
+    borderSide: const BorderSide(
       color: Colors.grey
     ),
   );
@@ -38,14 +39,9 @@ class _ChatInputFieldState extends State<ChatInputField> {
   Widget build(BuildContext context) {
     // 댓글 입력창 커서가 항상 입력값 맨 뒤에 오도록 설정
     // _userInfoProvider = Provider.of<UserInfoProvider>(context);
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      // decoration: BoxDecoration(
-      //   border: Border(
-      //     top: BorderSide(color: Constants.colorGrey6),
-      //   ),
-      // ),
-      child: Container(
+      child: SizedBox(
           width: 296.w,
           child: ConstrainedBox(
             constraints: BoxConstraints(
@@ -74,7 +70,7 @@ class _ChatInputFieldState extends State<ChatInputField> {
                 }
               },
               decoration: InputDecoration(
-                fillColor: Colors.grey,
+                fillColor: Colors.white54,
                 filled: true,
                 contentPadding: EdgeInsets.only(
                   left: 18.w,
@@ -94,23 +90,19 @@ class _ChatInputFieldState extends State<ChatInputField> {
                 suffixIcon: _textController.text.isNotEmpty
                     ? GestureDetector(
                   onTap: () async {
-                    //FocusScope.of(context).unfocus();
+                    FocusScope.of(context).unfocus();
                     setState(() {
                       widget.messageSend!(_textController.text, 0);
                       _textController.clear();
                     });
                   },
                   child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.greenAccent,
+                      decoration: const BoxDecoration(
+                        color: Constants.theme4,
                         shape: BoxShape.circle,
                       ),
-                      child: Image.asset(
-                        'assets/images/ico_write_done.png',
-                        width: 14.9.w,
-                      )),
-                )
-                    : null,
+                      child: const Icon(Icons.arrow_upward, color: Colors.black,)),
+                ) : null,
                 suffixIconConstraints: BoxConstraints(minHeight: 30.r, minWidth: 30.r),
                 enabledBorder: _borderStyle,
                 focusedBorder: _borderStyle,

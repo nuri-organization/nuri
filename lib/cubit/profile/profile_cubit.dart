@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:nuri/cubit/profile/profile_state.dart';
 import 'package:nuri/config/enum.dart';
+import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/data/model/profile/profile_model.dart';
 import 'package:nuri/repository/profile_repository.dart';
 
@@ -15,12 +16,18 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     final result = await profileRepository.getProfileInfo();
 
+    LocalStorage().setName(result.userName);
+    LocalStorage().setProfile(result.userProfile ?? "");
+
     emit(ProfileState(profileModel: result, loadingStatus: LoadingStatus.success));
   }
 
   Future<bool> setProfileData({required String userName, String? bestTravel, String? introduce, String? image}) async{
 
     final result = await profileRepository.postProfileInfo(userName: userName, bestTravel:  bestTravel, introduce:  introduce, image: image);
+
+    LocalStorage().setName(userName);
+    LocalStorage().setProfile(image ?? "");
 
     emit(ProfileState( loadingStatus: LoadingStatus.success));
 

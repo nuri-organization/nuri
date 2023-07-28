@@ -13,7 +13,9 @@ class LocalStorage{
   }
 
   String _userIdTokenKey = "userIdToken";
-  String isHaveParty = "isHaveParty";
+  String _isHaveParty = "isHaveParty";
+  String _userNameKey = "userName";
+  String _userProfileKey = "userProfile";
 
   String getUserIdToken(){
     return (box.get(_userIdTokenKey) ?? "").toString();
@@ -23,12 +25,28 @@ class LocalStorage{
     await box.put(_userIdTokenKey, token);
   }
 
+  String getName(){
+    return (box.get(_userNameKey) ?? "").toString();
+  }
+
+  Future<void> setName(String token) async{
+    await box.put(_userNameKey, token);
+  }
+
+  String getProfile(){
+    return (box.get(_userProfileKey) ?? "").toString();
+  }
+
+  Future<void> setProfile(String token) async{
+    await box.put(_userProfileKey, token);
+  }
+
   bool getPartyData(){
-    return (box.get(isHaveParty) ?? false);
+    return (box.get(_isHaveParty) ?? false);
   }
 
   Future<void> setPartyData(bool data) async{
-    await box.put(isHaveParty, data);
+    await box.put(_isHaveParty, data);
   }
 
 }

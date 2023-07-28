@@ -74,7 +74,7 @@ class _ChatMenuScreenState extends State<ChatMenuScreen> {
                         items.sort((a,b) => b.get(sortField).compareTo(a.get(sortField)));
                         return ListView.separated(
                             itemBuilder: (context, index){
-                              return Container();
+                              return _chatBox(context, items[index]);
                             },
                             shrinkWrap: true,
                             separatorBuilder: (context, index) => Divider(
@@ -88,7 +88,6 @@ class _ChatMenuScreenState extends State<ChatMenuScreen> {
                         return _noChatPage();
                       }
                     }else{
-                      print(snapshot);
                       return const Center(
                         child: CircularProgressIndicator(
                           color: Constants.theme4,
@@ -169,66 +168,41 @@ class _ChatMenuScreenState extends State<ChatMenuScreen> {
                             fit: BoxFit.fill,
                             image: NetworkImage(userChat.peerPhotoUrl))),
                   ),
-                )
-                    : Icon(Icons.person),
-                Positioned(
-                  right: 0.0,
-                  bottom: 1.w,
-                  child: Container(
-                    width: 13.w,
-                    height: 13.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: userChat.chattingIn
-                          ? Constants.theme4
-                          : Colors.grey,
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),),
+                ) : Icon(Icons.person),
               ],
             ),
             SizedBox(width: 16.w,),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      userChat.myName,
-                      style: TextStyle(
+                Text(
+                  userChat.myName,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                // 마지막 채팅 메시지 일자
+                Container(
+                  width: 200.w,
+                  child: Text(
+                    userChat.lastMsg == null
+                        ? ''
+                        : userChat.lastMsg.replaceAll("\n", ""),
+                    style: TextStyle(
                         fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 8.w,
-                    ),
-                    // 마지막 채팅 메시지 일자
-                    Text(
-                      userChat.lastMsgDate,
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 10.sp,
-                      ),
-                    ),
-                    Container(
-                      width: 250.w,
-                      child: Text(
-                        userChat.lastMsg == null
-                            ? ''
-                            : userChat.lastMsg.replaceAll("\n", ""),
-                        style: TextStyle(
-                            fontSize: 14.sp,
-                            overflow: TextOverflow.ellipsis,
-                            height: 1.57),
-                      ),
-                    ),
-                  ],
-                )
+                        overflow: TextOverflow.ellipsis,
+                        height: 1.57),
+                  ),
+                ),
+                Text(
+                  userChat.lastMsgDate,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 10.sp,
+                  ),
+                ),
               ],
             )
           ],

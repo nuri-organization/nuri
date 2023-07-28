@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:nuri/config/constants.dart';
+import 'package:nuri/config/scaffold.dart';
 import 'package:nuri/cubit/chat/chat_cubit.dart';
 import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/ui/screen/chat/chat_constants/chat_constants.dart';
@@ -17,7 +18,7 @@ import 'package:nuri/ui/widget/nuri_dialog.dart';
 class ChatScreen extends StatefulWidget {
   ChatScreenArguments chatArg;
 
-  ChatScreen({required this.chatArg});
+  ChatScreen({super.key, required this.chatArg});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -29,7 +30,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   List<QueryDocumentSnapshot> listMessage = [];
   var timestamps = [];
   int _limit = 50;
-  int _limitIncrement = 50;
+  final int _limitIncrement = 50;
   String groupChatId = "";
   File? imageFile;
   bool isLoading = false;
@@ -113,8 +114,8 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
     peerName = widget.chatArg.peerNickname;
     // 상대 사진
     peerProfile = widget.chatArg.peerImageUrl;
-    myName =
-        (widget.chatArg.myNickname == null ? "" : widget.chatArg.myNickname)!;
+    myProfile = LocalStorage().getProfile();
+    myName = widget.chatArg.myNickname ?? "";
     // 그룹아이디가 없을 때 생성함
     if (widget.chatArg.chatRoomId == null || widget.chatArg.chatRoomId == "") {
       if (myId.compareTo(peerId) > 0) {
@@ -131,7 +132,10 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
         myName: myName,
         peerName: peerName,
         myId: myId,
-        peerId: peerId);
+        peerId: peerId,
+      peerProfile: peerProfile,
+      myProfile: LocalStorage().getProfile()
+    );
     reference = FirebaseFirestore.instance
         .collection(ChatConstants.pathMessageCollection)
         .doc(groupChatId);
@@ -139,7 +143,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
       if (mounted) {
         setState(() {
           peerChattingIn =
-              getSnapshotBool(querySnapshot, peerId + 'chattingIn');
+              getSnapshotBool(querySnapshot, '${peerId}chattingIn');
           chatCubit
               .checkValidChattingRoom(groupChatId)
               .then((value) => valid = value);
@@ -165,7 +169,6 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
       setState(() {
         isLoading = false;
       });
-      print(e.message ?? e.toString());
     }
   }
 
@@ -181,9 +184,10 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
           peerId: peerId,
           peerChatingIn: peerChattingIn);
 
-      if (listScrollController.hasClients)
+      if (listScrollController.hasClients) {
         listScrollController.animateTo(0,
-            duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+            duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
+      }
       if (peerChattingIn == false) {
         // NotificationService().sendPush(
         //     context,
@@ -200,9 +204,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
         //     "",
         //     groupChatId);
       }
-    } else {
-      print('Nothing to send');
-    }
+    } else {}
   }
 
   @override
@@ -212,9 +214,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
     focusNode.addListener(onFocusChange);
     listScrollController.addListener(_scrollListener);
 
-    myId = (widget.chatArg.myId == null
-        ? LocalStorage().getUserIdToken()
-        : widget.chatArg.myId)!;
+    myId = widget.chatArg.myId ?? LocalStorage().getUserIdToken();
     peerId = widget.chatArg.peerId;
     openDate = widget.chatArg.openDate ?? "";
     // 사용 가능한 채팅인지 확인
@@ -229,7 +229,6 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
     if (checked) {
       switch (state) {
         case AppLifecycleState.resumed:
-          print("app in resumed");
           chatCubit
               .chattingInRoom(
                   collectionPath: ChatConstants.pathMessageCollection,
@@ -238,17 +237,14 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
               .then((value) => valid = value);
           break;
         case AppLifecycleState.inactive:
-          print("app in inactive");
           chatCubit.chattingInRoom(
               collectionPath: ChatConstants.pathMessageCollection,
               docPath: groupChatId,
               myId: myId);
           break;
         case AppLifecycleState.paused:
-          print("app in paused");
           break;
         case AppLifecycleState.detached:
-          print("app in detached");
           break;
       }
     }
@@ -264,32 +260,21 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
         // Right (my message)
         return Row(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            // Time
-            isLastMessageRight(index) && messageChat.type != TypeMessage.leave
-                ? Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        child: Text(
-                          DateFormat('aa hh:mm', 'ko').format(
-                              DateTime.fromMillisecondsSinceEpoch(
-                                  int.parse(messageChat.timestamp))),
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 10.sp,
-                          ),
-                        ),
-                        margin: EdgeInsets.only(
-                            left: 4.w, top: 1.w, bottom: 25.w, right: 4.w),
-                      )
-                    ],
-                  )
-                : SizedBox.shrink(),
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
             messageChat.type == TypeMessage.text
                 // Text
                 ? Container(
+                    padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 10.h),
+                    //width: 230.w,
+                    constraints:
+                        BoxConstraints(minWidth: 30.w, maxWidth: 230.w),
+                    decoration: BoxDecoration(
+                        color: Constants.theme4,
+                        borderRadius: BorderRadius.circular(18)),
+                    margin: EdgeInsets.only(
+                        bottom: isLastMessageRight(index) ? 20.w : 10.w,
+                        right: 10.w),
                     child: Text(
                       //  채팅 내용
                       messageChat.content,
@@ -300,25 +285,21 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                         height: 1.4,
                       ),
                     ),
-                    padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 10.h),
-                    //width: 230.w,
-                    constraints:
-                        BoxConstraints(minWidth: 30.w, maxWidth: 230.w),
-                    decoration: BoxDecoration(
-                        color: Colors.pinkAccent,
-                        borderRadius: BorderRadius.circular(18)),
-                    margin: EdgeInsets.only(
-                        bottom: isLastMessageRight(index) ? 20.w : 10.w,
-                        right: 10.w),
                   )
                 : messageChat.type == TypeMessage.image
                     // Image
                     ? Container(
+                        margin: EdgeInsets.only(
+                            bottom: isLastMessageRight(index) ? 20.w : 10.w,
+                            right: 10.w),
                         child: GestureDetector(
                           onTap: () {
                             showImageDetail(messageChat.content);
                           },
                           child: Material(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                            clipBehavior: Clip.hardEdge,
                             child: Image.network(
                               messageChat.content,
                               loadingBuilder: (BuildContext context,
@@ -326,7 +307,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                                   ImageChunkEvent? loadingProgress) {
                                 if (loadingProgress == null) return child;
                                 return Container(
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.grey,
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(8),
@@ -351,33 +332,31 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                               },
                               errorBuilder: (context, object, stackTrace) {
                                 return Material(
-                                  child: Image.asset(
-                                    'assets/images/profile_img_default.png',
-                                    width: 230.w,
-                                    height: 200.h,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.all(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(8),
                                   ),
                                   clipBehavior: Clip.hardEdge,
+                                  child: SizedBox(
+                                    width: 230.w,
+                                    height: 200.h,
+                                    child: const Icon(
+                                      Icons.person,
+                                      size: 20,
+                                    ),
+                                  ),
                                 );
                               },
                               width: 230.w,
                               height: 200.h,
                               fit: BoxFit.cover,
                             ),
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            clipBehavior: Clip.hardEdge,
                           ),
                         ),
-                        margin: EdgeInsets.only(
-                            bottom: isLastMessageRight(index) ? 20.w : 10.w,
-                            right: 10.w),
                       )
                     // leave out message
                     : Container(
                         width: MediaQuery.of(context).size.width * 0.8,
+                        margin: EdgeInsets.only(left: 10.w, right: 10.w),
                         child: Text(
                           messageChat.content,
                           textAlign: TextAlign.center,
@@ -388,14 +367,17 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                             height: 1.4,
                           ),
                         ),
-                        margin: EdgeInsets.only(left: 10.w, right: 10.w),
                       ),
             isLastMessageRight(index) && messageChat.type != TypeMessage.leave
                 ? Container(
                     margin: EdgeInsets.only(
                         bottom: isLastMessageRight(index) ? 20.w : 10.w),
                     child: Material(
-                      child: myProfile.contains('http')
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(30),
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      child: myProfile != ""
                           ? ClipOval(
                               child: Container(
                                 width: 35.h,
@@ -408,11 +390,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                                     )),
                               ),
                             )
-                          : Container(width: 35.w),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30),
-                      ),
-                      clipBehavior: Clip.hardEdge,
+                          : const Icon(Icons.person, size: 36,color: Colors.grey,),
                     ))
                 : Container(
                     margin: EdgeInsets.only(
@@ -420,13 +398,15 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                         right: 1.w),
                   )
           ],
-          mainAxisAlignment: MainAxisAlignment.end,
         );
       } else {
         // Left (peer message)
         var lineFeed = messageChat.content.split("\n");
         return Container(
+          margin: EdgeInsets.only(bottom: 10.w),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -439,7 +419,11 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                                   ? 170.h
                                   : ((lineFeed.length - 1) * 17.h) + 5.h),
                           child: Material(
-                            child: peerProfile.contains('http')
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(18),
+                            ),
+                            clipBehavior: Clip.hardEdge,
+                            child: peerProfile != ""
                                 ? ClipOval(
                                     child: Container(
                                     width: 35.h,
@@ -451,15 +435,19 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                                           image: NetworkImage(peerProfile),
                                         )),
                                   ))
-                                : Icon(Icons.person),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(18),
-                            ),
-                            clipBehavior: Clip.hardEdge,
+                                : const Icon(Icons.person, size: 20,),
                           ))
                       : Container(width: 35.w),
                   messageChat.type == TypeMessage.text
                       ? Container(
+                          padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 10.h),
+                          //width: 230.w,
+                          constraints:
+                              BoxConstraints(minWidth: 30.w, maxWidth: 230.w),
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(18)),
+                          margin: EdgeInsets.only(bottom: 4.w, left: 10.w),
                           child: Text(
                             messageChat.content,
                             style: TextStyle(
@@ -469,19 +457,22 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                               height: 1.4,
                             ),
                           ),
-                          padding: EdgeInsets.fromLTRB(15.w, 10.h, 15.w, 10.h),
-                          //width: 230.w,
-                          constraints:
-                              BoxConstraints(minWidth: 30.w, maxWidth: 230.w),
-                          decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(18)),
-                          margin: EdgeInsets.only(bottom: 4.w, left: 10.w),
                         )
                       : messageChat.type == TypeMessage.image
                           ? Container(
+                              margin: EdgeInsets.only(left: 10.w),
                               child: TextButton(
+                                onPressed: () {
+                                  showImageDetail(messageChat.content);
+                                },
+                                style: ButtonStyle(
+                                    padding:
+                                        MaterialStateProperty.all<EdgeInsets>(
+                                            const EdgeInsets.all(0))),
                                 child: Material(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(8)),
+                                  clipBehavior: Clip.hardEdge,
                                   child: Image.network(
                                     messageChat.content,
                                     loadingBuilder: (BuildContext context,
@@ -489,7 +480,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                                         ImageChunkEvent? loadingProgress) {
                                       if (loadingProgress == null) return child;
                                       return Container(
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Colors.grey,
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(8),
@@ -515,37 +506,29 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                                     errorBuilder:
                                         (context, object, stackTrace) =>
                                             Material(
-                                      child: Image.asset(
-                                        'assets/images/img_not_available.jpeg',
-                                        width: 230.w,
-                                        height: 200.h,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      borderRadius: BorderRadius.all(
+                                      borderRadius: const BorderRadius.all(
                                         Radius.circular(8),
                                       ),
                                       clipBehavior: Clip.hardEdge,
+                                      child: SizedBox(
+                                        width: 230.w,
+                                        height: 200.h,
+                                        child: const Icon(
+                                          Icons.person,
+                                          size: 20,
+                                        ),
+                                      ),
                                     ),
                                     width: 230.w,
                                     height: 200.h,
                                     fit: BoxFit.cover,
                                   ),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                  clipBehavior: Clip.hardEdge,
                                 ),
-                                onPressed: () {
-                                  showImageDetail(messageChat.content);
-                                },
-                                style: ButtonStyle(
-                                    padding:
-                                        MaterialStateProperty.all<EdgeInsets>(
-                                            EdgeInsets.all(0))),
                               ),
-                              margin: EdgeInsets.only(left: 10.w),
                             )
                           : Container(
                               width: MediaQuery.of(context).size.width * 0.7,
+                              margin: EdgeInsets.only(left: 10.w, right: 10.w),
                               child: Text(
                                 messageChat.content,
                                 textAlign: TextAlign.center,
@@ -556,45 +539,16 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                                   height: 1.4,
                                 ),
                               ),
-                              margin: EdgeInsets.only(left: 10.w, right: 10.w),
                             ),
                   // Time
-                  isLastMessageLeft(index) &&
-                          messageChat.type != TypeMessage.leave
-                      ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              child: Text(
-                                DateFormat('aa hh:mm', 'ko').format(
-                                    DateTime.fromMillisecondsSinceEpoch(
-                                        int.parse(messageChat.timestamp))),
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 10.sp,
-                                ),
-                              ),
-                              margin: EdgeInsets.only(
-                                  left: 4.w,
-                                  top: 25.w,
-                                  bottom: 1.w,
-                                  right: 4.w),
-                            )
-                          ],
-                        )
-                      : SizedBox.shrink(),
                 ],
               ),
             ],
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.end,
           ),
-          margin: EdgeInsets.only(bottom: 10.w),
         );
       }
     } else {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
   }
 
@@ -609,26 +563,6 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
               Container(
                 color: Colors.black,
               ),
-              // PhotoViewGallery.builder(
-              //   scrollPhysics: const BouncingScrollPhysics(),
-              //   itemCount: 1,
-              //   builder: (context, index) {
-              //     ImageProvider img;
-              //     if (imgPath.contains("http")) {
-              //       img = ExtendedImage.network(imgPath).image;
-              //     } else {
-              //       img = ExtendedImage.asset(imgPath).image;
-              //     }
-              //     return PhotoViewGalleryPageOptions(
-              //       onTapUp: (context, details, controllerValue) =>
-              //           Navigator.pop(context),
-              //       imageProvider: img,
-              //       initialScale: PhotoViewComputedScale.contained * 1,
-              //
-              //       // heroAttributes: PhotoViewHeroAttributes(tag: '$index / ${_images.length}'),
-              //     );
-              //   },
-              // ),
               Column(
                 children: [
                   GestureDetector(
@@ -702,7 +636,8 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
           myId: myId);
 
       if (value) {
-        await nuriDialog(context, [Text("종료된 채팅방입니다")]);
+        // ignore: use_build_context_synchronously
+        await nuriDialog(context, [const Text("종료된 채팅방입니다")]);
       }
     }
     return true;
@@ -712,9 +647,9 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: _onWillPop,
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: SafeArea(
+        child: NuriScaffold(
+          title: "채팅",
+          child: SafeArea(
             child: Stack(
               children: <Widget>[
                 Column(
@@ -725,7 +660,8 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                     ChatInputField(
                         messageSend: onSendMessage,
                         imageSend: onSendImage,
-                        valid: valid),
+                        valid: valid
+                    ),
                     //buildInput(),
                   ],
                 ),
@@ -733,20 +669,23 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                 buildLoading()
               ],
             ),
-          ),
-        ));
+          )
+        )
+    );
   }
 
   Widget buildLoading() {
     return Positioned(
-      child: isLoading ? Container(
-        child: Center(
-          child: CircularProgressIndicator(
-            color:Constants.theme4,
-          ),
-        ),
-        color: Colors.white.withOpacity(0.8),
-      ) : SizedBox.shrink(),
+      child: isLoading
+          ? Container(
+              color: Colors.white.withOpacity(0.8),
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: Constants.theme4,
+                ),
+              ),
+            )
+          : const SizedBox.shrink(),
     );
   }
 
@@ -754,13 +693,14 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
     return Flexible(
       child: groupChatId.isNotEmpty
           ? StreamBuilder<QuerySnapshot>(
-              stream: chatCubit.getChatStream(groupChatId: groupChatId, limit: _limit),
+              stream: chatCubit.getChatStream(
+                  groupChatId: groupChatId, limit: _limit),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
                   listMessage = snapshot.data!.docs;
                   timestamps = [];
-                  if (listMessage.length > 0) {
+                  if (listMessage.isNotEmpty) {
                     for (int i = listMessage.length - 1; i >= 0; i--) {
                       if (i == listMessage.length - 1) {
                         timestamps.add(i);
@@ -783,8 +723,9 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                       //print('${kd}---${kk.data()}');
                     }
                     return ListView.separated(
-                      separatorBuilder: (context, index) => SizedBox.shrink(),
-                      padding: EdgeInsets.all(10),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox.shrink(),
+                      padding: const EdgeInsets.all(10),
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
@@ -792,40 +733,13 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                                 ? Container(
                                     height: 20.h,
                                     width: 200.w,
-                                    //decoration: BoxDecoration(color: Constants.colorGrey5, borderRadius: BorderRadius.circular(20)),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        //Icon(Icons.calendar_month, color: Colors.black, size: 12.w,),
-                                        Image.asset(
-                                          'assets/images/ico_cal.png',
-                                          width: 14.w,
-                                          color: Colors.black,
-                                        ),
-                                        Text(
-                                          DateFormat('yyyy년 MM월 dd일 EEEE', 'ko')
-                                              .format(DateTime
-                                                  .fromMillisecondsSinceEpoch(
-                                                      int.parse(snapshot
-                                                          .data?.docs[index]
-                                                          .get('timestamp')))),
-                                          style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 12.sp,
-                                              fontStyle: FontStyle.normal),
-                                        ),
-                                      ],
-                                    ),
                                     margin: EdgeInsets.only(
                                         left: 80.w,
                                         top: 5.h,
                                         bottom: 5.h,
                                         right: 80.w),
                                   )
-                                : SizedBox.shrink(),
+                                : const SizedBox.shrink(),
                             buildItem(listMessage.length, index,
                                 snapshot.data?.docs[index]),
                           ],
@@ -851,7 +765,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                     );
                   }
                 } else {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(
                       color: Constants.theme4,
                     ),
@@ -859,7 +773,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                 }
               },
             )
-          : Center(
+          : const Center(
               child: CircularProgressIndicator(
                 color: Constants.theme4,
               ),

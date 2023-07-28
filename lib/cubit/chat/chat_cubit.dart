@@ -58,7 +58,7 @@ class ChatCubit extends Cubit<ChatState> {
 
   // 채팅 참여
   Future<bool> attendChattingRoom(
-      {required String collectionPath, required String docPath, required String myName, required String peerName, required String myId, required String peerId,}) async {
+      {required String myProfile, required String peerProfile, required String collectionPath, required String docPath, required String myName, required String peerName, required String myId, required String peerId,}) async {
     var value = await firebaseFirestore
         .collection(ChatConstants.pathMessageCollection)
         .doc(docPath)
@@ -83,6 +83,7 @@ class ChatCubit extends Cubit<ChatState> {
         peerId + "chattingIn": false,
         peerId + "unreadMsg": false,
         peerId + "lastMsg": "",
+        peerId + "peerPhotoUrl" : peerProfile,
         peerId + "lastMsgDate": DateTime
             .now()
             .millisecondsSinceEpoch
@@ -92,14 +93,9 @@ class ChatCubit extends Cubit<ChatState> {
         myId + "chattingIn": true,
         myId + "unreadMsg": false,
         myId + "lastMsg": "",
-        myId + "lastMsgDate": DateTime
-            .now()
-            .millisecondsSinceEpoch
-            .toString(),
-        ChatConstants.timestamp: DateTime
-            .now()
-            .millisecondsSinceEpoch
-            .toString(),
+        myId + "myPhotoUrl" : myProfile,
+        myId + "lastMsgDate": DateTime.now().millisecondsSinceEpoch.toString(),
+        ChatConstants.timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
       };
       firebaseFirestore
           .collection(ChatConstants.pathMessageCollection)
@@ -111,7 +107,6 @@ class ChatCubit extends Cubit<ChatState> {
 
   // 채팅룸 갖고오기
   Future<UserChat?> getChatRoom(String groupChatId, String myId) async {
-    print('짝크루 채팅방을 갖고왔습니다');
     var value = await firebaseFirestore
         .collection(ChatConstants.pathMessageCollection)
         .doc(groupChatId)
@@ -121,44 +116,6 @@ class ChatCubit extends Cubit<ChatState> {
       return _userChat;
     } else {
       return null;
-    }
-  }
-
-  // 채팅 신청 거절
-  Future<bool> rejectJJCrewChattingRoom(BuildContext context,
-      {required String collectionPath,
-        required String docPath,
-        required String myId,
-        required String peerId}) async {
-    var value = await firebaseFirestore
-        .collection(ChatConstants.pathMessageCollection)
-        .doc(docPath)
-        .get();
-    if (value.exists) {
-      UserChat _userChat = UserChat.fromDocument(value, myId);
-      if (_userChat.status == 'accept') {
-        return false;
-      } else {
-        // NotificationService().sendPush(
-        //     context,
-        //     PushType.jcrew_failed,
-        //     _userChat.userId,
-        //     _userChat.userNickname,
-        //     _userChat.peerId,
-        //     _userChat.nickName,
-        //     "",
-        //     -1,
-        //     -1,
-        //     "",
-        //     _userChat.id);
-        firebaseFirestore
-            .collection(ChatConstants.pathMessageCollection)
-            .doc(docPath)
-            .delete();
-        return true;
-      }
-    } else {
-      return false;
     }
   }
 

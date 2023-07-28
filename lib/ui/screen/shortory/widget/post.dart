@@ -225,6 +225,7 @@ class _StateBarState extends State<_StateBar> {
                       peerId: widget.userId,
                       peerImageUrl: widget.userProfile,
                       peerNickname: widget.userName,
+                      myNickname: LocalStorage().getName(),
                       chatRoomId: '');
                   ChatCheckService().check(context, _chatArg).then((value) {
                     if (value) {
