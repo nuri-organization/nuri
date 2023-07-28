@@ -6,10 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/config/constants.dart';
+import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/ui/screen/chat/chat_constants/chat_constants.dart';
 import 'package:nuri/ui/screen/chat/chat_screen.dart';
 import 'package:nuri/ui/screen/chat/model/chat_check_service.dart';
-import 'package:nuri/ui/screen/chat/model/provider/chat_menu_provider.dart';
+import 'package:nuri/cubit/chat/chat_menu_provider.dart';
 import 'package:nuri/ui/screen/chat/model/user_chat.dart';
 import 'package:nuri/ui/widget/nuri_dialog.dart';
 
@@ -36,6 +37,8 @@ class _ChatMenuScreenState extends State<ChatMenuScreen> {
   @override
   void initState() {
     chatMenuProvider = context.read<ChatMenuProvider>();
+    currentUserId = LocalStorage().getUserIdToken();
+
     listScrollController.addListener(scrollListener);
     super.initState();
   }
@@ -82,9 +85,10 @@ class _ChatMenuScreenState extends State<ChatMenuScreen> {
                             itemCount: snapshot.data!.docs.length
                         );
                       }else {
-                        return Container();
+                        return _noChatPage();
                       }
                     }else{
+                      print(snapshot);
                       return const Center(
                         child: CircularProgressIndicator(
                           color: Constants.theme4,

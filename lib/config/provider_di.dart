@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:nuri/cubit/Login/login_cubit.dart';
+import 'package:nuri/cubit/chat/chat_cubit.dart';
 import 'package:nuri/cubit/profile/profile_cubit.dart';
 import 'package:nuri/cubit/shortory/comment/comment_cubit.dart';
 import 'package:nuri/cubit/shortory/post/shortory_post_cubit.dart';
@@ -13,6 +16,7 @@ import 'package:nuri/repository/login_repository.dart';
 import 'package:nuri/repository/profile_repository.dart';
 import 'package:nuri/repository/shortory_post_repository.dart';
 import 'package:nuri/repository/travel_repository.dart';
+import 'package:nuri/cubit/chat/chat_menu_provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +36,9 @@ List<SingleChildWidget> getProvider() {
   final userProfileRepositoryImpl = ProfileRepositoryImpl(userProfileApi);
   final loginRepositoryImpl = LoginRepositoryImpl(loginApi);
 
+  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+
 
   NavigationCubit navigationCubit = NavigationCubit();
   ProfileCubit profileCubit = ProfileCubit(userProfileRepositoryImpl);
@@ -39,6 +46,8 @@ List<SingleChildWidget> getProvider() {
   CommentCubit commentCubit = CommentCubit(commentRepositoryImpl);
   TravelPostCubit travelPostCubit = TravelPostCubit(travelPostRepositoryImpl);
   LoginCubit loginCubit = LoginCubit(loginRepositoryImpl);
+  ChatMenuProvider chatMenuProvider = ChatMenuProvider(firebaseFirestore: firebaseFirestore);
+  ChatCubit chatCubit = ChatCubit(firebaseFirestore: firebaseFirestore, firebaseStorage: firebaseStorage);
 
 
   return [
@@ -47,6 +56,8 @@ List<SingleChildWidget> getProvider() {
     BlocProvider<ShortoryPostCubit>(create: (BuildContext context) => shortoryPostCubit),
     BlocProvider<CommentCubit>(create: (BuildContext context) => commentCubit),
     BlocProvider<TravelPostCubit>(create: (BuildContext context) => travelPostCubit),
-    BlocProvider<LoginCubit>(create: (BuildContext context) => loginCubit)
+    BlocProvider<LoginCubit>(create: (BuildContext context) => loginCubit),
+    BlocProvider<ChatMenuProvider>(create: (BuildContext context) => chatMenuProvider),
+    BlocProvider<ChatCubit>(create: (BuildContext context) => chatCubit)
   ];
 }

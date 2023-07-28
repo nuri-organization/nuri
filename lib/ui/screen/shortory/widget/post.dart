@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/cubit/shortory/post/shortory_post_cubit.dart';
 import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/data/model/post/post_model.dart';
+import 'package:nuri/ui/screen/chat/chat_screen.dart';
+import 'package:nuri/ui/screen/chat/model/chat_check_service.dart';
 import 'package:nuri/ui/screen/shortory/shortory_comment.dart';
 import 'package:nuri/ui/widget/nuri_dialog.dart';
 
@@ -32,6 +34,8 @@ class Post extends StatelessWidget {
               isLoved: postModel.liked,
               title: postModel.title,
               postId: postModel.postId,
+              userName: postModel.userInfo.userName,
+              userProfile: postModel.userInfo.userProfile,
             ),
             _Contents(
               contents: postModel.content,
@@ -148,11 +152,13 @@ AnimatedContainer slider(images, pagePosition) {
 
 
 class _StateBar extends StatefulWidget {
-  _StateBar({super.key, required this.isLoved, required this.title, required this.postId, required this.userId});
+  _StateBar({super.key, required this.isLoved, required this.title, required this.postId, required this.userId,required this.userName,required this.userProfile});
 
   bool isLoved = false;
   int postId = 0;
   String userId;
+  String userProfile;
+  String userName;
   String title;
 
   @override
@@ -214,8 +220,17 @@ class _StateBarState extends State<_StateBar> {
                 },
                 child: const Text("프로필 보기")),
             TextButton(
-                onPressed: (){
-
+                onPressed: () async{
+                  ChatScreenArguments _chatArg = ChatScreenArguments(
+                      peerId: widget.userId,
+                      peerImageUrl: widget.userProfile,
+                      peerNickname: widget.userName,
+                      chatRoomId: '');
+                  ChatCheckService().check(context, _chatArg).then((value) {
+                    if (value) {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => ChatScreen(chatArg: _chatArg) ));
+                    }
+                  });
                 }, child: const Text("채팅 하기")),
             TextButton(
                 onPressed: (){

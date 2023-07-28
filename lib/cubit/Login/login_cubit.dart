@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:nuri/config/constants.dart';
 import 'package:nuri/config/enum.dart';
 import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/data/model/login/login_model.dart';

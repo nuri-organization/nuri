@@ -24,3 +24,10 @@ class ChatConstants {
   static const matchId = "matchId";
   static const chattingIn = "chattingIn";
 }
+
+class TypeMessage {
+  static const text = 0;
+  static const image = 1;
+  static const leave = 2;
+  static const timestamp = 3;
+}
