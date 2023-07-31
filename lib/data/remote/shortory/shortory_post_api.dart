@@ -68,7 +68,7 @@ class ShortoryPostApi extends Api{
     }
   }
 
-  Future<bool> fetchPostInfo({required PostModel postModel}) async{
+  Future<bool> fetchPostInfo({required List<ShortoryModel> shortoryModel, required String title, required String content}) async{
     try{
       Map requestBody = {};
 

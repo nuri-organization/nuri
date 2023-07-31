@@ -21,6 +21,7 @@ class _NuriTravelScreenState extends State<NuriTravelScreen> {
   @override
   void initState() {
     context.read<TravelPostCubit>().getTravelPostInfo();
+    screenState = LocalStorage().getPartyData();
     super.initState();
   }
 
@@ -35,6 +36,7 @@ class _NuriTravelScreenState extends State<NuriTravelScreen> {
                 onPressed: () {
                   setState(() {
                     screenState = true;
+
                   });
 
                   LocalStorage().setPartyData(true);
@@ -50,6 +52,7 @@ class _NuriTravelScreenState extends State<NuriTravelScreen> {
                 child: Text("내 여행보기"))
           ],
         ),
+
         screenState
             ? TravelPostListScreen()
             : TravelPartyScreen()

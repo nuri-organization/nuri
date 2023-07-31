@@ -13,6 +13,7 @@ class NuriShortoryScreen extends StatefulWidget {
 }
 
 class _NuriShortoryScreenState extends State<NuriShortoryScreen> {
+
   @override
   void initState() {
     super.initState();

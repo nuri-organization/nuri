@@ -6,7 +6,9 @@ import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/data/model/post/post_model.dart';
 import 'package:nuri/ui/screen/chat/chat_screen.dart';
 import 'package:nuri/ui/screen/chat/model/chat_check_service.dart';
+import 'package:nuri/ui/screen/profile/widget/profile_detail_screen.dart';
 import 'package:nuri/ui/screen/shortory/shortory_comment.dart';
+import 'package:nuri/ui/screen/shortory/shotory_fetch_screen.dart';
 import 'package:nuri/ui/widget/nuri_dialog.dart';
 
 class Post extends StatelessWidget {
@@ -36,6 +38,7 @@ class Post extends StatelessWidget {
               postId: postModel.postId,
               userName: postModel.userInfo.userName,
               userProfile: postModel.userInfo.userProfile,
+              postModel: postModel,
             ),
             _Contents(
               contents: postModel.content,
@@ -152,7 +155,9 @@ AnimatedContainer slider(images, pagePosition) {
 
 
 class _StateBar extends StatefulWidget {
-  _StateBar({super.key, required this.isLoved, required this.title, required this.postId, required this.userId,required this.userName,required this.userProfile});
+  _StateBar({super.key, required this.isLoved, required this.title, required this.postId, required this.userId,required this.userName,required this.userProfile, required this.postModel});
+
+  PostModel postModel;
 
   bool isLoved = false;
   int postId = 0;
@@ -208,6 +213,14 @@ class _StateBarState extends State<_StateBar> {
             TextButton(
                 onPressed: (){
 
+                  nuriDialog(context, const [
+                    Text("이미지 처리 방식에 대해 기술적인 문제가 있습니다."),
+                    Text("다음 버전에 돌아오도록 하겠습니다!"),
+                    Text("불편을 드려 정말 죄송합니다.")
+                  ]);
+
+                  /// TODO : 다음버전에 추가
+                  // Navigator.push(context, MaterialPageRoute(builder: (_) => ShotoryFetchScreen(postModel: widget.postModel,)));
                 }, child: const Text("수정 하기")) : const SizedBox(),
             TextButton(
                 onPressed: () async{
@@ -216,7 +229,7 @@ class _StateBarState extends State<_StateBar> {
                 child: const Text("북마크하기")),
             TextButton(
                 onPressed: (){
-
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileDetailScreen()));
                 },
                 child: const Text("프로필 보기")),
             TextButton(

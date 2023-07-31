@@ -62,14 +62,6 @@ class NuriScaffold extends StatelessWidget {
                     },
                     icon: const Icon(Icons.add),
                 ),
-                ActionButtonSetting(
-                  onPressed: (){
-                    bool data = LocalStorage().getPartyData();
-
-                    data == true ? LocalStorage().setPartyData(false) : LocalStorage().setPartyData(true);
-                  },
-                  icon: const Icon(Icons.autorenew),
-                ),
               ],);
             }
             return Container();

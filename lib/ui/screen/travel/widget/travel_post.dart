@@ -28,7 +28,7 @@ class TravelPost extends StatelessWidget {
         Text(travelPostModel.content),
         SizedBox(height: 10.h,),
         const Text("주요 여행지"),
-        // _ImportantTravel(travelName: widget.travelPostModel[index].mainTravel),
+        _ImportantTravel(travelName: travelPostModel.mainTravel),
         SizedBox(height: 20.h,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,7 +51,15 @@ class TravelPost extends StatelessWidget {
 }
 
 class _PostInfo extends StatelessWidget {
-  _PostInfo({super.key, this.imageURL, required this.name, required this.title, required this.applied, required this.maxPeople, required this.people});
+  _PostInfo({
+    super.key,
+    this.imageURL,
+    required this.name,
+    required this.title,
+    required this.applied,
+    required this.maxPeople,
+    required this.people
+  });
   String? imageURL;
   String name;
   String title;
@@ -117,7 +125,20 @@ class _ImportantTravel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: travelName.length,
+          itemBuilder: (BuildContext context, int index){
+            return Container(
+              child: Text(travelName[index]),
+            );
+          },
+        )
+      ],
+    );
   }
 }
 
