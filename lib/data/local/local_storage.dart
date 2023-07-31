@@ -16,6 +16,7 @@ class LocalStorage{
   String _isHaveParty = "isHaveParty";
   String _userNameKey = "userName";
   String _userProfileKey = "userProfile";
+  String _userTravelKey = "userTravel";
 
   String getUserIdToken(){
     return (box.get(_userIdTokenKey) ?? "").toString();
@@ -47,6 +48,14 @@ class LocalStorage{
 
   Future<void> setPartyData(bool data) async{
     await box.put(_isHaveParty, data);
+  }
+
+  String getTravelId(){
+    return (box.get(_userTravelKey) ?? "").toString();
+  }
+
+  Future<void> setTravelId(String token) async{
+    await box.put(_userTravelKey, token);
   }
 
 }
