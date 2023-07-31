@@ -1,5 +1,5 @@
 import 'package:nuri/data/model/travel/todo/travel_todo_list_model.dart';
-import 'package:nuri/data/remote/travel/travel_todo.dart';
+import 'package:nuri/data/remote/travel/travel_todo_api.dart';
 
 abstract class TravelTodolistRepository{
   Future<List<TravelTodoListModel>> getTodolist({required String travelId});
