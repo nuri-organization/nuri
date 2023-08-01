@@ -136,7 +136,7 @@ class _TravelPostScreenState extends State<TravelPostScreen> {
                               endDate: endDate!,
                               maxPeople: maxPeople
                           )
-                  );
+                  ).then((value) => Navigator.pop(context));
                 },
                 child: const Text("업로드 하기")
             )
