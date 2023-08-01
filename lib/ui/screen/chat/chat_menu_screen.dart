@@ -135,6 +135,7 @@ class _ChatMenuScreenState extends State<ChatMenuScreen> {
             myImageUrl: userChat.myPhotoUrl,
             openDate: userChat.openDate,
             chatRoomId: userChat.id,
+            isTravel: userChat.isTravel
           );
           ChatCheckService().check(context, _chatArg).then((value){
             if(value){

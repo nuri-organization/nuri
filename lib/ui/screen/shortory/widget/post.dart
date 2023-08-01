@@ -239,7 +239,9 @@ class _StateBarState extends State<_StateBar> {
                       peerImageUrl: widget.userProfile,
                       peerNickname: widget.userName,
                       myNickname: LocalStorage().getName(),
-                      chatRoomId: '');
+                      chatRoomId: '',
+                    isTravel: false
+                  );
                   ChatCheckService().check(context, _chatArg).then((value) {
                     if (value) {
                       Navigator.push(context, MaterialPageRoute(builder: (_) => ChatScreen(chatArg: _chatArg) ));

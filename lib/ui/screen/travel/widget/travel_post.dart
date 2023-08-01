@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/data/model/travel/travel_post_model.dart';
+import 'package:nuri/ui/screen/chat/chat_screen.dart';
+import 'package:nuri/ui/screen/chat/model/chat_check_service.dart';
 
 class TravelPost extends StatelessWidget {
   TravelPost({super.key, required this.travelPostModel});
@@ -36,7 +39,12 @@ class TravelPost extends StatelessWidget {
             _Cost(cost: travelPostModel.cost),
             Row(
               children: [
-                _ApplyButton(),
+                _ApplyButton(
+                  travelId: travelPostModel.travelId,
+                  peerName: travelPostModel.userInfo.userName,
+                  peerProfile: travelPostModel.userInfo.userProfile,
+                  peerId: travelPostModel.userInfo.userId,
+                ),
                 _SettingButton()
               ],
             ),
@@ -159,14 +167,40 @@ class _Cost extends StatelessWidget {
 }
 
 class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({super.key});
+  _ApplyButton({super.key,required this.travelId, required this.peerName, required this.peerProfile, required this.peerId});
+
+  String peerId;
+  String peerProfile;
+  String peerName;
+  int travelId;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 30.h,
       width: 100.w,
-      child: Center(child: Text("신청하기"),),
+      child: InkWell(
+        onTap: (){
+          ChatScreenArguments _chatArg = ChatScreenArguments(
+              peerId: peerId,
+              peerImageUrl: peerProfile,
+              peerNickname: peerName,
+              myNickname: LocalStorage().getName(),
+              chatRoomId: '',
+              travelId: travelId,
+              isTravel: true
+          );
+          ChatCheckService().check(context, _chatArg).then((value) {
+            if (value) {
+              Navigator.push(context, MaterialPageRoute(builder: (_) => ChatScreen(chatArg: _chatArg) ));
+            }
+          });
+        },
+        child: const Center(
+          child:
+          Text("신청하기"),
+        ),
+      ),
     );
   }
 }

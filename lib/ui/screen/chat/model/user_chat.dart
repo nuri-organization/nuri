@@ -35,6 +35,8 @@ class UserChat {
   String peerInfo;
   String matchId;
   bool chattingIn;
+  bool isTravel;
+  int travelId;
 
   UserChat({
     required this.id,
@@ -55,6 +57,8 @@ class UserChat {
     required this.peerInfo,
     required this.matchId,
     required this.chattingIn,
+    required this.isTravel,
+    required this.travelId
   });
 
   Map<String, String> toJson() {
@@ -74,6 +78,8 @@ class UserChat {
       ChatConstants.openDate: openDate,
       ChatConstants.welMsg: welMsg,
       ChatConstants.chattingIn: chattingIn.toString(),
+      ChatConstants.isTravel: isTravel.toString(),
+      ChatConstants.travelId: travelId.toString()
     };
   }
 
@@ -94,6 +100,8 @@ class UserChat {
     String peerInfo = "";
     String matchId = "";
     bool chattingIn = false;
+    bool isTravel = false;
+    int travelId = 0;
 
     try {
       DateTime dt = DateTime.fromMillisecondsSinceEpoch(
@@ -147,6 +155,12 @@ class UserChat {
     try {
       chattingIn = doc.get(peerId + ChatConstants.chattingIn);
     } catch (e) {}
+    try {
+      isTravel = doc.get(ChatConstants.isTravel);
+    } catch (e) {}
+    try {
+      travelId = doc.get(ChatConstants.travelId);
+    } catch (e) {}
     return UserChat(
       id: doc.id,
       peerId: peerId,
@@ -166,6 +180,8 @@ class UserChat {
       peerInfo: peerInfo,
       matchId: matchId,
       chattingIn: chattingIn,
+      isTravel: isTravel,
+      travelId: travelId
     );
   }
 }

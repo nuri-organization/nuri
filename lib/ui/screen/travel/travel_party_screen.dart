@@ -14,7 +14,6 @@ class TravelPartyScreen extends StatefulWidget {
 class _TravelPartyScreenState extends State<TravelPartyScreen> {
   @override
   Widget build(BuildContext context) {
-    print(LocalStorage().getTravelId());
 
     return LocalStorage().getTravelId() != "" ? Column(
       children: [

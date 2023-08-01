@@ -23,6 +23,8 @@ class ChatConstants {
   static const peerInfo = "peerInfo";
   static const matchId = "matchId";
   static const chattingIn = "chattingIn";
+  static const isTravel = "isTravel";
+  static const travelId = "travelId";
 }
 
 class TypeMessage {

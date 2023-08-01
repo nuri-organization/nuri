@@ -13,6 +13,7 @@ import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/ui/screen/chat/chat_constants/chat_constants.dart';
 import 'package:nuri/ui/screen/chat/model/message_chat.dart';
 import 'package:nuri/ui/screen/chat/widget/chat_input_field.dart';
+import 'package:nuri/ui/screen/chat/widget/travel_apply.dart';
 import 'package:nuri/ui/widget/nuri_dialog.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -40,6 +41,9 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   String peerProfile = "";
   String myProfile = "";
   String openDate = "";
+  bool isTravel = false;
+  int? travelId;
+  bool isHost = false;
 
   late ChatCubit chatCubit;
 
@@ -116,12 +120,22 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
     peerProfile = widget.chatArg.peerImageUrl;
     myProfile = LocalStorage().getProfile();
     myName = widget.chatArg.myNickname ?? "";
+    isTravel = widget.chatArg.isTravel;
+
+    if(widget.chatArg.travelId != null && widget.chatArg.travelId != 0){
+      travelId = widget.chatArg.travelId;
+    }
+
+    if(widget.chatArg.peerNickname == LocalStorage().getName()){
+      isHost = true;
+    }
+
     // 그룹아이디가 없을 때 생성함
     if (widget.chatArg.chatRoomId == null || widget.chatArg.chatRoomId == "") {
       if (myId.compareTo(peerId) > 0) {
-        groupChatId = '$myId-$peerId@$myName-$peerName';
+        groupChatId = '${widget.chatArg.isTravel ? "travel" : "common"}-$myId-$peerId@$myName-$peerName';
       } else {
-        groupChatId = '$peerId-$myId@$peerName-$myName';
+        groupChatId = '${widget.chatArg.isTravel ? "travel" : "common"}-$peerId-$myId@$peerName-$myName';
       }
     } else {
       groupChatId = widget.chatArg.chatRoomId!;
@@ -133,8 +147,10 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
         peerName: peerName,
         myId: myId,
         peerId: peerId,
-      peerProfile: peerProfile,
-      myProfile: LocalStorage().getProfile()
+        peerProfile: peerProfile,
+        myProfile: LocalStorage().getProfile(),
+        isTravel: widget.chatArg.isTravel,
+        travelId: widget.chatArg.travelId
     );
     reference = FirebaseFirestore.instance
         .collection(ChatConstants.pathMessageCollection)
@@ -652,6 +668,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
           child: SafeArea(
             child: Stack(
               children: <Widget>[
+                isHost ? TravelApply(travelId: travelId!,peerId: peerId,) : const SizedBox(),
                 Column(
                   children: <Widget>[
                     // List of messages
@@ -791,15 +808,19 @@ class ChatScreenArguments {
   final String? myNickname;
   final String? chatRoomId;
   final String? openDate;
+  final int? travelId;
+  final bool isTravel;
 
   ChatScreenArguments({
     required this.peerId,
     required this.peerImageUrl,
     required this.peerNickname,
+    required this.isTravel,
     this.myId,
     this.myImageUrl,
     this.myNickname,
     this.chatRoomId,
     this.openDate,
+    this.travelId,
   });
 }
