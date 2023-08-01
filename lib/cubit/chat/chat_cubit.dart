@@ -57,37 +57,46 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   // 채팅 참여
-  Future<bool> attendChattingRoom(
-      {required String myProfile, required String peerProfile, required String collectionPath, required String docPath, required String myName, required String peerName, required String myId, required String peerId,}) async {
-    var value = await firebaseFirestore
-        .collection(ChatConstants.pathMessageCollection)
-        .doc(docPath)
-        .get();
+  Future<bool> attendChattingRoom({
+    required String myProfile,
+    required String peerProfile,
+    required String collectionPath,
+    required String docPath,
+    required String myName,
+    required String peerName,
+    required String myId,
+    required String peerId,
+    required bool isTravel,
+    required int? travelId
+  }) async {
+
+    var value = await firebaseFirestore.collection(ChatConstants.pathMessageCollection).doc(docPath).get();
+
     if (value.exists) {
-      final _chatData = <String, dynamic>{
+      final _chatData =
+      <String, dynamic>{
         peerId + "unreadMsg": false,
         myId + "chattingIn": true,
       };
-      firebaseFirestore
-          .collection(ChatConstants.pathMessageCollection)
-          .doc(docPath)
-          .update(_chatData);
+
+      firebaseFirestore.collection(ChatConstants.pathMessageCollection).doc(docPath).update(_chatData);
       var users = value.get('users');
+
       return (users.length > 1) ? true : false;
+
     } else {
       final _chatData = <String, dynamic>{
         "users": [myId, peerId],
         "reported": false,
+        "isTravel" : isTravel,
+        "travelId" : travelId,
         peerId + "nickName": peerName,
         peerId + "deleted": false,
         peerId + "chattingIn": false,
         peerId + "unreadMsg": false,
         peerId + "lastMsg": "",
         peerId + "peerPhotoUrl" : peerProfile,
-        peerId + "lastMsgDate": DateTime
-            .now()
-            .millisecondsSinceEpoch
-            .toString(),
+        peerId + "lastMsgDate": DateTime.now().millisecondsSinceEpoch.toString(),
         myId + "nickName": myName,
         myId + "deleted": false,
         myId + "chattingIn": true,
