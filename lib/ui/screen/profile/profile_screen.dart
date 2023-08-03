@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/config/fcm_setting.dart';
 import 'package:nuri/cubit/profile/profile_cubit.dart';
 import 'package:nuri/cubit/profile/profile_state.dart';
 import 'package:nuri/config/enum.dart';
 import 'package:nuri/data/local/local_storage.dart';
+import 'package:nuri/data/remote/push_alarm/notification_api.dart';
 import 'package:nuri/ui/screen/error_screen.dart';
 import 'package:nuri/ui/screen/profile/widget/post_grid_view.dart';
 import 'package:nuri/ui/screen/profile/widget/profile_edit_bar.dart';
@@ -34,6 +36,11 @@ class _NuriProfileScreenState extends State<NuriProfileScreen> {
         if(state.loadingStatus == LoadingStatus.success){
           return ListView(
             children: [
+              TextButton(onPressed: (){
+                NotificationApi().sendNotification();
+                // showNotification();
+                // sendPush(context, 1, "123", "123", "123", "123", "qweqweqwe", LocalStorage().getUserFcmToken());
+              }, child: Text("213")),
               UserInfo(
                 profileModel: state.profileModel!,
               ),

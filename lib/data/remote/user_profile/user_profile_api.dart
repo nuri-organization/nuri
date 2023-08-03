@@ -63,13 +63,15 @@ class UserProfileApi extends Api{
     }
   }
 
-  Future<bool> postUserProfile({required String userName, String? bestTravel, String? introduce, String? image}) async{
+  Future<bool> postUserProfile({required String userName, String? bestTravel, String? introduce, String? image, required String fcmToken}) async{
+
     Map requestBody =
     {
       "userProfile": image,
       "userName": userName,
       "introduce": introduce,
-      "bestTravel": bestTravel
+      "bestTravel": bestTravel,
+      "fcmToken": fcmToken
     };
 
     try{

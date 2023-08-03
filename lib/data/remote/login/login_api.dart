@@ -53,7 +53,8 @@ class LoginApi extends Api{
       return data;
     }
     catch(e){
-      return Future.error(e);
+      Future.error(e);
+      return false;
     }
 
   }

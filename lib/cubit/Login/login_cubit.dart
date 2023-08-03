@@ -19,11 +19,16 @@ class LoginCubit extends Cubit<LoginState> {
         .then((value) => emit(LoginState(loginStatus: LoginStatus.finish)));
   }
 
-  void signIn({required String loginId, required String loginPassword}) async{
+  Future<bool> signIn({required String loginId, required String loginPassword}) async{
     var result = await loginRepository.signIn(loginId: loginId, loginPassword: loginPassword);
 
-    LocalStorage().setUserIdToken(result).then((value) => emit(LoginState(loginStatus: LoginStatus.finish)));
-
+    if(result){
+      LocalStorage().setUserIdToken(result).then((value) => emit(LoginState(loginStatus: LoginStatus.finish)));
+    }
+    if(!result){
+      return result;
+    }
+    return true;
   }
 
   void checkAutoLogin() async{

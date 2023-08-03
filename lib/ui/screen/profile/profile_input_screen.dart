@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:nuri/config/constants.dart';
 import 'package:nuri/config/scaffold.dart';
 import 'package:nuri/cubit/profile/profile_cubit.dart';
+import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/data/model/profile/profile_model.dart';
 
 class ProfileInputScreen extends StatefulWidget {
@@ -193,7 +194,10 @@ Widget build(BuildContext context) {
     color: Constants.theme4,
     child: InkWell(
         onTap: () async{
-          await context.read<ProfileCubit>().setProfileData(userName: userName, introduce: introduce, bestTravel: bestTravel, image: image)
+
+          String fcm = LocalStorage().getUserFcmToken();
+
+          await context.read<ProfileCubit>().setProfileData(userName: userName, introduce: introduce, bestTravel: bestTravel, image: image, fcmToken: fcm)
               .then((value) {
                 if(value) {
                 Navigator.pop(context);

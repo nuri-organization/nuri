@@ -12,11 +12,21 @@ class LocalStorage{
     return _instance;
   }
 
+  String _userFcmToken = "userFcmToken";
   String _userIdTokenKey = "userIdToken";
   String _isHaveParty = "isHaveParty";
   String _userNameKey = "userName";
   String _userProfileKey = "userProfile";
   String _userTravelKey = "userTravel";
+
+  String getUserFcmToken(){
+    return (box.get(_userFcmToken) ?? "").toString();
+  }
+
+  Future<void> setUserFcmToken(String? token) async{
+    print("the token data : $token");
+    await box.put(_userFcmToken, token);
+  }
 
   String getUserIdToken(){
     return (box.get(_userIdTokenKey) ?? "").toString();

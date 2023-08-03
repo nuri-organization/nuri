@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         if(state.loginStatus == LoginStatus.loading) {
           return Container();
         }
-        return NuriScaffold(isInAppbar: false, child: LoginScreen());
+        return NuriScaffold(isInAppbar: false, child: const LoginScreen());
       },
     );
   }

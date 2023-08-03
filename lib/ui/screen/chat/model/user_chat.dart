@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:nuri/data/model/time_manager.dart';
+import 'package:nuri/service/time_manager.dart';
 import 'package:nuri/ui/screen/chat/chat_constants/chat_constants.dart';
 
 String _getPeerId(String docIds, String currentUserId){

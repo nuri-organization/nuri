@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:nuri/cubit/Login/login_cubit.dart';
 import 'package:nuri/cubit/chat/chat_cubit.dart';
+import 'package:nuri/cubit/notification/notification_cubit.dart';
 import 'package:nuri/cubit/profile/profile_cubit.dart';
 import 'package:nuri/cubit/shortory/comment/comment_cubit.dart';
 import 'package:nuri/cubit/shortory/post/shortory_post_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:nuri/cubit/travel/member/travel_member_cubit.dart';
 import 'package:nuri/cubit/travel/post/travel_post_cubit.dart';
 import 'package:nuri/cubit/travel/todo/travel_todolist_cubit.dart';
 import 'package:nuri/data/remote/login/login_api.dart';
+import 'package:nuri/data/remote/push_alarm/notification_api.dart';
 import 'package:nuri/data/remote/shortory/comment/comment_api.dart';
 import 'package:nuri/data/remote/shortory/shortory_post_api.dart';
 import 'package:nuri/data/remote/travel/travel_accept_api.dart';
@@ -21,6 +23,7 @@ import 'package:nuri/data/remote/travel/travel_todo_api.dart';
 import 'package:nuri/data/remote/user_profile/user_profile_api.dart';
 import 'package:nuri/repository/comment_repository.dart';
 import 'package:nuri/repository/login_repository.dart';
+import 'package:nuri/repository/notification_repository.dart';
 import 'package:nuri/repository/profile_repository.dart';
 import 'package:nuri/repository/shortory_post_repository.dart';
 import 'package:nuri/repository/travel_accept_repository.dart';
@@ -45,6 +48,7 @@ List<SingleChildWidget> getProvider() {
   final travelTodoApi = TravelTodoApi();
   final travelCheckApi = TravelCheckApi();
   final travelMemberApi = TravelMemberApi();
+  final notificationApi = NotificationApi();
 
   final shortoryPostRepositoryImpl = ShortoryPostRepositoryImpl(shortoryPostApi);
   final commentRepositoryImpl = CommentRepositoryImpl(commentApi);
@@ -55,6 +59,8 @@ List<SingleChildWidget> getProvider() {
   final travelTodoRepositoryImpl = TravelTodolistRepositoryImpl(travelTodoApi);
   final travelCheckRepositoryImpl = TravelChecklistRepositoryImpl(travelCheckApi);
   final travelMemberRepositoryImpl = TravelMemberRepositoryImpl(travelMemberApi);
+  final notificationRepositoryImpl = NotificationImpl(notificationApi);
+
 
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
@@ -72,6 +78,7 @@ List<SingleChildWidget> getProvider() {
   TravelTodolistCubit travelTodolistCubit = TravelTodolistCubit(travelTodoRepositoryImpl);
   TravelChecklistCubit travelChecklistCubit = TravelChecklistCubit(travelCheckRepositoryImpl);
   TravelMemberCubit travelMemberCubit = TravelMemberCubit(travelMemberRepositoryImpl);
+  NotificationCubit notificationCubit = NotificationCubit(notificationRepositoryImpl);
 
 
   return [
@@ -87,5 +94,6 @@ List<SingleChildWidget> getProvider() {
     BlocProvider<TravelTodolistCubit>(create: (BuildContext context) => travelTodolistCubit),
     BlocProvider<TravelChecklistCubit>(create: (BuildContext context) => travelChecklistCubit),
     BlocProvider<TravelMemberCubit>(create: (BuildContext context) => travelMemberCubit),
+    BlocProvider<NotificationCubit>(create: (BuildContext context) => notificationCubit)
   ];
 }

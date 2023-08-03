@@ -13,6 +13,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepository profileRepository;
 
   void getUserProfileData() async{
+    
+    emit(ProfileState(loadingStatus: LoadingStatus.loading));
 
     final result = await profileRepository.getProfileInfo();
 
@@ -22,9 +24,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileState(profileModel: result, loadingStatus: LoadingStatus.success));
   }
 
-  Future<bool> setProfileData({required String userName, String? bestTravel, String? introduce, String? image}) async{
+  Future<bool> setProfileData({required String userName, String? bestTravel, String? introduce, String? image,required String fcmToken}) async{
 
-    final result = await profileRepository.postProfileInfo(userName: userName, bestTravel:  bestTravel, introduce:  introduce, image: image);
+    final result = await profileRepository.postProfileInfo(userName: userName, bestTravel:  bestTravel, introduce:  introduce, image: image,fcmToken: fcmToken);
 
     LocalStorage().setName(userName);
     LocalStorage().setProfile(image ?? "");

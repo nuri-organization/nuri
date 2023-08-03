@@ -4,7 +4,7 @@ import 'package:nuri/data/remote/user_profile/user_profile_api.dart';
 abstract class ProfileRepository{
   Future<ProfileModel> getProfileInfo();
   Future<bool> fetchProfileInfo({required String userName, String? bestTravel, String? introduce, String? image});
-  Future<bool> postProfileInfo({required String userName, String? bestTravel, String? introduce, String? image});
+  Future<bool> postProfileInfo({required String userName, String? bestTravel, String? introduce, String? image,required String fcmToken});
 }
 
 class ProfileRepositoryImpl extends ProfileRepository{
@@ -29,9 +29,9 @@ class ProfileRepositoryImpl extends ProfileRepository{
   }
 
   @override
-  Future<bool> postProfileInfo({required String userName, String? bestTravel, String? introduce, String? image}) async{
+  Future<bool> postProfileInfo({required String userName, String? bestTravel, String? introduce, String? image, required String fcmToken}) async{
 
-    final bool result = await api.postUserProfile(userName: userName, bestTravel:  bestTravel, introduce:  introduce, image: image);
+    final bool result = await api.postUserProfile(userName: userName, bestTravel:  bestTravel, introduce:  introduce, image: image,fcmToken: fcmToken);
 
     return result;
 
