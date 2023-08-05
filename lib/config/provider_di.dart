@@ -9,6 +9,7 @@ import 'package:nuri/cubit/shortory/post/shortory_post_cubit.dart';
 import 'package:nuri/cubit/travel/accept/travel_accept_cubit.dart';
 import 'package:nuri/cubit/travel/check/travel_checklist_cubit.dart';
 import 'package:nuri/cubit/travel/member/travel_member_cubit.dart';
+import 'package:nuri/cubit/travel/my_travel/travel_my_travel_cubit.dart';
 import 'package:nuri/cubit/travel/post/travel_post_cubit.dart';
 import 'package:nuri/cubit/travel/todo/travel_todolist_cubit.dart';
 import 'package:nuri/data/remote/login/login_api.dart';
@@ -79,6 +80,7 @@ List<SingleChildWidget> getProvider() {
   TravelChecklistCubit travelChecklistCubit = TravelChecklistCubit(travelCheckRepositoryImpl);
   TravelMemberCubit travelMemberCubit = TravelMemberCubit(travelMemberRepositoryImpl);
   NotificationCubit notificationCubit = NotificationCubit(notificationRepositoryImpl);
+  TravelMyTravelCubit travelMyTravelCubit = TravelMyTravelCubit(travelMemberRepositoryImpl);
 
 
   return [
@@ -94,6 +96,7 @@ List<SingleChildWidget> getProvider() {
     BlocProvider<TravelTodolistCubit>(create: (BuildContext context) => travelTodolistCubit),
     BlocProvider<TravelChecklistCubit>(create: (BuildContext context) => travelChecklistCubit),
     BlocProvider<TravelMemberCubit>(create: (BuildContext context) => travelMemberCubit),
-    BlocProvider<NotificationCubit>(create: (BuildContext context) => notificationCubit)
+    BlocProvider<NotificationCubit>(create: (BuildContext context) => notificationCubit),
+    BlocProvider<TravelMyTravelCubit>(create: (BuildContext context) => travelMyTravelCubit)
   ];
 }
