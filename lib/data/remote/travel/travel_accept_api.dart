@@ -28,4 +28,16 @@ class TravelAcceptApi extends Api{
       return Future.error(e);
     }
   }
+  Future<bool> userApply({required int travelId}) async{
+
+    try{
+
+      Response response = await dio.post("$baseUrl/travel/apply/$travelId");
+
+      return true;
+    }
+    catch(e){
+      return Future.error(e);
+    }
+  }
 }

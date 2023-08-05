@@ -10,7 +10,7 @@ class UserInfoModel with _$UserInfoModel{
   const factory UserInfoModel({
     @Default("") String userId,
     @Default("") String userName,
-    @Default("") String userProfile
+    @Default(null) String? userProfile
   }) = _UserInfoModel;
 
   factory UserInfoModel.fromJson(Map<String, Object?>json)

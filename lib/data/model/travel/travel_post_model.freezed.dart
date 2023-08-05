@@ -249,7 +249,7 @@ class _$_TravelPostModel
       this.title = "",
       this.content = "",
       this.userInfo =
-          const UserInfoModel(userProfile: "", userName: "", userId: ""),
+          const UserInfoModel(userProfile: null, userName: "", userId: ""),
       final List<String> mainTravel = const [],
       this.cost = 0,
       this.startDate = "",

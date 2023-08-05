@@ -38,7 +38,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   String imageUrl = "";
   String myName = "";
   String peerName = "";
-  String peerProfile = "";
+  String? peerProfile = "";
   String myProfile = "";
   String openDate = "";
   bool isTravel = false;
@@ -448,7 +448,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                                         color: Colors.grey,
                                         image: DecorationImage(
                                           fit: BoxFit.fill,
-                                          image: NetworkImage(peerProfile),
+                                          image: NetworkImage(peerProfile ?? ""),
                                         )),
                                   ))
                                 : const Icon(Icons.person, size: 20,),
@@ -801,7 +801,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
 
 class ChatScreenArguments {
   final String peerId;
-  final String peerImageUrl;
+  final String? peerImageUrl;
   final String peerNickname;
   final String? myId;
   final String? myImageUrl;
@@ -813,7 +813,7 @@ class ChatScreenArguments {
 
   ChatScreenArguments({
     required this.peerId,
-    required this.peerImageUrl,
+    this.peerImageUrl,
     required this.peerNickname,
     required this.isTravel,
     this.myId,

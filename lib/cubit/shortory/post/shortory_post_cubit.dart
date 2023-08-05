@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:nuri/config/enum.dart';
 import 'package:nuri/data/model/post/post_model.dart';
 import 'package:nuri/repository/shortory_post_repository.dart';
+import 'package:nuri/ui/screen/shortory/widget/post.dart';
 
 part 'shortory_post_state.dart';
 
@@ -10,6 +11,10 @@ class ShortoryPostCubit extends Cubit<ShortoryPostState> {
   ShortoryPostCubit(this.shortoryPostRepository) : super(ShortoryPostState());
 
   final ShortoryPostRepository shortoryPostRepository;
+
+  Future<List<PostModel>?> getLocalShortoryData() async{
+    return await ShortoryPostState().postModel;
+  }
 
 
   void getShortoryPostInfo() async{

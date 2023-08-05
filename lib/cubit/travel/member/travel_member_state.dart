@@ -9,5 +9,5 @@ class TravelMemberState extends Equatable {
   LoadingStatus loadingStatus;
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [loadingStatus,userInfoModel];
 }

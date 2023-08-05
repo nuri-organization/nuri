@@ -155,14 +155,14 @@ AnimatedContainer slider(images, pagePosition) {
 
 
 class _StateBar extends StatefulWidget {
-  _StateBar({super.key, required this.isLoved, required this.title, required this.postId, required this.userId,required this.userName,required this.userProfile, required this.postModel});
+  _StateBar({super.key, required this.isLoved, required this.title, required this.postId, required this.userId,required this.userName,this.userProfile, required this.postModel});
 
   PostModel postModel;
 
   bool isLoved = false;
   int postId = 0;
   String userId;
-  String userProfile;
+  String? userProfile;
   String userName;
   String title;
 
@@ -229,7 +229,7 @@ class _StateBarState extends State<_StateBar> {
                 child: const Text("북마크하기")),
             TextButton(
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileDetailScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => ProfileDetailScreen(userId: widget.userId,)));
                 },
                 child: const Text("프로필 보기")),
             TextButton(

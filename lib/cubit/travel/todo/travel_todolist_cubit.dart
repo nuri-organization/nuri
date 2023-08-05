@@ -11,10 +11,13 @@ class TravelTodolistCubit extends Cubit<TravelTodolistState> {
 
   final TravelTodolistRepository travelTodolistRepository;
 
+  List<TravelTodoListModel>? travelTodoListModel;
+
   void getTodoList({required String travelId}) async{
     var result = await travelTodolistRepository.getTodolist(travelId: travelId);
 
     if(result.isNotEmpty){
+      travelTodoListModel = result;
       emit(TravelTodolistState(loadingStatus: LoadingStatus.success, travelTodoListModel: result));
     }
     if(result.isEmpty){

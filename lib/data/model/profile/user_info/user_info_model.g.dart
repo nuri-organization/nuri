@@ -10,7 +10,7 @@ _$_UserInfoModel _$$_UserInfoModelFromJson(Map<String, dynamic> json) =>
     _$_UserInfoModel(
       userId: json['userId'] as String? ?? "",
       userName: json['userName'] as String? ?? "",
-      userProfile: json['userProfile'] as String? ?? "",
+      userProfile: json['userProfile'] as String? ?? null,
     );
 
 Map<String, dynamic> _$$_UserInfoModelToJson(_$_UserInfoModel instance) =>

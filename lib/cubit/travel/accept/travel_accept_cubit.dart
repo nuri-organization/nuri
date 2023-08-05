@@ -14,4 +14,8 @@ class TravelAcceptCubit extends Cubit<TravelAcceptState> {
 
   }
 
+  void userApply({required int travelId}) async{
+    var result = await travelAcceptRepository.userApply(travelId: travelId);
+  }
+
 }

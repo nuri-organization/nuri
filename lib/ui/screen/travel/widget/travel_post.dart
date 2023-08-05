@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/cubit/travel/accept/travel_accept_cubit.dart';
 import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/data/model/travel/travel_post_model.dart';
 import 'package:nuri/ui/screen/chat/chat_screen.dart';
@@ -167,10 +169,10 @@ class _Cost extends StatelessWidget {
 }
 
 class _ApplyButton extends StatelessWidget {
-  _ApplyButton({super.key,required this.travelId, required this.peerName, required this.peerProfile, required this.peerId});
+  _ApplyButton({super.key,required this.travelId, required this.peerName, this.peerProfile, required this.peerId});
 
   String peerId;
-  String peerProfile;
+  String? peerProfile;
   String peerName;
   int travelId;
 
@@ -181,21 +183,8 @@ class _ApplyButton extends StatelessWidget {
       width: 100.w,
       child: InkWell(
         onTap: (){
-          ChatScreenArguments _chatArg = ChatScreenArguments(
-              peerId: peerId,
-              peerImageUrl: peerProfile,
-              peerNickname: peerName,
-              myNickname: LocalStorage().getName(),
-              chatRoomId: '',
-              travelId: travelId,
-              isTravel: true
-          );
-          ChatCheckService().check(context, _chatArg).then((value) {
-            if (value) {
-              Navigator.push(context, MaterialPageRoute(builder: (_) => ChatScreen(chatArg: _chatArg) ));
-            }
-          });
-        },
+          context.read<TravelAcceptCubit>().userApply(travelId: travelId);
+          },
         child: const Center(
           child:
           Text("신청하기"),

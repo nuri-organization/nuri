@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nuri/config/enum.dart';
 import 'package:nuri/cubit/shortory/post/shortory_post_cubit.dart';
+import 'package:nuri/data/model/post/post_model.dart';
 import 'package:nuri/ui/screen/error_screen.dart';
 import 'package:nuri/ui/screen/shortory/widget/post.dart';
 
@@ -20,9 +21,19 @@ class _NuriShortoryScreenState extends State<NuriShortoryScreen> {
   }
 
   @override
-  void didChangeDependencies() {
-    context.read<ShortoryPostCubit>().getShortoryPostInfo();
+  void didChangeDependencies() async{
+    List<PostModel>? data = await context.read<ShortoryPostCubit>().getLocalShortoryData();
+
+    if(data == null){
+      // ignore: use_build_context_synchronously
+      context.read<ShortoryPostCubit>().getShortoryPostInfo();
+    }
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override

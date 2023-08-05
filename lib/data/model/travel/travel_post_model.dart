@@ -14,7 +14,7 @@ class TravelPostModel with _$TravelPostModel{
     @Default("") String content,
     @Default(
         UserInfoModel(
-            userProfile: "",
+            userProfile: null,
             userName: "",
             userId: ""
         )

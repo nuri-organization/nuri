@@ -1,42 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:nuri/config/scaffold.dart';
 import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/ui/screen/travel/travel_checklist_screen.dart';
 import 'package:nuri/ui/screen/travel/travel_member_screen.dart';
 import 'package:nuri/ui/screen/travel/travel_todolist_screen.dart';
 
 class TravelPartyScreen extends StatefulWidget {
-  const TravelPartyScreen({super.key});
+  TravelPartyScreen({super.key,required this.travelId});
+
+  String travelId;
 
   @override
   State<TravelPartyScreen> createState() => _TravelPartyScreenState();
 }
 
 class _TravelPartyScreenState extends State<TravelPartyScreen> {
+
+  int index = 0;
+
+  void _setCurrentData(int currentData){
+    setState(() {
+      index = currentData;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    return LocalStorage().getTravelId() != "" ? Column(
-      children: [
-        TravelTile(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (_) => TravelMemberScreen(travelId: LocalStorage().getTravelId(),)));
-            },
-            title: "멤버 보기"
+    return NuriScaffold(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TravelTile(
+                    onTap: (){
+                      _setCurrentData(0);
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => TravelMemberScreen(travelId: widget.travelId,)));
+                    },
+                    title: "멤버 보기"
+                ),
+                TravelTile(
+                    onTap: (){
+                      _setCurrentData(1);
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => TravelTodoListScreen(travelId: widget.travelId)));
+                    },
+                    title: "TODO - 리스트"
+                ),
+                TravelTile(
+                    onTap: (){
+                      _setCurrentData(2);
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => TravelCheckListScreen(travelId: widget.travelId)));
+                    },
+                    title: "CheckList"
+                )
+              ],
+            ),
+          ],
         ),
-        TravelTile(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (_) => TravelTodoListScreen(travelId: LocalStorage().getTravelId())));
-            },
-            title: "TODO - 리스트"
-        ),
-        TravelTile(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (_) => TravelCheckListScreen(travelId: LocalStorage().getTravelId())));
-            },
-            title: "CheckList"
-        )
-      ],
-    ) : Center(child: Text("아직 가입된 여행이 없습니다. 원하는 여행을 찾아 가입해보세요!"),);
+      ),
+    );
   }
 }
 

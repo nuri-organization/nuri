@@ -22,7 +22,7 @@ UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) {
 mixin _$UserInfoModel {
   String get userId => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
-  String get userProfile => throw _privateConstructorUsedError;
+  String? get userProfile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $UserInfoModelCopyWith<$Res> {
           UserInfoModel value, $Res Function(UserInfoModel) then) =
       _$UserInfoModelCopyWithImpl<$Res, UserInfoModel>;
   @useResult
-  $Res call({String userId, String userName, String userProfile});
+  $Res call({String userId, String userName, String? userProfile});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$UserInfoModelCopyWithImpl<$Res, $Val extends UserInfoModel>
   $Res call({
     Object? userId = null,
     Object? userName = null,
-    Object? userProfile = null,
+    Object? userProfile = freezed,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -65,10 +65,10 @@ class _$UserInfoModelCopyWithImpl<$Res, $Val extends UserInfoModel>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      userProfile: null == userProfile
+      userProfile: freezed == userProfile
           ? _value.userProfile
           : userProfile // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -81,7 +81,7 @@ abstract class _$$_UserInfoModelCopyWith<$Res>
       __$$_UserInfoModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, String userName, String userProfile});
+  $Res call({String userId, String userName, String? userProfile});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$_UserInfoModelCopyWithImpl<$Res>
   $Res call({
     Object? userId = null,
     Object? userName = null,
-    Object? userProfile = null,
+    Object? userProfile = freezed,
   }) {
     return _then(_$_UserInfoModel(
       userId: null == userId
@@ -108,10 +108,10 @@ class __$$_UserInfoModelCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      userProfile: null == userProfile
+      userProfile: freezed == userProfile
           ? _value.userProfile
           : userProfile // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -120,7 +120,7 @@ class __$$_UserInfoModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserInfoModel with DiagnosticableTreeMixin implements _UserInfoModel {
   const _$_UserInfoModel(
-      {this.userId = "", this.userName = "", this.userProfile = ""});
+      {this.userId = "", this.userName = "", this.userProfile = null});
 
   factory _$_UserInfoModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserInfoModelFromJson(json);
@@ -133,7 +133,7 @@ class _$_UserInfoModel with DiagnosticableTreeMixin implements _UserInfoModel {
   final String userName;
   @override
   @JsonKey()
-  final String userProfile;
+  final String? userProfile;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -184,7 +184,7 @@ abstract class _UserInfoModel implements UserInfoModel {
   const factory _UserInfoModel(
       {final String userId,
       final String userName,
-      final String userProfile}) = _$_UserInfoModel;
+      final String? userProfile}) = _$_UserInfoModel;
 
   factory _UserInfoModel.fromJson(Map<String, dynamic> json) =
       _$_UserInfoModel.fromJson;
@@ -194,7 +194,7 @@ abstract class _UserInfoModel implements UserInfoModel {
   @override
   String get userName;
   @override
-  String get userProfile;
+  String? get userProfile;
   @override
   @JsonKey(ignore: true)
   _$$_UserInfoModelCopyWith<_$_UserInfoModel> get copyWith =>

@@ -59,7 +59,7 @@ class ChatCubit extends Cubit<ChatState> {
   // 채팅 참여
   Future<bool> attendChattingRoom({
     required String myProfile,
-    required String peerProfile,
+    String? peerProfile,
     required String collectionPath,
     required String docPath,
     required String myName,

@@ -11,13 +11,13 @@ class TravelMemberCubit extends Cubit<TravelMemberState> {
 
   final TravelMemberRepository travelMemberRepository;
 
-  void getMember({required String travelId}) async{
-    var result = await travelMemberRepository.getTravelMember(travelId: travelId);
+  void getMember({required String travelId}) async {
+    List<UserInfoModel> result = await travelMemberRepository.getTravelMember(travelId: travelId);
 
-    if(result.isEmpty){
+    if (result.isEmpty) {
       emit(TravelMemberState(loadingStatus: LoadingStatus.noData));
     }
-    if(result.isNotEmpty){
+    if (result.isNotEmpty) {
       emit(TravelMemberState(loadingStatus: LoadingStatus.success, userInfoModel: result));
     }
   }

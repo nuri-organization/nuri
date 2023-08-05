@@ -6,6 +6,7 @@ import 'package:nuri/cubit/profile/profile_cubit.dart';
 import 'package:nuri/cubit/profile/profile_state.dart';
 import 'package:nuri/config/enum.dart';
 import 'package:nuri/data/local/local_storage.dart';
+import 'package:nuri/data/model/profile/profile_model.dart';
 import 'package:nuri/data/remote/push_alarm/notification_api.dart';
 import 'package:nuri/ui/screen/error_screen.dart';
 import 'package:nuri/ui/screen/profile/widget/post_grid_view.dart';
@@ -24,8 +25,27 @@ class _NuriProfileScreenState extends State<NuriProfileScreen> {
 
   @override
   void initState() {
-    context.read<ProfileCubit>().getUserProfileData();
+
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() async{
+    ProfileModel? data = await context.read<ProfileCubit>().getLocalData();
+
+    print("the data is $data");
+
+    if(data == null){
+      // ignore: use_build_context_synchronously
+      context.read<ProfileCubit>().getUserProfileData();
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    print("profile dispost");
+    super.dispose();
   }
 
   @override
@@ -36,11 +56,6 @@ class _NuriProfileScreenState extends State<NuriProfileScreen> {
         if(state.loadingStatus == LoadingStatus.success){
           return ListView(
             children: [
-              TextButton(onPressed: (){
-                NotificationApi().sendNotification();
-                // showNotification();
-                // sendPush(context, 1, "123", "123", "123", "123", "qweqweqwe", LocalStorage().getUserFcmToken());
-              }, child: Text("213")),
               UserInfo(
                 profileModel: state.profileModel!,
               ),
