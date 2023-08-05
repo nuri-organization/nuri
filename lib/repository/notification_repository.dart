@@ -1,7 +1,8 @@
+import 'package:nuri/data/model/push/notification_model.dart';
 import 'package:nuri/data/remote/push_alarm/notification_api.dart';
 
 abstract class NotificationRepository {
-  Future sendNotification({required Map requestBody});
+  Future<List<NotificationModel>> getNotificationList();
 }
 
 class NotificationImpl extends NotificationRepository{
@@ -10,10 +11,10 @@ class NotificationImpl extends NotificationRepository{
   NotificationImpl(this.api);
 
   @override
-  Future sendNotification({required Map requestBody}) async{
-    // var result = await api.sendNotification(requestBody: requestBody);
+  Future<List<NotificationModel>> getNotificationList() async{
+    List<NotificationModel> result = await api.getNotification();
 
-    return true;
+    return result;
   }
 
 }

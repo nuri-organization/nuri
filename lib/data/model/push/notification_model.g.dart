@@ -8,34 +8,33 @@ part of 'notification_model.dart';
 
 _$_NotificationModel _$$_NotificationModelFromJson(Map<String, dynamic> json) =>
     _$_NotificationModel(
-      id: json['id'] as int?,
-      type: json['type'] as int?,
-      timestamp: json['timestamp'] as String?,
-      date:
-          json['date'] == null ? null : DateTime.parse(json['date'] as String),
-      title: json['title'] as String?,
-      myId: json['myId'] as int?,
-      myNickname: json['myNickname'] as String?,
-      peerId: json['peerId'] as int?,
-      peerNickname: json['peerNickname'] as String?,
-      contents: json['contents'] as String?,
-      read: json['read'] as bool?,
-      fcmToken: json['fcmToken'] as String?,
+      notificationId: json['notificationId'] as int? ?? 0,
+      title: json['title'] as String? ?? "",
+      content: json['content'] as String? ?? "",
+      peer: json['peer'] == null
+          ? null
+          : PeerInfoModel.fromJson(json['peer'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_NotificationModelToJson(
         _$_NotificationModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'type': instance.type,
-      'timestamp': instance.timestamp,
-      'date': instance.date?.toIso8601String(),
+      'notificationId': instance.notificationId,
       'title': instance.title,
-      'myId': instance.myId,
-      'myNickname': instance.myNickname,
+      'content': instance.content,
+      'peer': instance.peer,
+    };
+
+_$_PeerInfoModel _$$_PeerInfoModelFromJson(Map<String, dynamic> json) =>
+    _$_PeerInfoModel(
+      peerId: json['peerId'] as String? ?? "",
+      peerName: json['peerName'] as String? ?? "",
+      peerProfile: json['peerProfile'] as String? ?? "",
+    );
+
+Map<String, dynamic> _$$_PeerInfoModelToJson(_$_PeerInfoModel instance) =>
+    <String, dynamic>{
       'peerId': instance.peerId,
-      'peerNickname': instance.peerNickname,
-      'contents': instance.contents,
-      'read': instance.read,
-      'fcmToken': instance.fcmToken,
+      'peerName': instance.peerName,
+      'peerProfile': instance.peerProfile,
     };

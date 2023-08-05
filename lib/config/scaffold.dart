@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nuri/data/local/local_storage.dart';
+import 'package:nuri/ui/screen/notification/notiifcation_screen.dart';
 import 'package:nuri/ui/screen/shortory/shortory_post_screen.dart';
 import 'package:nuri/ui/screen/travel/travel_post_screen.dart';
 import 'package:nuri/ui/widget/action_button.dart';
@@ -20,6 +21,17 @@ class NuriScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     if(isInBottomNavigation){
       return Scaffold(
+        appBar: AppBar(
+          title: Text("누리"),
+          actions: [
+            IconButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const NotificationScreen()));
+                },
+                icon: Icon(Icons.notifications)
+            )
+          ],
+        ),
         bottomNavigationBar: BlocBuilder<NavigationCubit, NavigationState>(
           builder: (context, state){
             return BottomNavigationBar(
@@ -70,12 +82,19 @@ class NuriScaffold extends StatelessWidget {
       );
     }
     return Scaffold(
-      appBar: isInAppbar ? AppBar(title: Text(title!),) : null,
+      appBar: isInAppbar
+          ? AppBar(
+              title: Text(title!),
+              actions: [
+                IconButton(onPressed: (){}, icon: Icon(Icons.notifications))
+              ],
+            )
+          : null,
       body:SafeArea(
           child: Padding(
               padding: const EdgeInsets.all(10.0),
                 child: child
-          )
+          ),
       ),
     );
   }

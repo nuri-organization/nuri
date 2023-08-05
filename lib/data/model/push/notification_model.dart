@@ -8,20 +8,24 @@ part 'notification_model.g.dart';
 @freezed
 class NotificationModel with _$NotificationModel{
   const factory NotificationModel({
-    int? id,
-    final int? type,
-    final String? timestamp,
-    final DateTime? date,
-    final String? title,
-    final int? myId,
-    final String? myNickname,
-    final int? peerId,
-    final String? peerNickname,
-    final String? contents,
-    final bool? read,
-    final String? fcmToken,
+    @Default(0) int notificationId,
+    @Default("") String title,
+    @Default("") String content,
+    PeerInfoModel? peer
   }) = _NotificationModel;
 
   factory NotificationModel.fromJson(Map<String, Object?>json)
   => _$NotificationModelFromJson(json);
+}
+
+@freezed
+class PeerInfoModel with _$PeerInfoModel{
+  const factory PeerInfoModel({
+    @Default("") String peerId,
+    @Default("") String peerName,
+    @Default("") String peerProfile
+  }) = _PeerInfoModel;
+
+  factory PeerInfoModel.fromJson(Map<String, Object?>json)
+  => _$PeerInfoModelFromJson(json);
 }

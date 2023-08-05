@@ -20,18 +20,10 @@ NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NotificationModel {
-  int? get id => throw _privateConstructorUsedError;
-  int? get type => throw _privateConstructorUsedError;
-  String? get timestamp => throw _privateConstructorUsedError;
-  DateTime? get date => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  int? get myId => throw _privateConstructorUsedError;
-  String? get myNickname => throw _privateConstructorUsedError;
-  int? get peerId => throw _privateConstructorUsedError;
-  String? get peerNickname => throw _privateConstructorUsedError;
-  String? get contents => throw _privateConstructorUsedError;
-  bool? get read => throw _privateConstructorUsedError;
-  String? get fcmToken => throw _privateConstructorUsedError;
+  int get notificationId => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get content => throw _privateConstructorUsedError;
+  PeerInfoModel? get peer => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,18 +38,9 @@ abstract class $NotificationModelCopyWith<$Res> {
       _$NotificationModelCopyWithImpl<$Res, NotificationModel>;
   @useResult
   $Res call(
-      {int? id,
-      int? type,
-      String? timestamp,
-      DateTime? date,
-      String? title,
-      int? myId,
-      String? myNickname,
-      int? peerId,
-      String? peerNickname,
-      String? contents,
-      bool? read,
-      String? fcmToken});
+      {int notificationId, String title, String content, PeerInfoModel? peer});
+
+  $PeerInfoModelCopyWith<$Res>? get peer;
 }
 
 /// @nodoc
@@ -73,69 +56,41 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? type = freezed,
-    Object? timestamp = freezed,
-    Object? date = freezed,
-    Object? title = freezed,
-    Object? myId = freezed,
-    Object? myNickname = freezed,
-    Object? peerId = freezed,
-    Object? peerNickname = freezed,
-    Object? contents = freezed,
-    Object? read = freezed,
-    Object? fcmToken = freezed,
+    Object? notificationId = null,
+    Object? title = null,
+    Object? content = null,
+    Object? peer = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as int?,
-      timestamp: freezed == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as String?,
-      date: freezed == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      title: freezed == title
+      notificationId: null == notificationId
+          ? _value.notificationId
+          : notificationId // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      myId: freezed == myId
-          ? _value.myId
-          : myId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      myNickname: freezed == myNickname
-          ? _value.myNickname
-          : myNickname // ignore: cast_nullable_to_non_nullable
-              as String?,
-      peerId: freezed == peerId
-          ? _value.peerId
-          : peerId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      peerNickname: freezed == peerNickname
-          ? _value.peerNickname
-          : peerNickname // ignore: cast_nullable_to_non_nullable
-              as String?,
-      contents: freezed == contents
-          ? _value.contents
-          : contents // ignore: cast_nullable_to_non_nullable
-              as String?,
-      read: freezed == read
-          ? _value.read
-          : read // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      fcmToken: freezed == fcmToken
-          ? _value.fcmToken
-          : fcmToken // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      peer: freezed == peer
+          ? _value.peer
+          : peer // ignore: cast_nullable_to_non_nullable
+              as PeerInfoModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PeerInfoModelCopyWith<$Res>? get peer {
+    if (_value.peer == null) {
+      return null;
+    }
+
+    return $PeerInfoModelCopyWith<$Res>(_value.peer!, (value) {
+      return _then(_value.copyWith(peer: value) as $Val);
+    });
   }
 }
 
@@ -148,18 +103,10 @@ abstract class _$$_NotificationModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
-      int? type,
-      String? timestamp,
-      DateTime? date,
-      String? title,
-      int? myId,
-      String? myNickname,
-      int? peerId,
-      String? peerNickname,
-      String? contents,
-      bool? read,
-      String? fcmToken});
+      {int notificationId, String title, String content, PeerInfoModel? peer});
+
+  @override
+  $PeerInfoModelCopyWith<$Res>? get peer;
 }
 
 /// @nodoc
@@ -173,68 +120,28 @@ class __$$_NotificationModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? type = freezed,
-    Object? timestamp = freezed,
-    Object? date = freezed,
-    Object? title = freezed,
-    Object? myId = freezed,
-    Object? myNickname = freezed,
-    Object? peerId = freezed,
-    Object? peerNickname = freezed,
-    Object? contents = freezed,
-    Object? read = freezed,
-    Object? fcmToken = freezed,
+    Object? notificationId = null,
+    Object? title = null,
+    Object? content = null,
+    Object? peer = freezed,
   }) {
     return _then(_$_NotificationModel(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as int?,
-      timestamp: freezed == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as String?,
-      date: freezed == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      title: freezed == title
+      notificationId: null == notificationId
+          ? _value.notificationId
+          : notificationId // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      myId: freezed == myId
-          ? _value.myId
-          : myId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      myNickname: freezed == myNickname
-          ? _value.myNickname
-          : myNickname // ignore: cast_nullable_to_non_nullable
-              as String?,
-      peerId: freezed == peerId
-          ? _value.peerId
-          : peerId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      peerNickname: freezed == peerNickname
-          ? _value.peerNickname
-          : peerNickname // ignore: cast_nullable_to_non_nullable
-              as String?,
-      contents: freezed == contents
-          ? _value.contents
-          : contents // ignore: cast_nullable_to_non_nullable
-              as String?,
-      read: freezed == read
-          ? _value.read
-          : read // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      fcmToken: freezed == fcmToken
-          ? _value.fcmToken
-          : fcmToken // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      peer: freezed == peer
+          ? _value.peer
+          : peer // ignore: cast_nullable_to_non_nullable
+              as PeerInfoModel?,
     ));
   }
 }
@@ -245,50 +152,26 @@ class _$_NotificationModel
     with DiagnosticableTreeMixin
     implements _NotificationModel {
   const _$_NotificationModel(
-      {this.id,
-      this.type,
-      this.timestamp,
-      this.date,
-      this.title,
-      this.myId,
-      this.myNickname,
-      this.peerId,
-      this.peerNickname,
-      this.contents,
-      this.read,
-      this.fcmToken});
+      {this.notificationId = 0, this.title = "", this.content = "", this.peer});
 
   factory _$_NotificationModel.fromJson(Map<String, dynamic> json) =>
       _$$_NotificationModelFromJson(json);
 
   @override
-  final int? id;
+  @JsonKey()
+  final int notificationId;
   @override
-  final int? type;
+  @JsonKey()
+  final String title;
   @override
-  final String? timestamp;
+  @JsonKey()
+  final String content;
   @override
-  final DateTime? date;
-  @override
-  final String? title;
-  @override
-  final int? myId;
-  @override
-  final String? myNickname;
-  @override
-  final int? peerId;
-  @override
-  final String? peerNickname;
-  @override
-  final String? contents;
-  @override
-  final bool? read;
-  @override
-  final String? fcmToken;
+  final PeerInfoModel? peer;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NotificationModel(id: $id, type: $type, timestamp: $timestamp, date: $date, title: $title, myId: $myId, myNickname: $myNickname, peerId: $peerId, peerNickname: $peerNickname, contents: $contents, read: $read, fcmToken: $fcmToken)';
+    return 'NotificationModel(notificationId: $notificationId, title: $title, content: $content, peer: $peer)';
   }
 
   @override
@@ -296,18 +179,10 @@ class _$_NotificationModel
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NotificationModel'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('type', type))
-      ..add(DiagnosticsProperty('timestamp', timestamp))
-      ..add(DiagnosticsProperty('date', date))
+      ..add(DiagnosticsProperty('notificationId', notificationId))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('myId', myId))
-      ..add(DiagnosticsProperty('myNickname', myNickname))
-      ..add(DiagnosticsProperty('peerId', peerId))
-      ..add(DiagnosticsProperty('peerNickname', peerNickname))
-      ..add(DiagnosticsProperty('contents', contents))
-      ..add(DiagnosticsProperty('read', read))
-      ..add(DiagnosticsProperty('fcmToken', fcmToken));
+      ..add(DiagnosticsProperty('content', content))
+      ..add(DiagnosticsProperty('peer', peer));
   }
 
   @override
@@ -315,29 +190,17 @@ class _$_NotificationModel
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NotificationModel &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.timestamp, timestamp) ||
-                other.timestamp == timestamp) &&
-            (identical(other.date, date) || other.date == date) &&
+            (identical(other.notificationId, notificationId) ||
+                other.notificationId == notificationId) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.myId, myId) || other.myId == myId) &&
-            (identical(other.myNickname, myNickname) ||
-                other.myNickname == myNickname) &&
-            (identical(other.peerId, peerId) || other.peerId == peerId) &&
-            (identical(other.peerNickname, peerNickname) ||
-                other.peerNickname == peerNickname) &&
-            (identical(other.contents, contents) ||
-                other.contents == contents) &&
-            (identical(other.read, read) || other.read == read) &&
-            (identical(other.fcmToken, fcmToken) ||
-                other.fcmToken == fcmToken));
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.peer, peer) || other.peer == peer));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, type, timestamp, date, title,
-      myId, myNickname, peerId, peerNickname, contents, read, fcmToken);
+  int get hashCode =>
+      Object.hash(runtimeType, notificationId, title, content, peer);
 
   @JsonKey(ignore: true)
   @override
@@ -356,48 +219,211 @@ class _$_NotificationModel
 
 abstract class _NotificationModel implements NotificationModel {
   const factory _NotificationModel(
-      {final int? id,
-      final int? type,
-      final String? timestamp,
-      final DateTime? date,
-      final String? title,
-      final int? myId,
-      final String? myNickname,
-      final int? peerId,
-      final String? peerNickname,
-      final String? contents,
-      final bool? read,
-      final String? fcmToken}) = _$_NotificationModel;
+      {final int notificationId,
+      final String title,
+      final String content,
+      final PeerInfoModel? peer}) = _$_NotificationModel;
 
   factory _NotificationModel.fromJson(Map<String, dynamic> json) =
       _$_NotificationModel.fromJson;
 
   @override
-  int? get id;
+  int get notificationId;
   @override
-  int? get type;
+  String get title;
   @override
-  String? get timestamp;
+  String get content;
   @override
-  DateTime? get date;
-  @override
-  String? get title;
-  @override
-  int? get myId;
-  @override
-  String? get myNickname;
-  @override
-  int? get peerId;
-  @override
-  String? get peerNickname;
-  @override
-  String? get contents;
-  @override
-  bool? get read;
-  @override
-  String? get fcmToken;
+  PeerInfoModel? get peer;
   @override
   @JsonKey(ignore: true)
   _$$_NotificationModelCopyWith<_$_NotificationModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+PeerInfoModel _$PeerInfoModelFromJson(Map<String, dynamic> json) {
+  return _PeerInfoModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PeerInfoModel {
+  String get peerId => throw _privateConstructorUsedError;
+  String get peerName => throw _privateConstructorUsedError;
+  String get peerProfile => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PeerInfoModelCopyWith<PeerInfoModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PeerInfoModelCopyWith<$Res> {
+  factory $PeerInfoModelCopyWith(
+          PeerInfoModel value, $Res Function(PeerInfoModel) then) =
+      _$PeerInfoModelCopyWithImpl<$Res, PeerInfoModel>;
+  @useResult
+  $Res call({String peerId, String peerName, String peerProfile});
+}
+
+/// @nodoc
+class _$PeerInfoModelCopyWithImpl<$Res, $Val extends PeerInfoModel>
+    implements $PeerInfoModelCopyWith<$Res> {
+  _$PeerInfoModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? peerId = null,
+    Object? peerName = null,
+    Object? peerProfile = null,
+  }) {
+    return _then(_value.copyWith(
+      peerId: null == peerId
+          ? _value.peerId
+          : peerId // ignore: cast_nullable_to_non_nullable
+              as String,
+      peerName: null == peerName
+          ? _value.peerName
+          : peerName // ignore: cast_nullable_to_non_nullable
+              as String,
+      peerProfile: null == peerProfile
+          ? _value.peerProfile
+          : peerProfile // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_PeerInfoModelCopyWith<$Res>
+    implements $PeerInfoModelCopyWith<$Res> {
+  factory _$$_PeerInfoModelCopyWith(
+          _$_PeerInfoModel value, $Res Function(_$_PeerInfoModel) then) =
+      __$$_PeerInfoModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String peerId, String peerName, String peerProfile});
+}
+
+/// @nodoc
+class __$$_PeerInfoModelCopyWithImpl<$Res>
+    extends _$PeerInfoModelCopyWithImpl<$Res, _$_PeerInfoModel>
+    implements _$$_PeerInfoModelCopyWith<$Res> {
+  __$$_PeerInfoModelCopyWithImpl(
+      _$_PeerInfoModel _value, $Res Function(_$_PeerInfoModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? peerId = null,
+    Object? peerName = null,
+    Object? peerProfile = null,
+  }) {
+    return _then(_$_PeerInfoModel(
+      peerId: null == peerId
+          ? _value.peerId
+          : peerId // ignore: cast_nullable_to_non_nullable
+              as String,
+      peerName: null == peerName
+          ? _value.peerName
+          : peerName // ignore: cast_nullable_to_non_nullable
+              as String,
+      peerProfile: null == peerProfile
+          ? _value.peerProfile
+          : peerProfile // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PeerInfoModel with DiagnosticableTreeMixin implements _PeerInfoModel {
+  const _$_PeerInfoModel(
+      {this.peerId = "", this.peerName = "", this.peerProfile = ""});
+
+  factory _$_PeerInfoModel.fromJson(Map<String, dynamic> json) =>
+      _$$_PeerInfoModelFromJson(json);
+
+  @override
+  @JsonKey()
+  final String peerId;
+  @override
+  @JsonKey()
+  final String peerName;
+  @override
+  @JsonKey()
+  final String peerProfile;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'PeerInfoModel(peerId: $peerId, peerName: $peerName, peerProfile: $peerProfile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'PeerInfoModel'))
+      ..add(DiagnosticsProperty('peerId', peerId))
+      ..add(DiagnosticsProperty('peerName', peerName))
+      ..add(DiagnosticsProperty('peerProfile', peerProfile));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PeerInfoModel &&
+            (identical(other.peerId, peerId) || other.peerId == peerId) &&
+            (identical(other.peerName, peerName) ||
+                other.peerName == peerName) &&
+            (identical(other.peerProfile, peerProfile) ||
+                other.peerProfile == peerProfile));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, peerId, peerName, peerProfile);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PeerInfoModelCopyWith<_$_PeerInfoModel> get copyWith =>
+      __$$_PeerInfoModelCopyWithImpl<_$_PeerInfoModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PeerInfoModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PeerInfoModel implements PeerInfoModel {
+  const factory _PeerInfoModel(
+      {final String peerId,
+      final String peerName,
+      final String peerProfile}) = _$_PeerInfoModel;
+
+  factory _PeerInfoModel.fromJson(Map<String, dynamic> json) =
+      _$_PeerInfoModel.fromJson;
+
+  @override
+  String get peerId;
+  @override
+  String get peerName;
+  @override
+  String get peerProfile;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PeerInfoModelCopyWith<_$_PeerInfoModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
