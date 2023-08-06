@@ -106,6 +106,17 @@ flutter:
           weight: 200
         - asset: assets/fonts/MaplestoryFont_OTF/MaplestoryOTF-Bold.otf
           weight: 700
+    - family: dnf
+      fonts:
+        - asset: assets/fonts/DNFForgedBlade_OTF/DNFForgedBlade-Light.otf
+          weight: 200
+
+        - asset: assets/fonts/DNFForgedBlade_OTF/DNFForgedBlade-Medium.otf
+          weight: 500
+
+        - asset: assets/fonts/DNFForgedBlade_OTF/DNFForgedBlade-Bold.otf
+          weight: 700
+
   # example:
   # fonts:
   #   - family: Schyler

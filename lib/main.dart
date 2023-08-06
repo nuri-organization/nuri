@@ -49,7 +49,7 @@ class NuriApp extends StatelessWidget {
             providers: getProvider(),
             child: MaterialApp(
               theme: ThemeData(
-                fontFamily: "maple",
+                fontFamily: "dnf",
                 primaryColor: Constants.theme4,
                 primarySwatch: Colors.orange
               ),
