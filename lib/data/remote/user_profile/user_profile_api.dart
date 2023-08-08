@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:nuri/config/api.dart';
 import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/data/model/profile/profile_model.dart';
-import 'package:nuri/test/profile_data.dart';
 
 class UserProfileApi extends Api{
   static final UserProfileApi _instance = UserProfileApi._internal();

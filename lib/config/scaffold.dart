@@ -4,11 +4,11 @@ import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/ui/screen/notification/notiifcation_screen.dart';
 import 'package:nuri/ui/screen/shortory/shortory_post_screen.dart';
 import 'package:nuri/ui/screen/travel/travel_post_screen.dart';
-import 'package:nuri/ui/widget/action_button.dart';
-import 'package:nuri/ui/widget/bottom_nav/bottomnav_router.dart';
-import 'package:nuri/ui/widget/bottom_nav/bottomnav_state.dart';
-import 'package:nuri/ui/widget/bottom_nav/navigation_cubit.dart';
-import 'package:nuri/ui/widget/bottom_nav/nuri_bottomnavigation_constants.dart';
+import 'package:nuri/ui/common/action_button.dart';
+import 'package:nuri/ui/common/bottom_nav/bottomnav_router.dart';
+import 'package:nuri/ui/common/bottom_nav/bottomnav_state.dart';
+import 'package:nuri/ui/common/bottom_nav/navigation_cubit.dart';
+import 'package:nuri/ui/common/bottom_nav/nuri_bottomnavigation_constants.dart';
 
 class NuriScaffold extends StatelessWidget {
   NuriScaffold({super.key, this.isInBottomNavigation = false, this.child, this.title = "누리", this.isInAppbar = true});

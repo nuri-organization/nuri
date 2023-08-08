@@ -9,7 +9,7 @@ import 'package:nuri/ui/screen/chat/model/chat_check_service.dart';
 import 'package:nuri/ui/screen/profile/widget/profile_detail_screen.dart';
 import 'package:nuri/ui/screen/shortory/shortory_comment.dart';
 import 'package:nuri/ui/screen/shortory/shotory_fetch_screen.dart';
-import 'package:nuri/ui/widget/nuri_dialog.dart';
+import 'package:nuri/ui/common/nuri_dialog.dart';
 
 class Post extends StatelessWidget {
   Post({super.key,required this.postModel});

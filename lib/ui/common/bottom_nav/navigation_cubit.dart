@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:nuri/ui/widget/bottom_nav/bottomnav_state.dart';
-import 'package:nuri/ui/widget/bottom_nav/nuri_bottomnavigation_constants.dart';
+import 'package:nuri/ui/common/bottom_nav/bottomnav_state.dart';
+import 'package:nuri/ui/common/bottom_nav/nuri_bottomnavigation_constants.dart';
 
 class NavigationCubit extends Cubit<NavigationState>{
   NavigationCubit() : super(NavigationState(0, NavBarItem.shortory));

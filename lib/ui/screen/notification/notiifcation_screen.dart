@@ -8,7 +8,7 @@ import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/ui/screen/chat/chat_screen.dart';
 import 'package:nuri/ui/screen/chat/model/chat_check_service.dart';
 import 'package:nuri/ui/screen/profile/widget/profile_detail_screen.dart';
-import 'package:nuri/ui/widget/nuri_dialog.dart';
+import 'package:nuri/ui/common/nuri_dialog.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});

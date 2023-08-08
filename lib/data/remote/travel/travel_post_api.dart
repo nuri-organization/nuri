@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:nuri/config/api.dart';
 import 'package:nuri/data/model/travel/travel_post_model.dart';
-import 'package:nuri/test/travel_post_data.dart';
 
 class TravelPostApi extends Api{
   static final TravelPostApi _instance = TravelPostApi._internal();

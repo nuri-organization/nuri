@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nuri/config/enum.dart';
 import 'package:nuri/config/scaffold.dart';
 import 'package:nuri/cubit/shortory/comment/comment_cubit.dart';
-import 'package:nuri/test/comment_data.dart';
 import 'package:nuri/ui/screen/shortory/widget/comment.dart';
 
 class ShortoryComment extends StatefulWidget {

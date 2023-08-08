@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/config/scaffold.dart';
 import 'package:nuri/cubit/travel/post/travel_post_cubit.dart';
-import 'package:nuri/ui/widget/nuri_date_picker.dart';
-import 'package:nuri/ui/widget/nuri_dialog.dart';
+import 'package:nuri/ui/common/nuri_date_picker.dart';
+import 'package:nuri/ui/common/nuri_dialog.dart';
 
 class TravelPostScreen extends StatefulWidget {
   const TravelPostScreen({super.key});

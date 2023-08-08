@@ -12,7 +12,7 @@ import 'package:nuri/ui/screen/chat/chat_screen.dart';
 import 'package:nuri/ui/screen/chat/model/chat_check_service.dart';
 import 'package:nuri/cubit/chat/chat_menu_provider.dart';
 import 'package:nuri/ui/screen/chat/model/user_chat.dart';
-import 'package:nuri/ui/widget/nuri_dialog.dart';
+import 'package:nuri/ui/common/nuri_dialog.dart';
 
 class ChatMenuScreen extends StatefulWidget {
   const ChatMenuScreen({super.key});

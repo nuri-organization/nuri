@@ -4,7 +4,7 @@ import 'package:nuri/cubit/chat/chat_cubit.dart';
 import 'package:nuri/data/local/local_storage.dart';
 import 'package:nuri/ui/screen/chat/chat_screen.dart';
 import 'package:nuri/ui/screen/chat/model/user_chat.dart';
-import 'package:nuri/ui/widget/nuri_dialog.dart';
+import 'package:nuri/ui/common/nuri_dialog.dart';
 
 class ChatCheckService {
   // 채팅방 사용 가능 체크

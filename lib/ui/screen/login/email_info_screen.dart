@@ -5,7 +5,7 @@ import 'package:nuri/config/constants.dart';
 import 'package:nuri/config/scaffold.dart';
 import 'package:nuri/cubit/Login/login_cubit.dart';
 import 'package:nuri/ui/screen/profile/profile_input_screen.dart';
-import 'package:nuri/ui/widget/nuri_dialog.dart';
+import 'package:nuri/ui/common/nuri_dialog.dart';
 
 class EmailInfoScreen extends StatefulWidget {
   const EmailInfoScreen({super.key});

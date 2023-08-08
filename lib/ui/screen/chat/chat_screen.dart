@@ -14,7 +14,7 @@ import 'package:nuri/ui/screen/chat/chat_constants/chat_constants.dart';
 import 'package:nuri/ui/screen/chat/model/message_chat.dart';
 import 'package:nuri/ui/screen/chat/widget/chat_input_field.dart';
 import 'package:nuri/ui/screen/chat/widget/travel_apply.dart';
-import 'package:nuri/ui/widget/nuri_dialog.dart';
+import 'package:nuri/ui/common/nuri_dialog.dart';
 
 class ChatScreen extends StatefulWidget {
   ChatScreenArguments chatArg;
