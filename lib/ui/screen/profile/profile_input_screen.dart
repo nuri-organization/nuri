@@ -46,7 +46,6 @@ class _ProfileInputScreenState extends State<ProfileInputScreen> {
     final Uint8List bytes = await File(imageUrl).readAsBytes();
     final val = base64Encode(bytes).toString();
     byte = val;
-    print(byte);
   }
 
 

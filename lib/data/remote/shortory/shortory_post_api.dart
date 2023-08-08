@@ -20,7 +20,6 @@ class ShortoryPostApi extends Api{
     try{
       Response response = await dio.get("$baseUrl/post/",data:requestBody );
 
-      print(response);
 
       List getData =  response.data["post"];
 
@@ -59,7 +58,6 @@ class ShortoryPostApi extends Api{
           data: requestBody
       );
 
-      print(response);
 
       return true;
     }
@@ -89,7 +87,6 @@ class ShortoryPostApi extends Api{
       Response response = await dio.put(
         "$baseUrl/post/likes/$postId",
       );
-      print(response);
 
       return true;
 
@@ -104,7 +101,6 @@ class ShortoryPostApi extends Api{
       Response response = await dio.put(
         "$baseUrl/post/bookmarks/$postId",
       );
-      print(response);
 
       return true;
 

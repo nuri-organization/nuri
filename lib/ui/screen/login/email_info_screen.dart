@@ -169,7 +169,6 @@ class _LoginButton extends StatelessWidget {
           onTap: () {
             isLogin
                 ? context.read<LoginCubit>().signIn(loginId: loginId, loginPassword: loginPassword).then((value) {
-                  print(value);
                     if(!value){
                       nuriDialog(context, [Text("없는 계정입니다")]);
                     }

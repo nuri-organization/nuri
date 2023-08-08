@@ -23,7 +23,6 @@ class LoginApi extends Api{
 
       Response response = await dio.post("$baseUrl/account/sign-up",data: requestBody);
 
-      print(response);
 
       var data = response.data["userId"];
 
@@ -46,7 +45,6 @@ class LoginApi extends Api{
 
       Response response = await dio.post("$baseUrl/account/sign-in",data: requestBody);
 
-      print(response);
 
       var data = response.data["userId"];
 

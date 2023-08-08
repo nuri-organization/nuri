@@ -23,15 +23,12 @@ class TravelPostApi extends Api{
 
       Response response = await dio.get("$baseUrl/travel/",data: requestBody);
 
-      print(response);
 
       List getData = response.data["travels"];
 
-      print(getData);
 
       List<TravelPostModel> data = getData.map((e) => TravelPostModel.fromJson(e)).toList();
 
-      print(data);
 
       return data;
     }
@@ -53,14 +50,12 @@ class TravelPostApi extends Api{
         "maxPeople": maxPeople
       };
 
-      print(requestBody);
 
       Response response = await dio.post(
         "$baseUrl/travel/",
         data: requestBody
       );
 
-      print(response);
 
       return true;
     }

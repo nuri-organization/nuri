@@ -614,7 +614,6 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   }
 
   bool isChangeDate(int index) {
-    //print(index.toString() +":" + size.toString());
     if (timestamps.contains(index)) {
       return true;
     } else {
@@ -737,7 +736,6 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                       }
                       //var kk = listMessage[i];
                       //String kd = DateFormat('yyyyMMdd').format(DateTime.fromMillisecondsSinceEpoch(int.parse(kk.get(ChatConstants.timestamp))));
-                      //print('${kd}---${kk.data()}');
                     }
                     return ListView.separated(
                       separatorBuilder: (context, index) =>

@@ -24,7 +24,6 @@ class LocalStorage{
   }
 
   Future<void> setUserFcmToken(String? token) async{
-    print("the token data : $token");
     await box.put(_userFcmToken, token);
   }
 

@@ -15,7 +15,6 @@ class Api{
         onRequest: (request, handler) async{
           if((LocalStorage().getUserIdToken()).isNotEmpty){
             if(needAccessToken){
-              print(LocalStorage().getUserIdToken());
               request.headers['Authorization'] = '${LocalStorage().getUserIdToken()}';
             }
           }

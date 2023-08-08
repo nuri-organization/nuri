@@ -26,7 +26,6 @@ class _TravelPostScreenState extends State<TravelPostScreen> {
 
   Future _setTravelPoint()async{
      travelPointList = travelPoint.split(",");
-     print(travelPointList);
   }
 
   @override

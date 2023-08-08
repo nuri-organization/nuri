@@ -46,7 +46,6 @@ class ChatCheckService {
       return false;
     }
     if (chatArg.chatRoomId == '') {
-      print(chatArg.isTravel);
       // 신규 채팅일 경우 채팅방 정상 여부를 체크하여 .. 채팅방에 사용자가 1인이면 삭제 후 다시 채팅방을 생성한디ㅏ.
       var groupChatId = "";
       // groupChatId = '$userId-$peerId@$userNickname-$peerNickname';
@@ -55,7 +54,6 @@ class ChatCheckService {
       } else {
         groupChatId = '${chatArg.isTravel ? "travel" : "common"}-$peerId-$userId@$peerNickname-$userNickname';
       }
-      print(groupChatId);
       // var value = await Provider.of<ChatProvider>(context, listen: false).checkValidChattingRoom(groupChatId);
       // if (value == false) {
         // await Provider.of<ChatProvider>(context, listen: false).copyAndDelChattingRoom(groupChatId);

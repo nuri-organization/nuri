@@ -26,7 +26,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     LocalStorage().setProfile(result.userProfile ?? "");
 
     emit(ProfileState(profileModel: result, loadingStatus: LoadingStatus.success));
-    print(ProfileState().profileModel);
   }
 
   Future<bool> setProfileData({required String userName, String? bestTravel, String? introduce, String? image,required String fcmToken}) async{

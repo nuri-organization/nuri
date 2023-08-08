@@ -33,7 +33,6 @@ class _NuriProfileScreenState extends State<NuriProfileScreen> {
   void didChangeDependencies() async{
     ProfileModel? data = await context.read<ProfileCubit>().getLocalData();
 
-    print("the data is $data");
 
     if(data == null){
       // ignore: use_build_context_synchronously
@@ -44,7 +43,6 @@ class _NuriProfileScreenState extends State<NuriProfileScreen> {
 
   @override
   void dispose() {
-    print("profile dispost");
     super.dispose();
   }
 

@@ -17,8 +17,6 @@ class UserProfileApi extends Api{
     try {
       Response response = await dio.get("$baseUrl/profile/");
 
-      print(response);
-
       ProfileModel getData = ProfileModel.fromJson(response.data);
 
 
@@ -45,11 +43,9 @@ class UserProfileApi extends Api{
     };
 
     try{
-      print(requestBody);
 
       Response response = await dio.put('$baseUrl/profile/', data: requestBody);
 
-      print(response);
 
       if(response.data["statusCode"] == 201) {
         return true;
@@ -75,11 +71,9 @@ class UserProfileApi extends Api{
 
     try{
 
-      print(requestBody);
 
       Response response = await dio.post("$baseUrl/profile/", data: requestBody,);
 
-      print(response);
 
       if(response.data["statusCode"] == 201) {
         return true;
@@ -87,7 +81,6 @@ class UserProfileApi extends Api{
       else return false;
     }
     catch(e){
-      print(e);
       return false;
     }
   }

@@ -41,7 +41,6 @@ class _ProfileFetchScreenState extends State<ProfileFetchScreen> {
     final Uint8List bytes = await File(imageUrl).readAsBytes();
     final val = base64Encode(bytes).toString();
     byte = val;
-    print(byte);
   }
 
   @override

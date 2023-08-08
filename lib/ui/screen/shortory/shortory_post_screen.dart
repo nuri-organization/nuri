@@ -44,7 +44,6 @@ class _ShortoryPostScreenState extends State<ShortoryPostScreen> {
     setState(() {
       story[index] = content;
     });
-    print(story);
   }
 
   Future getImage(int index) async {
@@ -68,9 +67,7 @@ class _ShortoryPostScreenState extends State<ShortoryPostScreen> {
   void _setData() {
 
     for(int i = 0; i <= _images!.length -1; i++){
-      print("gelli");
        _getBytes(_images![i].path, i);
-       print(i);
     }
 
 

@@ -12,21 +12,17 @@ class TravelPostCubit extends Cubit<TravelPostState> {
   final TravelPostRepository travelPostRepository;
 
   Future<List<TravelPostModel>?> getLocalData() async{
-    print("the data is ${TravelPostState().travelPostModel}");
     return await TravelPostState().travelPostModel;
   }
 
   void getTravelPostInfo() async{
     var result = await travelPostRepository.getTravelPostInfo();
 
-    print("result : $result");
 
     if(result.isEmpty){
-      print("emptry");
       emit(TravelPostState(loadingStatus: LoadingStatus.noData));
     }
     if(result.isNotEmpty){
-      print("is not emptry");
       emit(TravelPostState(travelPostModel: result, loadingStatus: LoadingStatus.success));
     }
 
