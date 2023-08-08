@@ -51,6 +51,7 @@ dependencies:
   intl: ^0.18.1
   firebase_core: ^2.15.0
   firebase_storage: ^11.2.5
+  logger: ^2.0.1
 
 dev_dependencies:
   flutter_test:
