@@ -23,4 +23,8 @@ class Constants{
   static const theme3 = Color(0xFFFEE092);
   static const theme4 = Color(0xFFFFB966);
 
+  static const fontSizedSmall = 8;
+  static const fontSizedNormal = 14;
+  static const fontSizedBig = 20;
+
 }

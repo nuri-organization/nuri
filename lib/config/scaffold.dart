@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nuri/data/local/local_storage.dart';
-import 'package:nuri/ui/screen/notification/notiifcation_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nuri/config/constants.dart';
+import 'package:nuri/ui/screen/notification/notification_screen.dart';
 import 'package:nuri/ui/screen/shortory/shortory_post_screen.dart';
 import 'package:nuri/ui/screen/travel/travel_post_screen.dart';
 import 'package:nuri/ui/common/action_button.dart';
@@ -9,7 +10,9 @@ import 'package:nuri/ui/common/bottom_nav/bottomnav_router.dart';
 import 'package:nuri/ui/common/bottom_nav/bottomnav_state.dart';
 import 'package:nuri/ui/common/bottom_nav/navigation_cubit.dart';
 import 'package:nuri/ui/common/bottom_nav/nuri_bottomnavigation_constants.dart';
+import 'package:nuri/ui/common/nuri_material.dart';
 
+// ignore: must_be_immutable
 class NuriScaffold extends StatelessWidget {
   NuriScaffold({super.key, this.isInBottomNavigation = false, this.child, this.title = "누리", this.isInAppbar = true});
   bool isInBottomNavigation;
@@ -21,14 +24,40 @@ class NuriScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     if(isInBottomNavigation){
       return Scaffold(
+        drawer: Drawer(
+          child: SafeArea(
+            child: Column(
+              children: [
+                Container(height: 0.1, width: double.infinity, color: Colors.black,),
+                NuriTextButton(
+                  title: "로그아웃",
+                  textStyle: TextStyle(
+                      fontSize: Constants.fontSizedNormal.sp,
+                      color: Colors.red
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
-          title: Text("누리"),
+          title: Text(
+              "누리",
+              style: TextStyle(
+                  fontSize: Constants.fontSizedBig.sp
+              )
+          ),
           actions: [
             IconButton(
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const NotificationScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const NotificationScreen()
+                      )
+                  );
                 },
-                icon: Icon(Icons.notifications)
+                icon: const Icon(Icons.notifications)
             )
           ],
         ),
@@ -60,7 +89,12 @@ class NuriScaffold extends StatelessWidget {
              return ActionButton(children: [
                ActionButtonSetting(
                    onPressed: (){
-                     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const ShortoryPostScreen()));
+                     Navigator.push(
+                         context,
+                         MaterialPageRoute(
+                             builder: (BuildContext context) => const ShortoryPostScreen()
+                         )
+                     );
                    },
                    icon: const Icon(Icons.add)
                )
@@ -70,7 +104,12 @@ class NuriScaffold extends StatelessWidget {
               return ActionButton(children: [
                 ActionButtonSetting(
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const TravelPostScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => const TravelPostScreen()
+                          )
+                      );
                     },
                     icon: const Icon(Icons.add),
                 ),
@@ -84,10 +123,10 @@ class NuriScaffold extends StatelessWidget {
     return Scaffold(
       appBar: isInAppbar
           ? AppBar(
-              title: Text(title!),
-              actions: [
-                IconButton(onPressed: (){}, icon: Icon(Icons.notifications))
-              ],
+              title: Text(
+                title!,
+                style: TextStyle(fontSize: Constants.fontSizedBig.sp),
+              ),
             )
           : null,
       body:SafeArea(

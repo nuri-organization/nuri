@@ -22,10 +22,10 @@ class LoginCubit extends Cubit<LoginState> {
   Future<bool> signIn({required String loginId, required String loginPassword}) async{
     var result = await loginRepository.signIn(loginId: loginId, loginPassword: loginPassword);
 
-    if(result){
+    if(result != ""){
       LocalStorage().setUserIdToken(result).then((value) => emit(LoginState(loginStatus: LoginStatus.finish)));
     }
-    if(!result){
+    if(result == ""){
       return result;
     }
     return true;

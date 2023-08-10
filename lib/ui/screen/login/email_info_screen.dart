@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nuri/config/constants.dart';
 import 'package:nuri/config/scaffold.dart';
 import 'package:nuri/cubit/Login/login_cubit.dart';
+import 'package:nuri/ui/common/text_input_field.dart';
 import 'package:nuri/ui/screen/profile/profile_input_screen.dart';
 import 'package:nuri/ui/common/nuri_dialog.dart';
 
@@ -23,127 +24,103 @@ class _EmailInfoScreenState extends State<EmailInfoScreen> {
   Widget build(BuildContext context) {
     return NuriScaffold(
       title: isLogin ? "로그인" : "회원 가입",
-      child: BlocBuilder<LoginCubit, LoginState>(
-        builder: (context, state) {
-          return Column(
-            children: [
-              Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        isLogin = false;
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: 170.w,
-                          height: 20.h,
-                          child: const Center(
-                            child: Text("계정 생성"),
+      child: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: BlocBuilder<LoginCubit, LoginState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          isLogin = false;
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: 170.w,
+                            height: 20.h,
+                            child: const Center(
+                              child: Text("계정 생성"),
+                            ),
                           ),
-                        ),
-                        isLogin
-                            ? const SizedBox()
-                            : Container(
-                                height: 3,
-                                width: 70.w,
-                                color: Constants.theme4,
-                              )
-                      ],
+                          isLogin
+                              ? const SizedBox()
+                              : Container(
+                                  height: 3,
+                                  width: 70.w,
+                                  color: Constants.theme4,
+                                )
+                        ],
+                      ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        isLogin = true;
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: 170.w,
-                          height: 20.h,
-                          child: const Center(
-                            child: Text("로그인"),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          isLogin = true;
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: 170.w,
+                            height: 20.h,
+                            child: const Center(
+                              child: Text("로그인"),
+                            ),
                           ),
-                        ),
-                        isLogin
-                            ? Container(
-                                height: 3,
-                                width: 70.w,
-                                color: Constants.theme4,
-                              )
-                            : const SizedBox()
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 13.h,
-              ),
-              _GetTextField(
-                title: "이메일 아이디를 입력해주세요!",
-                labelHint: "ID",
-                content: (value) {
-                  setState(() {
-                    loginId = value;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              _GetTextField(
-                title: "이메일 비밀번호를 입력해주세요!",
-                labelHint: "PASSWORD",
-                content: (value) {
-                  setState(() {
-                    loginPassword = value;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 300.h,
-              ),
-              _LoginButton(
-                loginId: loginId,
-                loginPassword: loginPassword,
-                isLogin: isLogin,
-              )
-            ],
-          );
-        },
+                          isLogin
+                              ? Container(
+                                  height: 3,
+                                  width: 70.w,
+                                  color: Constants.theme4,
+                                )
+                              : const SizedBox()
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 13.h,
+                ),
+                TextInputField(
+                  title: "이메일 아이디를 입력해주세요!",
+                  labelHint: "ID",
+                  content: (value) {
+                    setState(() {
+                      loginId = value;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                TextInputField(
+                  title: "이메일 비밀번호를 입력해주세요!",
+                  labelHint: "PASSWORD",
+                  content: (value) {
+                    setState(() {
+                      loginPassword = value;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 300.h,
+                ),
+                _LoginButton(
+                  loginId: loginId,
+                  loginPassword: loginPassword,
+                  isLogin: isLogin,
+                )
+              ],
+            );
+          },
+        ),
       ),
-    );
-  }
-}
-
-class _GetTextField extends StatelessWidget {
-  _GetTextField(
-      {super.key,
-      required this.title,
-      required this.labelHint,
-      required this.content});
-
-  String title;
-  String labelHint;
-  void Function(String) content;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title),
-        SizedBox(
-            child: TextField(
-          onChanged: content,
-          decoration: InputDecoration(labelText: labelHint),
-        ))
-      ],
     );
   }
 }

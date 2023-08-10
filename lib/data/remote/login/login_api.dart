@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 import 'package:nuri/config/api.dart';
 import 'package:nuri/data/model/login/login_model.dart';
 
@@ -45,7 +46,7 @@ class LoginApi extends Api{
 
       Response response = await dio.post("$baseUrl/account/sign-in",data: requestBody);
 
-
+      Logger().i(response);
       var data = response.data["userId"];
 
       return data;
