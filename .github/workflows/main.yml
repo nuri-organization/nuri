@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: hyeonui-mac
+    runs-on: self-hosted
 
     steps:
      - name: pub get packages
