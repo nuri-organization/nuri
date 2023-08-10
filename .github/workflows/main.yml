@@ -1,1 +1,16 @@
+name: Flutter CI
 
+on:
+  push:
+    branches: [release]
+
+jobs:
+  build:
+    runs-on: hyeonui-mac
+
+    steps:
+     - name: pub get packages
+        run: flutter pub get
+
+      - name: test
+         run: flutter test
