@@ -127,7 +127,14 @@ class _ShortoryPostScreenState extends State<ShortoryPostScreen> {
                     onTap: (){
                         getImages();
                     },
-                    child: Container(width: 100, height: 30, color: Constants.theme4, child: Center(child: Text("사진 추가하기"),),),
+                    child: Container(
+                      width: 100,
+                      height: 30,
+                      color: Constants.theme4,
+                      child: Center(
+                        child: Text("사진 추가하기"
+                        ),
+                      ),),
                   ),
                 ],
               ),
